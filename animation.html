@@ -1,0 +1,25 @@
+---
+layout: default
+---
+<section class="ani-parent">
+<div class="moving"></div>
+</section>
+
+<nav>
+    <a href="">link 1</a>
+    <a href="">link 2</a>
+    <a href="">link 3</a>
+    <a href="">link 4</a>
+</nav>
+<span>
+    burgerbutton
+</span>
+<p>
+    {% unless page.url == "/contact.html" %}
+        <a href="contact.html">contact me  here</a>
+    {% endunless %} 
+</p>
+
+
+
+So in your example, you’ve set the padding to be 7.5% on each side, so 15% of the total width of the parent container. But col-1 should only have a max-width of 8.33% so when the padding doesn’t fit, the box expands. If your only goal with the padding was to create the visual effect, you can change it to padding-bottom or padding-top and bottom without breaking the grid, or you can set a minimum height. That also explains why it works responsively, once the columns drop down, the padding does fit inside the max-width that’s set.

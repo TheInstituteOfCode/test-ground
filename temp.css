@@ -1,0 +1,49 @@
+body #about .class {
+    background-image: url('www.bob.com/bob.jpg');
+    background-size: cover;
+    background-position: 50% 50%;
+    color: rgba(0,0,0)
+}
+
+.ani-parent{
+    min-height: 100vh;
+    position: relative;
+}
+.moving{
+    position: absolute;
+    animation: moving 2s;
+    border:1px solid;
+    width: 10vw;
+    height: 10vw;
+    top:0%;
+    bottom:calc(100vh - 10vw);
+    left:0%;
+    right: 90vw;
+}
+
+@keyframes moving {
+    0% {
+        top:0%;
+        bottom:calc(100vh - 10vw);
+        left:0%;
+        right: 90vw;
+    }
+    25%{
+        top:0%;
+        bottom:calc(100vh - 10vw);
+        left:90vw;
+        right: 0vw;
+    }
+    50%{
+        top:calc(100vh - 10vw);
+        bottom:calc(100vh - 10vw);
+        left:0%;
+        right: 90vw;
+    }    75%
+    100%{
+        top:0%;
+        bottom:calc(100vh - 10vw);
+        left:0%;
+        right: 90vw;
+    }
+}
