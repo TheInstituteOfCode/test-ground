@@ -1,0 +1,36 @@
+---
+layout: default
+thing:
+---
+
+
+<h2>
+    all post
+</h2>
+    {% for post in site.posts %}
+        <a href="{{post.url}}">
+            {{post.title}}
+        </a>
+    {% endfor %}
+    
+    <h2>prime</h2>
+    {% for post in site.categories["prime"] %}
+    <a href="{{post.url}}">
+        {{post.title}}
+    </a>
+    {% endfor %}
+
+    <h2>even</h2>
+    {% for post in site.categories["even"] %}
+    <a href="{{post.url}}">
+        {{post.title}}
+    </a>
+    {% endfor %}
+
+    <h2>odd</h2>
+    {% for post in site.categories["odd"] %}
+    <a href="{{post.url}}">
+        {{post.title}}
+    </a>
+    {% endfor %}
+

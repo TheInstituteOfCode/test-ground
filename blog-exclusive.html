@@ -1,0 +1,55 @@
+---
+layout: default
+---
+
+{% assign seenPost = "[0]" %}
+
+<h2>prime</h2>
+{% for post in site.categories["prime"] %}
+    {% if seenPost contains post.url %}    
+    {% else %}
+        <a href="{{post.url}}">
+            {{post.title}}
+        </a>
+        {% assign seenPost = seenPost | append: post.url %}
+
+    {% endif %}
+{% endfor %}
+
+<h2>even</h2>
+{% for post in site.categories["even"] %}
+    {% if seenPost contains post.url %}
+
+    {% else %}
+        <a href="{{post.url}}">
+            {{post.title}}
+        </a>
+        {% assign seenPost = seenPost | append: post.url %}
+    {% endif %}
+{% endfor %}
+
+<h2>odd</h2>
+{% for post in site.categories["odd"] %}
+    {% if seenPost contains post.url %}
+
+    {% else %}
+        <a href="{{post.url}}">
+            {{post.title}}
+        </a>
+        {% assign seenPost = seenPost | append: post.url %}
+    {% endif %}
+{% endfor %}
+
+<h2>
+    all other post
+</h2>
+    {% for post in site.posts %}
+        {% if seenPost contains post.url %}
+        {% else %}
+            <a href="{{post.url}}">
+                {{post.title}}
+            </a>
+            {% assign seenPost = seenPost | append: post.url %}
+        {% endif %}
+    {% endfor %}
+

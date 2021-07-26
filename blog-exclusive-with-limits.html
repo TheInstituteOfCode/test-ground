@@ -1,0 +1,80 @@
+---
+layout: default
+---
+
+{% assign seenPost = "[0]" %}
+
+<h2>prime</h2>
+{% assign count = 0 %}
+{% for post in site.categories["prime"] %}
+    {% if count < 4 %}
+        
+        {% if seenPost contains post.url %}    
+        {% else %}
+            <a href="{{post.url}}">
+                {{post.title}}
+            </a>
+            {% assign seenPost = seenPost | append: post.url %}
+            {% assign count = count | plus:1 %}
+        {% endif %}
+    {% endif %} 
+{% endfor %}
+{{count}}
+
+<h2>even</h2>
+{% assign count = 0 %}
+{% for post in site.categories["even"] %}
+    
+    {% if count < 4 %}
+
+        {% if seenPost contains post.url %}
+
+        {% else %}
+            <a href="{{post.url}}">
+                {{post.title}}
+            </a>
+            {% assign seenPost = seenPost | append: post.url %}
+            {% assign count = count | plus:1 %}
+        {% endif %}
+    
+    {% endif %}
+{% endfor %}
+{{count}}
+
+<h2>odd</h2>
+{% assign count = 0 %}
+{% for post in site.categories["odd"] %}
+    {% if count < 4 %}
+
+        {% if seenPost contains post.url %}
+
+        {% else %}
+            <a href="{{post.url}}">
+                {{post.title}}
+            </a>
+            {% assign seenPost = seenPost | append: post.url %}
+            {% assign count = count | plus:1 %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+{{count}}
+
+<h2>
+    all other post
+</h2>
+{% assign count = 0 %}
+{% for post in site.posts %}
+        {% if count < 20 %}
+
+        {% if seenPost contains post.url %}
+        {% else %}
+            <a href="{{post.url}}">
+                {{post.title}}
+            </a>
+            {% assign seenPost = seenPost | append: post.url %}
+            {% assign count = count | plus:1 %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+{{count}}
+
