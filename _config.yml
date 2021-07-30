@@ -2,3 +2,6 @@ categories:
   - prime
   - odd
   - even
+
+sass:
+    sass_dir: _scss
