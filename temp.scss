@@ -2,11 +2,6 @@
 color: 272
 ---
 
-body{
-    background-color: #{{page.color}} ;
-    color: #000{{site.data.color.primary_color }};
-            font-size: 1rem;
-}
 
 body #about .class {
     background-image: url('www.bob.com/bob.jpg');
