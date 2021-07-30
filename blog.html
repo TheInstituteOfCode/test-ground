@@ -1,6 +1,7 @@
 ---
 layout: default
 thing:
+category: prime
 ---
 
 
@@ -14,7 +15,7 @@ thing:
     {% endfor %}
     
     <h2>prime</h2>
-    {% for post in site.categories["prime"] %}
+    {% for post in site.categories[page.category] %}
     <a href="{{post.url}}">
         {{post.title}}
     </a>

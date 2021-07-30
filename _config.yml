@@ -5,3 +5,9 @@ categories:
 
 sass:
     sass_dir: _scss
+
+gems:
+  - jekyll-archives
+
+jekyll-archives:
+  enabled: ['categories']
