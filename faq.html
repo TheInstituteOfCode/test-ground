@@ -1,0 +1,19 @@
+---
+layout: default
+faq:
+    - q:
+      a:
+---
+
+
+<dl class="accordion">
+    <h2>FAQ</h2>
+{% for q in page.faq %}
+    <dt><a href="">{{q.q}}</a></dt>
+    <dd>{{q.a}}</dd>
+{% endfor %}
+</dl>
+
+{% if section.settings.heading != blank %}
+    
+{% endif %}

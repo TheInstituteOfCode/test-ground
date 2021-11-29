@@ -9,5 +9,6 @@ source "https://rubygems.org"
 # Plugins
 group :jekyll_plugins do
     gem "jekyll"
-    gem "jekyll-archives"
+    gem "jekyll-paginate-v2"
+    gem 'jekyll-sitemap'
 end
