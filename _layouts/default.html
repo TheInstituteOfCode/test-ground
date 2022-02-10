@@ -10,6 +10,19 @@
 </head>
 
 <body>
+    <style>
+        :root {
+            --headings: {{site.data.color.headings}};
+            --para:  {{site.data.color.paragraph}};
+            --bgDark: {{site.data.color.Dark_backgroundg}};
+            --white: #ffffff;
+        }
+    
+    
+        h1,h2,h3 {
+            color: var(--headings)
+        }
+    </style>
     <header>
         <nav>
             <a href="/blog">blog</a>
@@ -20,8 +33,7 @@
         </nav>
     </header>
     {{content}}
-
-<script>
+    <script>
     var MemberSpace = window.MemberSpace || { subdomain: "chilly-giraffe" };
     (function (d) {
         var s = d.createElement("script");

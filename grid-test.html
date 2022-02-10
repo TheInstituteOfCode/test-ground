@@ -1,0 +1,64 @@
+---
+layout: default
+divs:
+    - width: 4
+      height: 
+      sx_w: 1
+    - width: 1
+      height:
+      sx_w: 2
+    - width: 2
+      height:
+      sx_w: 3
+    - width: 1
+      height: 2
+      sx_w: 4
+    - width: 2
+      height:
+      sx_w: 2
+    - width: 2
+      height: 1
+      sx_w: 2
+    - width: 1
+      height: 1
+      sx_w: 1
+    - width: 1
+      height: 4
+      sx_w: 6
+    - width: 2
+      height:
+      sx_w: 4
+    - width: 2
+      height: 2
+      sx_w: 2
+    - width: 1
+      height:
+      sx_w: 4
+---
+<link rel="stylesheet" href="/gridmk1.css">
+
+<section class="grid-5 xs_grid-6">
+{% for div in page.divs %}
+    <div class="
+    {% if div.width %}
+    col-w-{{div.width}}
+    {% endif %}
+    {% if div.height %}
+    col-h-{{div.height}}
+    {% endif %} 
+    {% if div.sx_w %}
+    xs_col-w-{{div.sx_w}}
+    {% endif %}
+    center
+    ">
+        <h2>{{forloop.index}}</h2>
+        <h3>{{div.width}} X {{div.height | default:1 }}</h3>
+        <h3>{{div.xs_w}} X {{div.height | default:1 }}</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda distinctio voluptates, fugit tempora alias facilis vitae deleniti accusantium temporibus. Sed, facere voluptas! Nobis, ab voluptate laborum est mollitia dolorum fugit.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda distinctio voluptates, fugit tempora alias facilis
+          vitae deleniti accusantium temporibus. Sed, facere voluptas! Nobis, ab voluptate laborum est mollitia dolorum fugit.
+        </p>
+    </div>
+{% endfor %}
+
+</section>
