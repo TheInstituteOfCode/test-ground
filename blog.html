@@ -1,6 +1,6 @@
 ---
 layout: default
-thing:
+id: 1
 category: prime
 ---
 
@@ -35,3 +35,15 @@ category: prime
     </a>
     {% endfor %}
 
+    <h2>where prime</h2>
+    
+
+    {% for post in site.posts %}
+        {% if page.id == post.id_number %}
+        <a href="{{post.url}}">
+            {{post.title}} {{thing}}
+        </a>
+        {% endif %}
+    {% endfor %}
+
+    

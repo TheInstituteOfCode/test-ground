@@ -2,22 +2,11 @@
 layout: default
 ---
 
-<style>
-:root {
-  --headings: {{site.data.color.headings}}
-  --white: #ffffff;
-}
 
-
-h2{
-    color: var(--headings)
-}
-
-</style>
 
 {% assign seenPost = "[0]" %}
 
-<h2>prime</h2>
+<h2 >prime</h2>
 {% assign count = 0 %}
 {% for post in site.categories["prime"] %}
     {% if count < 4 %}
