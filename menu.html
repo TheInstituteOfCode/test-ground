@@ -1,0 +1,92 @@
+---
+layout: default
+menu:
+    - name: Manicure
+      top-option: true
+      styles: 
+            - name: European
+              price: 130k
+              top-nail-price: 230k
+            - name: Signiture
+              price: 130k
+              top-nail-price: 230k
+            - name: Spa
+              price: 130k
+              top-nail-price: 230k
+            - name: European     
+              price: 130k
+              top-nail-price: 230k
+    - name: nail polish selection
+      top: false
+      styles:
+            - name: European
+              price: 130k
+              top-nail-price: 230k
+            - name: European
+              price: 130k
+              top-nail-price: 230k
+            - name: European
+              price: 130k
+              top-nail-price: 230k
+            - name: European
+              price: 130k
+              top-nail-price: 230k
+          
+---
+
+
+    
+<div class="menu-parent">
+    <div></div>
+    <div class="right">price IDR</div>
+    <div class="right">price IDR</div>
+    <div class="framing-line"></div>
+{% for cat in page.menu %}
+    <div>
+        <h3>
+            {{cat.name}}
+        </h3>
+    </div>
+    
+    {% if cat.top-option == true %}
+        <div class="right">Nail Artist</div>
+        <div  class="right">Top Nail Artist</div>
+
+    {% else %}
+        <div></div>
+        <div></div>
+    {% endif %}
+
+    <div class="framing-line"></div>
+
+    {% for thing in cat.styles %}
+    <div> {{ thing.name }} </div>
+        {% if cat.top-option == true %}
+        <div> {{ thing.price }}</div>
+        <div> {{ thing.top-nail-price }}</div>
+        {% else %}
+        <div></div>
+        <div> {{ thing.price }} </div>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+</div>
+
+<style>
+.menu-parent{
+    display: grid;
+    grid-template-columns: 1fr 5rem 7rem;
+    background-color: #0f1110;
+    color: #9d9f9e;
+}
+
+.menu-parent > * {
+    padding:.5rem;
+}
+
+.framing-line{
+    grid-column: span 3;
+    border-bottom:2px solid #9d9f9e;
+}
+
+</style>
