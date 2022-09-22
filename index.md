@@ -65,4 +65,4 @@ a{
 
 
 
-<script src="prism.js"></script>
+<script src="/prism.js" defer></script>
