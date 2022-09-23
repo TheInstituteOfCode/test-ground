@@ -1,0 +1,64 @@
+---
+layout: default
+title: counting game
+---
+
+
+<div>
+    <p>bob</p>
+    <p class="counter" data-count="150" data-curent="0">0</p>
+</div>
+<div class="counter" data-count="85">0</div>
+<div class="counter" data-count="2200">0</div>
+
+
+<style>
+    body {
+  background-color: #F46A6A;
+  color:#fff;
+  max-width:800px;
+  margin: 100px auto 0;
+  text-align: center;
+  display: table;
+}
+
+div {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin:1.5%;
+  font-size:50px;
+  background-color: #FF6F6F;
+  width:400px;
+  border-radius: 50%;
+  height:400px;
+  vertical-align: middle;
+}
+</style>
+
+
+<script>
+const counters = document.querySelectorAll('.counter');
+const countingDuration = 8000
+
+function update(counter) {
+     var time = Math.floor(countingDuration / counter.dataset.count);
+    console.log(counter)
+    if (counter.dataset.current > counter.dataset.count) {
+        counter.dataset.count += 1
+        const counter = setTimeout(update(counter), time);
+    } else {
+
+    }
+}
+
+counters.forEach(counter => {
+    var time =  Math.floor(countingDuration / counter.dataset.count);
+    
+    console.log(`counter-${index}`);
+    const counter-${index} = setTimeout(update(counter), time);
+})
+
+
+</script>

@@ -1,0 +1,66 @@
+---
+layout: default
+title: hover Gallery
+---
+
+<div class="gallery-target" style="background-image:url('https://picsum.photos/200/300')"></div>
+
+<div data-pic="https://picsum.photos/300/300" class="gallery-pic"
+    style="background-image:url('https://picsum.photos/300/300')"></div>
+<div data-pic="https://picsum.photos/400/300" class="gallery-pic"
+    style="background-image:url('https://picsum.photos/400/300')"></div>
+<div data-pic="https://picsum.photos/500/300" class="gallery-pic"
+    style="background-image:url('https://picsum.photos/500/300')"></div>
+<div data-pic="https://picsum.photos/600/300" class="gallery-pic"
+    style="background-image:url('https://picsum.photos/600/300')"></div>
+
+
+<style>
+    .gallery-pic{
+        height:20vw;
+        width:20vw;
+        display:inline-block;
+        background-size:cover;
+        background-position:center;
+        background-repeat: no-repeat;
+    }
+
+    .gallery-target{
+        height:40vw;
+        width:100%;
+        margin: 1rem auto;
+        /*   background:blue; */
+        background-size:contain;
+        background-position:center;
+        background-repeat: no-repeat;
+    }
+</style>
+
+
+<script defer>
+const galleryTarget = document.querySelector(".gallery-target")
+const galleryThumbnails = document.querySelectorAll(".gallery-pic")
+
+function changeTarget() {
+    var target = this.dataset.pic
+
+    var urlValue = `url('${target}')`;
+    console.log(target)
+    
+    console.log(urlValue)
+    galleryTarget.style.backgroundImage = urlValue
+
+}
+
+
+galleryThumbnails.forEach(thumbnail => {
+    thumbnail.addEventListener('mouseenter', changeTarget)
+})
+
+            // $('.gallery-pic').mouseenter(function (e) {
+            //     var background = $(this).attr("data-pic");
+            //     $(".gallery-target").css("background-image", "url(" + background + ")");
+            // });
+
+    
+</script>

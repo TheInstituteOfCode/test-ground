@@ -1,0 +1,121 @@
+---
+layout: default
+title: pull info from the url
+---
+
+
+<!-- <section class="temp">
+used to test scroll function
+</section> -->
+<section class="center padded">
+    <nav class="port-nav" id="portfolio-filter">
+        <a href="#" id="all">ALL</a> /
+        <a href="#" id="type-1">type-1</a> /
+        <a href="#" id="type-2">type-2</a> /
+        <a href="#" id="type-3">type-3</a>
+    </nav>
+</section>
+
+<!-- Second SECTION - - - - - - - - - - - - - - -->
+
+<section class="no-margin-top padded">
+    <div class="grid-3 center" id="portfolio-grid">
+        <div class="type-1 gallery-item"></div>
+        <div class="type-2 gallery-item"></div>
+        <div class="type-3 gallery-item"></div>
+        <div class="type-1 gallery-item"></div>
+        <div class="type-2 gallery-item"></div>
+        <div class="type-3 gallery-item"></div>
+        <div class="type-1 gallery-item"></div>
+        <div class="type-2 gallery-item"></div>
+        <div class="type-3 gallery-item"></div>
+    </div>
+</section>
+
+
+<style>
+    
+.type-1{
+  background-image: url("https://picsum.photos/200/300/?random")
+}
+
+.type-2{
+  background-image: url("https://picsum.photos/300/300/?random")
+}
+.type-3{
+  background-image: url("https://picsum.photos/400/300/?random")
+}
+
+.gallery-item {
+    padding-bottom: 50%;
+    background-size: cover;
+    background-position: center;
+}
+
+[class*=grid] {
+    gap: 5vw;
+}
+</style>
+
+<script>
+    const gallery_buttons = document.querySelectorAll('#portfolio-filter a')
+    const gallery_items = document.querySelectorAll('#portfolio-grid .gallery-item')
+    var initial = location.search.replace("?", "");
+    
+            /* filtering */
+
+            alert(initial)
+
+            gallery_items.forEach(item => {
+                if (initial != "") {
+                    // element which needs to be scrolled to
+                    var element = document.querySelector("#portfolio-grid");
+                    // scroll to element
+                    element.scrollIntoView();
+
+                    if (initial == 'all') {
+                        item.classList.remove('hidden');
+                    } else {
+                        if (item.classList.contains(initial)) {
+                            item.classList.remove('hidden'); // show those that do have the filter
+                        } else {
+                            item.classList.add('hidden'); // hide those that don't have the filter
+                        }
+                    };
+                };
+            })
+
+            
+            gallery_buttons.forEach(button => {
+                button.addEventListener('click', filterGallery)
+            })
+
+            function filterGallery(e) {
+                e.preventDefault();
+
+                /* make this <li> class active and remove class 'active' from any other <li>s */
+                gallery_buttons.forEach(button => {
+                    button.classList.remove('active')
+                });
+                this.classList.add('active');
+
+                /* get the name of the cateory from this link */
+                var filterVal = this.getAttribute('id');
+                 gallery_items.forEach(item => {
+                    
+
+                         if (filterVal == 'all') {
+                         item.classList.remove('hidden');
+                     } else {
+                         if (item.classList.contains(filterVal)) {
+                             item.classList.remove('hidden'); // show those that do have the filter
+                         } else {
+                             item.classList.add('hidden'); // hide those that don't have the filter
+                         }
+                     };
+                    
+                })
+            }
+
+
+</script>
