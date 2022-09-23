@@ -6,10 +6,10 @@ title: counting game
 
 <div>
     <p>bob</p>
-    <p class="counter" data-count="150" data-curent="0">0</p>
+    <p class="counter" data-count="150" data-current="0">0</p>
 </div>
-<div class="counter" data-count="85">0</div>
-<div class="counter" data-count="2200">0</div>
+<div class="counter" data-count="85"  data-current="0">0</div>
+<div class="counter" data-count="2200"  data-current="0">0</div>
 
 
 <style>
@@ -42,22 +42,28 @@ div {
 const counters = document.querySelectorAll('.counter');
 const countingDuration = 8000
 
-function update(counter) {
-     var time = Math.floor(countingDuration / counter.dataset.count);
-    console.log(counter)
-    if (counter.dataset.current > counter.dataset.count) {
-        counter.dataset.count += 1
-        const counter = setTimeout(update(counter), time);
-    } else {
+function update(counter, time) {
+    //  var time = Math.floor(countingDuration / counter.dataset.count);
+    //  var currentCount = counter.dataset.current
+    // console.log(counter)
+    // console.log(counter.dataset.current)
+    // console.log(counter.dataset.count)
+    // console.log(Math.round(counter.dataset.current) < Math.round(counter.dataset.count))
 
+    if (Math.round(counter.dataset.current) < Math.round(counter.dataset.count)) {
+        counter.dataset.current = Math.round(counter.dataset.current) + 1 ;
+        counter.innerText = counter.dataset.current ;
+        setTimeout(() => update(counter, time), time);
+    } else {
+      // setTimeout(() => update(counter, time), time);
     }
 }
 
 counters.forEach(counter => {
-    var time =  Math.floor(countingDuration / counter.dataset.count);
-    
-    console.log(`counter-${index}`);
-    const counter-${index} = setTimeout(update(counter), time);
+  var time =  Math.floor(countingDuration / counter.dataset.count);
+  console.log(time);
+    // setTimeout(() => { checkMouse(deck, card) }, animationDuration);
+    setTimeout(() => update(counter, time), time);
 })
 
 
