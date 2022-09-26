@@ -1,0 +1,49 @@
+---
+layout: default
+hideSearchbar: true
+target: home
+---
+
+
+<!-- HTML elements for search -->
+<input type="text" id="search-input" placeholder="Search blog posts..">
+<div id="results-container" class="grid-4"></div>
+
+<style >
+#results-container > div:nth-child(1n+9) {display: none;}
+</style>
+
+
+<!-- or without installing anything -->
+<script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+
+
+<script>
+
+    const initial = location.search.replace("?", "");
+
+    const searchInput = document.querySelector("#search-input")
+
+    searchInput.value = initial;
+
+    var sjs = SimpleJekyllSearch({
+            searchInput: document.getElementById('search-input'),
+            resultsContainer: document.getElementById('results-container'),
+            json: '/search.json',
+            searchResultTemplate: '<div><img src="{imgPath}" alt=""><a href="{{ site.url }}{url}">{title}</a></div>'
+        });
+
+        function initialRun() {
+            sjs.search( initial )
+
+        }
+
+    const start = setTimeout(initialRun, 10)
+
+        
+    </script>
+
+<script defer>
+</script>
+
+<!-- <img src="https://picsum.photos/id/1025/600/400" alt=""> -->
