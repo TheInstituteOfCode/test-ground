@@ -55,6 +55,8 @@ function update(counter, time) {
         counter.innerText = counter.dataset.current ;
         setTimeout(() => update(counter, time), time);
     } else {
+        counter.innerText = counter.dataset.current;
+
       // setTimeout(() => update(counter, time), time);
     }
 }
