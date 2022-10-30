@@ -1,6 +1,7 @@
 ---
 layout: default
 title: advanced dark mode with cookies
+img_Path: https://picsum.photos/id/1025/600/400
 ---
 
 
@@ -50,25 +51,37 @@ left:calc(4rem - 2px);
 
 <script>
     
-
+// constants for targetting later on 
         const body = document.querySelector('body');
         const darkmodeButton = document.querySelector('#dark-btn');
+
+        // this is checking what state the cookie is in on page load 
         if (document.cookie.includes('dark-mode=active')) {
+          // if the cookie says darkmode active then add the class of darkMode to the body 
             body.classList.add('darkMode');
         }
+
+        // new function for flipping between light and dark mode
         function toggleDarkMode() {
+            // this is just for debuging the code  
             console.log('clickedon' + document.cookie)
+          
+            // this adds or removes darkmode from the bodies class list 
             body.classList.toggle('darkMode');
+            // this is checking the classlist again
             if (body.classList.contains('darkMode')) {
+              // if its set to darkmode then make a cookie saying its active
                 document.cookie = "dark-mode=active";
             }
             else {
+              // if its not then it is setting it to deactive
                 document.cookie = "dark-mode=deactive";
             };
-
+            // more trouble shooting code
             console.log('clickedon' + document.cookie)
         };
 
+        // this is tying the darkmode button to the toggleDarkMode function
         darkmodeButton.addEventListener('click', toggleDarkMode);
 
 </script>

@@ -1,0 +1,54 @@
+---
+layout: default
+title: sticky nav
+img_Path: https://picsum.photos/id/1025/600/400
+---
+
+
+<section>
+
+</section>
+<header class="center stickyHeader">
+  <nav class="stickyNav">sticky links</nav>
+  <nav class="staticNav">static links</nav>
+</header>
+
+<section>
+
+</section>
+
+
+
+<style>
+  section, header{min-height: 100vh; border: 1px solid;}
+
+  header{
+    display: flex;
+    justify-content: center;
+    align-items:  flex-start;
+  }
+  nav{
+    border: 1px solid;
+  }
+
+  .stickyNav{position: fixed; top: -5rem;}
+</style>
+
+<script>
+  const header = document.querySelector(".stickyHeader")
+  const stickyNav = document.querySelector('.stickyNav');
+  const staticNav = document.querySelector('.staticNav')
+
+  function updateNav() {
+    let staticNavToTop = header.getBoundingClientRect().top;
+    console.log(staticNavToTop)
+    if (staticNavToTop < -20 ) {
+      stickyNav.style.top = `0px` ;
+    } else {
+      stickyNav.style.top = `-40px`;
+      
+    }
+  }
+
+  window.onscroll = function () { updateNav() };
+</script>

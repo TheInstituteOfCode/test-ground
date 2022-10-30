@@ -1,6 +1,7 @@
 ---
 layout: default
 title: pull info from the url
+img_Path: https://picsum.photos/id/1025/600/400
 ---
 
 
@@ -58,21 +59,24 @@ used to test scroll function
 </style>
 
 <script>
+    // we start with all our constants
     const gallery_buttons = document.querySelectorAll('#portfolio-filter a')
     const gallery_items = document.querySelectorAll('#portfolio-grid .gallery-item')
-    var initial = location.search.replace("?", "");
+    const gallery = document.querySelector("#portfolio-grid");
+
+    // this is a bit of a special one that looks a little different. location.search is another way of saying the url and the replace is just pulling the text after the ? in the url
+    const initial = location.search.replace("?", "");
     
-            /* filtering */
+    
+    // this first if is seeing if initial ISN'T blank remember ! before an = means not equal to or anything but
+    if (initial != "") {
+        // this line will scroll the gallery in to focus
+        gallery.scrollIntoView();
+        
+        gallery_items.forEach(item => {
+                // this is running a filter on the grid based on what was in the url
 
-            alert(initial)
-
-            gallery_items.forEach(item => {
-                if (initial != "") {
-                    // element which needs to be scrolled to
-                    var element = document.querySelector("#portfolio-grid");
-                    // scroll to element
-                    element.scrollIntoView();
-
+                    // this is saying if our value is all we 
                     if (initial == 'all') {
                         item.classList.remove('hidden');
                     } else {
@@ -82,13 +86,11 @@ used to test scroll function
                             item.classList.add('hidden'); // hide those that don't have the filter
                         }
                     };
-                };
-            })
+                });
+            };
 
             
-            gallery_buttons.forEach(button => {
-                button.addEventListener('click', filterGallery)
-            })
+            
 
             function filterGallery(e) {
                 e.preventDefault();
@@ -116,6 +118,10 @@ used to test scroll function
                     
                 })
             }
+
+        gallery_buttons.forEach(button => {
+                button.addEventListener('click', filterGallery)
+        })
 
 
 </script>

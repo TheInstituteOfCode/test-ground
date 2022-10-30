@@ -1,6 +1,7 @@
 ---
 layout: default
 title: counting game
+img_Path: https://picsum.photos/id/1025/600/400
 ---
 
 
@@ -39,33 +40,34 @@ div {
 
 
 <script>
+  // const so we can tartget in js 
 const counters = document.querySelectorAll('.counter');
+// this is a time (in milli second) we want the bumbers to count in (bigger number might take longer due to a rounding error). so 8000 is 8s
 const countingDuration = 8000
 
-function update(counter, time) {
-    //  var time = Math.floor(countingDuration / counter.dataset.count);
-    //  var currentCount = counter.dataset.current
-    // console.log(counter)
-    // console.log(counter.dataset.current)
-    // console.log(counter.dataset.count)
-    // console.log(Math.round(counter.dataset.current) < Math.round(counter.dataset.count))
 
+// a function to count up numbers. it takes in two variables counter and time. counter is what element is getting counted and time in how often the function is called
+function update(counter, time) {
+// this is an if statment that checks if the counter need to keep counting
     if (Math.round(counter.dataset.current) < Math.round(counter.dataset.count)) {
+      // this is incresing the number by 1. can be a bigger number if you want to count faster
         counter.dataset.current = Math.round(counter.dataset.current) + 1 ;
+      // this makes the text reflect the current number
         counter.innerText = counter.dataset.current ;
+      // this set the function to run again
         setTimeout(() => update(counter, time), time);
     } else {
-        counter.innerText = counter.dataset.current;
-
-      // setTimeout(() => update(counter, time), time);
+        // this is to reset the text in the case that it goes over the target count
+        counter.innerText = counter.dataset.count;
     }
 }
 
+// this is running the function on all counters on the page wether there are 1 or 796 counters on the page
 counters.forEach(counter => {
+  // this is setting the time so that it tries to finish at the count duration. if a number is to big then there is a chance that it will take longer then the counting duration.
   var time =  Math.floor(countingDuration / counter.dataset.count);
-  console.log(time);
-    // setTimeout(() => { checkMouse(deck, card) }, animationDuration);
-    setTimeout(() => update(counter, time), time);
+  // this starts the function running and passes on the element and the timing
+  setTimeout(() => update(counter, time), time);
 })
 
 

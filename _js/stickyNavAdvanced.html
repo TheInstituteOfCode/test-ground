@@ -1,0 +1,89 @@
+---
+layout: default
+title: sticky nav advanced
+img_Path: https://picsum.photos/id/1025/600/400
+---
+
+
+<!-- <section></section> -->
+<header class="center stickyHeader">
+  <nav class="stickyNav">sticky links</nav>
+  <nav class="staticNav">static links</nav>
+</header>
+
+<section>
+
+</section>
+
+
+
+<style>
+  section, header{min-height: 100vh; border: 1px solid;}
+
+  header{
+    display: flex;
+    justify-content: center;
+    align-items:  flex-start;
+  }
+  nav{
+    border: 1px solid;
+    background-color: #fff;
+    padding: 5px;
+  }
+  .staticNav{
+    position: relative;
+    z-index: 2;
+  }
+  
+  .stickyNav{
+    position: fixed;
+    top: -214px;
+  }
+  .stickyNav.show{ top: 0;}
+</style>
+
+<script>
+  const header = document.querySelector(".stickyHeader");
+  const stickyNav = document.querySelector('.stickyNav');
+  const staticNav = document.querySelector('.staticNav');
+  let scrollHeight
+
+  function updateNav() {
+    let staticNavToTop = header.getBoundingClientRect().top;
+    
+    if (window.scrollY < scrollHeight){
+      if (staticNavToTop < -30) {
+        stickyNav.classList.add("show");
+      } else {
+        stickyNav.classList.remove("show");
+      }
+    } else {
+      stickyNav.classList.remove("show");
+    }
+
+    scrollHeight = window.scrollY
+
+    console.log(window.scrollY)
+
+  }
+
+
+  function debounce(func, wait = 2, immediate = true) {
+      var timeout;
+      return function () {
+        var context = this, args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    };
+
+
+
+   window.addEventListener('scroll', debounce(updateNav));
+</script>

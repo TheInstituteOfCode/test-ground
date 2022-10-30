@@ -10,7 +10,14 @@ img{ max-width: 100%;}
 .center{text-align: center;}
 
 
-.padded{ padding:5vw;}
+.padded{ padding:5%;}
 
+.padded-2{padding:2%}
+
+.padded-r{padding-right:5%}
+.padded-l { padding-left: 5%}
+.margin-b-2{margin-bottom: 2%;}
 
 .hidden{ display: none;}
+
+.border{border:1px solid #444}

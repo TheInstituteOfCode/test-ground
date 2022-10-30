@@ -9,7 +9,17 @@ layout: default
 </h2>
 
 {% for snippet in site.js %}
+<div>
+    <a href="{{snippet.url}}">{{snippet.title}}</a>
+</div>
+{% endfor %}
 
-<a href="{{snippet.url}}">{{snippet.title}}</a>
+<h2>
+    advanced css activities
+</h2>
 
+{% for snippet in site.css %}
+<div>
+    <a href="{{snippet.url}}">{{snippet.title}}</a>
+</div>
 {% endfor %}

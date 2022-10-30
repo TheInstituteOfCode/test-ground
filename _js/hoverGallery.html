@@ -1,6 +1,7 @@
 ---
 layout: default
 title: hover Gallery
+img_Path: https://picsum.photos/id/1025/600/400
 ---
 
 <div class="gallery-target" style="background-image:url('https://picsum.photos/200/300')"></div>
@@ -38,29 +39,34 @@ title: hover Gallery
 
 
 <script defer>
+    // const for targetting
+        // this is our large image at the top
 const galleryTarget = document.querySelector(".gallery-target")
+        // these are all of our smaller images for hovering on
 const galleryThumbnails = document.querySelectorAll(".gallery-pic")
 
+    // our function to change our large image
 function changeTarget() {
+    // this is pulling the new image off of the div that we hovered on
     var target = this.dataset.pic
-
+    // this is converting it in to a format that we can use in js
     var urlValue = `url('${target}')`;
+
+    // this is just for testing 
     console.log(target)
-    
     console.log(urlValue)
+    
+    // this is setting the background image = to what we hovered on
     galleryTarget.style.backgroundImage = urlValue
 
 }
 
 
+// this is adding event lisiteners to all of our small images
 galleryThumbnails.forEach(thumbnail => {
+    // when 
     thumbnail.addEventListener('mouseenter', changeTarget)
 })
-
-            // $('.gallery-pic').mouseenter(function (e) {
-            //     var background = $(this).attr("data-pic");
-            //     $(".gallery-target").css("background-image", "url(" + background + ")");
-            // });
 
     
 </script>

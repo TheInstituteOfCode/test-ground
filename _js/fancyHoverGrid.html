@@ -1,0 +1,144 @@
+---
+layout: default
+title: fancy hover grid
+img_Path: https://picsum.photos/id/1025/600/400
+grid:
+  - name: item 1
+    Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum architecto autem, quia eaque velit, aliquid blanditiis ducimus ipsam cupiditate ipsum iure explicabo? Ratione excepturi recusandae minus quos dolores quibusdam nemo.
+    hoverItems:
+      - img_path: https://picsum.photos/id/684/600
+        top: 5
+        left: 5
+        width: 10
+        height: 15
+      - img_path: https://picsum.photos/id/684/600
+        top: 15
+        left: 15
+        width: 10
+        height: 15
+      - img_path: https://picsum.photos/id/684/600
+        top: 10
+        left: 10
+        width: 10
+        height: 15
+  - name: item 1
+    Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum architecto autem, quia eaque velit, aliquid blanditiis ducimus ipsam cupiditate ipsum iure explicabo? Ratione excepturi recusandae minus quos dolores quibusdam nemo.
+    hoverItems:
+      - img_path: https://picsum.photos/id/684/600
+        top: 5
+        left: 5
+        width: 10
+        height: 15
+      - img_path: https://picsum.photos/id/684/600
+        top: 15
+        left: 15
+        width: 10
+        height: 15
+---
+<style>
+  /* div{border:2px solid} */
+
+  .fancyHoverGrid > div{
+    /* position: relative; */
+  }
+  .fancyHoverGrid .eye-image{
+    /* position:absolute; */
+    top:5%;
+    right:5%;
+    width:50px;
+    z-index: 8;
+  }
+  .hoverImg {
+    position: absolute;
+    opacity: 0;
+    display: none;
+  }
+
+  .hoveredChildInGrid > *{
+    opacity: 0;
+  }
+  .hoveredChildInGrid .hoveredChild{
+    opacity: 1;
+  }
+  .hoveredChildInGrid .hoveredChild .hoverImg{
+    display: block;
+  }
+</style>
+
+
+<section class="grid-4 fancyHoverGrid">
+  {% for item in page.grid %}
+    <div class="grid-item grid-5" data-hover-items="{{item.hoverItems.size}}">
+      <div class="col-w-4">
+        <h3>{{item.name}}</h3>
+        <p>{{item.description}}</p>
+      </div>
+      <img class="eye-image" src="https://picsum.photos/id/1025/600/400" alt="eye">
+
+      {{identifier}}
+      {% for hoveritem in item.hoverItems %}
+      <img src="{{hoveritem.img_path}}" alt="" class="hoverImg" style="top:{{hoveritem.top}}%;left:{{hoveritem.left}}%;" data-img-num="{{forloop.index}}">
+      {% endfor %}
+    </div>
+  {% endfor %}
+</section>
+
+
+<script>
+  const grid = document.querySelector(".fancyHoverGrid");
+  const gridItems = grid.querySelectorAll(".grid-item");
+  let currentImgNum = 1;
+
+  function nextImage(item) {
+      if (!item.classList.contains('hoveredChild') ) {
+        return
+      }
+
+      currentImgNum = (currentImgNum + 1);
+
+      if (currentImgNum > item.dataset.hoverItems) {
+        currentImgNum = 1
+      }
+
+      let images = item.querySelectorAll(".hoverImg")
+
+      images.forEach(img => {
+        let self = Math.floor(img.dataset.imgNum)
+        console.log(self)
+        if (currentImgNum === self) {
+          img.style.opacity = 1;
+        } else {
+          img.style.opacity = 0;
+        }
+      });
+
+      console.log(currentImgNum)
+    setTimeout(() => { nextImage(item) }, 1000);
+  }
+
+  function unHovered(item) {
+    grid.classList.remove('hoveredChildInGrid');
+    item.classList.remove('hoveredChild');
+    let images = item.querySelectorAll(".hoverImg");
+
+    images.forEach(img => { img.style.opacity = 0 });
+  }
+
+  function hoverEffect(item) {
+    grid.classList.add('hoveredChildInGrid');
+    item.classList.add('hoveredChild');
+    setTimeout(() => { nextImage(item)}, 100 );
+    console.log(item);
+  }
+  
+  gridItems.forEach(item => {
+    const eye = item.querySelector(".eye-image");
+    eye.addEventListener('mouseleave', e =>  unHovered(item));
+    eye.addEventListener("mouseenter", e => hoverEffect(item));
+    // console.log(item.dataset.hoverItems)
+  });
+
+
+</script>
+
+

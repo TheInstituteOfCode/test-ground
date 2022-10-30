@@ -33,11 +33,11 @@
             <a href="/blog-exclusive-with-limits.html">blog 3</a> 
             {% unless page.hideSearchbar == true %}
                 <input id="searchBox" type="text">
-                <a class="button searchButton" >search</button>
+                <a class="button searchButton" >search</a>
             {% endunless %}
         </nav>
     </header>
-
+            {% unless page.hideSearchbar == true %}
 <script>
     const searchBox = document.querySelector("#searchBox");
     const searchLink = document.querySelector(".searchButton")
@@ -59,6 +59,7 @@
     searchBox.addEventListener("keyup", searchNow)
     
 </script>
+{% endunless %}
 
     {{content}}
     <!-- <script>

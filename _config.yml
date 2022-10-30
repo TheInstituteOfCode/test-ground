@@ -1,6 +1,8 @@
 collections:
   js:
     output: true
+  css:
+    output: true
 
 
 categories:
