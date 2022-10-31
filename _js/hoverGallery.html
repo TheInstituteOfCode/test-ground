@@ -48,9 +48,9 @@ const galleryThumbnails = document.querySelectorAll(".gallery-pic")
     // our function to change our large image
 function changeTarget() {
     // this is pulling the new image off of the div that we hovered on
-    var target = this.dataset.pic
+    let target = this.dataset.pic
     // this is converting it in to a format that we can use in js
-    var urlValue = `url('${target}')`;
+    let urlValue = `url('${target}')`;
 
     // this is just for testing 
     console.log(target)
