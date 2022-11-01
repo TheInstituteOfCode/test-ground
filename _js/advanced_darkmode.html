@@ -22,8 +22,8 @@ img_Path: https://picsum.photos/id/1025/600/400
   position:relative;
   border:1px solid black;
   border-radius:1rem;
-
 }
+
 #dark-btn span{
   position:absolute;
   background-color:#fff;
@@ -37,6 +37,7 @@ img_Path: https://picsum.photos/id/1025/600/400
   bottom:1px;
   transition:1s;
 }
+
 .darkMode #dark-btn{
   background-color:#fff;
 }
@@ -64,7 +65,7 @@ left:calc(4rem - 2px);
         // new function for flipping between light and dark mode
         function toggleDarkMode() {
             // this is just for debuging the code  
-            console.log('clickedon' + document.cookie)
+            // console.log('clicked on ' + document.cookie)
           
             // this adds or removes darkmode from the bodies class list 
             body.classList.toggle('darkMode');
@@ -78,11 +79,13 @@ left:calc(4rem - 2px);
                 document.cookie = "dark-mode=deactive";
             };
             // more trouble shooting code
-            console.log('clickedon' + document.cookie)
+            console.log('clicked on ' + document.cookie)
         };
 
         // this is tying the darkmode button to the toggleDarkMode function
         darkmodeButton.addEventListener('click', toggleDarkMode);
+
+
 
 </script>
 
