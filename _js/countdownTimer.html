@@ -1,0 +1,58 @@
+---
+layout: default
+title: countdown timer
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+---
+
+<h2>TIME TILL</h2>
+<span data-date="SEPT 4TH" class="dateSpan">
+
+</span>
+
+
+
+<script>
+  // 1) probably know where this is going but lets start with const. We are going to need two, one for our span and one for the date we are aming for. 
+  const dateSpan = document.querySelector('.dateSpan');
+    // const endTime = new Date('3 NOV 2022 12:48:00');
+    // 2) now dates are simmilar but slightly different to normal const in that we need to go
+    const endTime = new Date('28 NOV 2022');
+    // 3) now lets do a quick little console.log(endtime) ad see what comes out. Lots of numbers thats how many milli seconds there has been since 1 January 1970
+    console.log(endTime)
+
+
+  // 5) and function time. we called it updateTime in the intervel so lets do the same here 
+  function updateTime() {
+
+    // 6) we already have our end date but we need to get our current date to compare it to
+    let currentTime = Date.now();
+    // 7) so what happens when we take the currentTime from the Endtime. yep we get the number of milliseconds left till our end goal :D so who thinks we are done 
+    let timeLeft = endTime - currentTime;
+    // 8) na lets do it in to a more usefull form and i find it easiest to work biggest down so lets start with days
+    let days = Math.floor(timeLeft / (24 * 60 * 60 * 1000))
+    // 9) ok before we move on to lets re work out how much time is left
+    timeLeft = timeLeft - (days * 24 * 60 * 60 * 1000)
+    // 10) lets repeate for hours, mins and seconds
+    let hours = Math.floor(timeLeft / (60 * 60  * 1000))
+    timeLeft = timeLeft - (hours * 60 * 60 * 1000)
+    let mins = Math.floor(timeLeft / ( 60 * 1000))
+    timeLeft = timeLeft - (mins * 60 * 1000)
+    let seconds = Math.floor(timeLeft / 1000)
+    // 11) and last but not least lets use all of those variables and change our span to some 
+    dateSpan.textContent = `${days} days ${hours} hours ${mins} minuets ${seconds} seconds`;
+    // 12) ok and who thinks we are done... well it functions but what happenes if the end date is in the past? we are going to get some negative days. so we are going to need an if statement seeing if there are negative days.
+    if (days < 0) {
+      // 13) lets add some text to our span to say that people missed out
+      dateSpan.textContent = `sorry looks like you missed out `
+      // 14)and lets clear out our timeUpdater so that it stops running in the background
+      clearInterval(timeUpdater)
+    }
+
+  }
+
+  // 4) then a special const that im going to place at the bottom of the script.its going down here because its going to call a function (the updateTime one that we are about to make). the other special thing about this one is it has a setInterval method. bonus point to who ever can tell me what 
+
+  const timeUpdater = setInterval(updateTime, 500);
+
+</script>

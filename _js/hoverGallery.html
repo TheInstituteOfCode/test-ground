@@ -2,6 +2,7 @@
 layout: default
 title: hover Gallery
 img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
 ---
 
 <div class="gallery-target" style="background-image:url('https://picsum.photos/200/300')"></div>
@@ -39,6 +40,7 @@ img_Path: https://picsum.photos/id/1025/600/400
 
 
 <script defer>
+  // 1) So doing js then lets make some const. One for the 
     // const for targetting
         // this is our large image at the top
 const galleryTarget = document.querySelector(".gallery-target")
@@ -66,6 +68,7 @@ function changeTarget() {
 galleryThumbnails.forEach(thumbnail => {
     // when 
     thumbnail.addEventListener('mouseenter', changeTarget)
+
 })
 
     

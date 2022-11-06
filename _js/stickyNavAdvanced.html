@@ -7,13 +7,12 @@ img_Path: https://picsum.photos/id/1025/600/400
 
 <!-- <section></section> -->
 <header class="center stickyHeader">
-  <nav class="stickyNav">sticky links</nav>
-  <nav class="staticNav">static links</nav>
+  <nav class="stickyNav">links</nav>
 </header>
 
-<section>
-
-</section>
+<section></section>
+<section></section>
+<section></section>
 
 
 
@@ -30,16 +29,14 @@ img_Path: https://picsum.photos/id/1025/600/400
     background-color: #fff;
     padding: 5px;
   }
-  .staticNav{
-    position: relative;
-    z-index: 2;
-  }
   
   .stickyNav{
-    position: fixed;
-    top: -214px;
+    position: sticky;
+    top: 0px;
   }
-  .stickyNav.show{ top: 0;}
+
+  .stickyNav.fixed{ position: fixed;}
+  .stickyNav.hide{ top: -30px;}
 </style>
 
 <script>
@@ -50,15 +47,22 @@ img_Path: https://picsum.photos/id/1025/600/400
 
   function updateNav() {
     let staticNavToTop = header.getBoundingClientRect().top;
+
+    console.log(staticNavToTop)
+    if (staticNavToTop < -100) {
+      stickyNav.classList.add('fixed')
+    } else {
+      stickyNav.classList.remove('fixed')
+    }
     
     if (window.scrollY < scrollHeight){
       if (staticNavToTop < -30) {
-        stickyNav.classList.add("show");
+        stickyNav.classList.add("hide");
       } else {
-        stickyNav.classList.remove("show");
+        stickyNav.classList.remove("hide");
       }
     } else {
-      stickyNav.classList.remove("show");
+      stickyNav.classList.remove("hide");
     }
 
     scrollHeight = window.scrollY

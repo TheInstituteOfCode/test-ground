@@ -93,10 +93,10 @@ menu:
         const menuCats = document.querySelectorAll('.cat-div');
         const menuItem = document.querySelectorAll('.dish-div');
         const sorryMessege = document.querySelector('.sorryMessege') 
+        let nothingFound = true
 
         function searching() {
-          let nothingFound = true
-          
+          nothingFound = true
             let target = SearchBar.value.toLowerCase()
             console.log(target)
             menuItem.forEach(dish => {
@@ -104,6 +104,7 @@ menu:
                 // console.log(link.textContent)
                 if (dish.dataset.searchTerms.toLowerCase().includes(target)) {
                     dish.style.display = 'grid'
+                    nothingFound = false;
                 } else {
                     dish.style.display = 'none';
                 }
@@ -113,17 +114,15 @@ menu:
                 // console.log(link.dataset.subLinks)
                 // console.log(link.textContent)
                 if (cat.dataset.searchTerms.includes(target)) {
-                    cat.style.display = 'block'
-                  nothingFound = 
+                  cat.style.display = 'block'
+                  nothingFound = false;
                 }
-                else if (cat.dataset.subLinks.toLowerCase().includes(target)) {
-                    cat.style.display = 'block'
-                } else {
+                else {
                     cat.style.display = 'none';
                 }
-            }
-            );
-            if (nothingFound = true) {
+            });
+            console.log(nothingFound)
+            if (nothingFound == true) {
               sorryMessege.classList.remove('hidden')
             } else {
               sorryMessege.classList.add('hidden')

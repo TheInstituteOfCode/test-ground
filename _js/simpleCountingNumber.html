@@ -1,0 +1,83 @@
+---
+layout: default
+title: simple counting game
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+---
+
+
+<div>
+    <p>bob</p>
+    <p class="counter" data-count="150">0</p>
+</div>
+<div class="counter" data-count="85">0</div>
+<div class="counter" data-count="2200">0</div>
+
+
+<style>
+    body {
+  background-color: #F46A6A;
+  color:#fff;
+  max-width:800px;
+  margin: 100px auto 0;
+  text-align: center;
+  display: table;
+}
+
+div {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin:1.5%;
+  font-size:50px;
+  background-color: #FF6F6F;
+  width:400px;
+  border-radius: 50%;
+  height:400px;
+  vertical-align: middle;
+}
+</style>
+
+
+<script>
+  // 1) like all our js activities lets start with adding in some const. in this case we want all of our counting elements
+  // const so we can tartget in js 
+const counters = document.querySelectorAll('.counter');
+
+// 2) now this function is going to look a little different in that we are going to pass a parameter (think function specific variables that we can pass with the function); because we are going to get the function to target its self later on i have added the counter parameter
+// a function to count up numbers. it takes in two parameters, counter and time. counter is what element is getting counted and time in how often the function is called
+function update(counter) {
+  // 7) now that we are running the function we need to see if we have hit the target number. So a nice if statement thats compares our two datasets 
+// this is an if statment that checks if the counter need to keep counting
+    if (Math.round(counter.dataset.current) < Math.round(counter.dataset.count)) {
+      // 8) ok so we have decided that our current number is less then our desired number we need to increase our counter. there are a few ways to do it but for beginners i find that saying a thing = it's self + 1 makes the most sense
+      // this is incresing the number by 1. can be a bigger number if you want to count faster
+        counter.dataset.current = Math.round(counter.dataset.current) + 1 ;
+      // this makes the text reflect the current number
+      // 9) after we increse it we should update our html to reflect our new number
+        counter.innerText = counter.dataset.current;
+      // this set the function to run again
+      // 11) if we were only counting to 1 then we could just leave it there but im guessing that if you have some bigger numbers then like 2 or even 7 then we are going to have to run it a few times. so lets do another setTimeout to run again in .1 seconds 
+      setTimeout(() => update(counter), 100);
+    } 
+    // 10) if we are at / over our target then we want to probably want to just go back and just set the html to the what ever the cap was. this is more important if your counting by a number bigger then 1 and its kinda like we are future proofing our code.
+    else {
+        // this is to reset the text in the case that it goes over the target count
+        counter.innerText = counter.dataset.count;
+    }
+}
+
+// 3) now before we start filling out the functions let set up whats calling it first. so for each of the counters we want to do something
+// this is running the function on all counters on the page wether there are 1 or 796 counters on the page
+counters.forEach(counter => {
+  // 5) so up an till now we have been adding our datasets in our html but if we know that all of the countes are starting from 0 we can set that in our for loop  
+  counter.dataset.current = 0;
+  // 6) next we want to run it in to the setTimout method to run after a certain amount fo time
+  // this starts the function running and passes on the element we are running the function on.
+  setTimeout(() => update(counter), 100);
+})
+
+
+</script>
+

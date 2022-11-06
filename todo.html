@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+<h2>
+  js less that need notes
+</h2>
+
+{% for lesson in site.js %}
+  {% unless lesson.teaching_notes == true %}
+<a href="{{lesson.url}}" >{{lesson.title}}</a>
+{% endunless %}
+{% endfor %}

@@ -4,15 +4,10 @@ title: sticky nav
 img_Path: https://picsum.photos/id/1025/600/400
 ---
 
-
-<section>
-
-</section>
 <header class="center stickyHeader">
-  <nav class="stickyNav">sticky links</nav>
-  <nav class="staticNav">static links</nav>
+  <nav class="stickyNav">links</nav>
 </header>
-
+<section></section>
 <section>
 
 </section>
@@ -29,24 +24,34 @@ img_Path: https://picsum.photos/id/1025/600/400
   }
   nav{
     border: 1px solid;
+    background-color: #fff;
+    text-align: center;
+    width: 100vw;
+  }
+  .stickyNav{
+    position: sticky;
+    z-index: 9;
+    top:0;
+  }
+  .sticky{
+    position: fixed;
+    background-color: black;
+    color: #fff;
   }
 
-  .stickyNav{position: fixed; top: -5rem;}
 </style>
 
 <script>
-  const header = document.querySelector(".stickyHeader")
+  const header = document.querySelector(".stickyHeader");
   const stickyNav = document.querySelector('.stickyNav');
-  const staticNav = document.querySelector('.staticNav')
 
   function updateNav() {
     let staticNavToTop = header.getBoundingClientRect().top;
     console.log(staticNavToTop)
-    if (staticNavToTop < -20 ) {
-      stickyNav.style.top = `0px` ;
+    if (staticNavToTop < -10 ) {
+      stickyNav.classList.add('sticky')
     } else {
-      stickyNav.style.top = `-40px`;
-      
+      stickyNav.classList.remove('sticky')
     }
   }
 

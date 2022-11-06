@@ -57,25 +57,28 @@ img_Path: https://picsum.photos/id/1025/600/400
 </style>
 
 <script>
+  // 1) js 101 looking for the section and all the slides
     // this is our parent section 
     const section = document.querySelector(".sliderSection");
     // these are our slides in the section
     const slides = document.querySelectorAll('.sideSection');
 
+    // 2) function time, lets call it update pannels
     // this is our function
     function updatePannels() {
+
+      //3) just like we when we start a script lets add some varables at the start of the function we want one for screen height and one for how far above the fold the parent section is
         // this is finding the screen's height
         let height = screen.height;
-        // this is finding the screens width
-        let width = screen.width;
         // this is finding out how far the top of the section is from the top of the screen (once you start going past the top of the section the number becomes negitive )
         let distanceToTop = section.getBoundingClientRect().top;
         
         // this is for trouble shooting
         console.log(distanceToTop);
-        
+        // 4) now that we have them all defined lets loop over our slides
         // this is a for each on the slides so we can do something slightly different to each of them
         slides.forEach(slide => {
+                // 5) now because we want them to all come in at different times we are going to need to give them each there own offset
                 // this is finding the order of the slides and multiplying it by the screen height to find when it should be apearing  
                 let personaloffset = slide.dataset.order * height;
                 // this determins when it makes the switch
@@ -89,8 +92,28 @@ img_Path: https://picsum.photos/id/1025/600/400
         });
 
     };
-
     updatePannels()
 
+    // function debounce(func, wait = 2, immediate = true) {
+    //   var timeout;
+    //   return function () {
+    //     var context = this, args = arguments;
+    //     var later = function () {
+    //       timeout = null;
+    //       if (!immediate) func.apply(context, args);
+    //     };
+    //     var callNow = immediate && !timeout;
+    //     clearTimeout(timeout);
+    //     timeout = setTimeout(later, wait);
+    //     if (callNow) func.apply(context, args);
+    //   };
+    // };
+
+
+    // window.onscroll = function () { debounce(updatePannels()) };
+
+    // 3) and some eventlistiner so that we can test as we go :D 
     window.onscroll = function () { updatePannels() };
+    window.onresize = function () { updatePannels() };
+
 </script>

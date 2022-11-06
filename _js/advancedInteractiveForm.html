@@ -2,6 +2,7 @@
 layout: default
 title: fancier form
 img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
 ---
 
 <style>
@@ -97,6 +98,7 @@ img_Path: https://picsum.photos/id/1025/600/400
 
     inputs.forEach(input => {
         input.addEventListener("change", updateData);
+        // 1) need to add an extra trigger for sliders to get the out put shown as you slide it
         // only extra code from input
         input.addEventListener("mousemove", updateData);
         
