@@ -1,5 +1,4 @@
 ---
-layout: none
 ---
 
 [
@@ -13,6 +12,9 @@ layout: none
         "category": "{{ subPost.categories }}"
     },
     {%- endfor -%}
+    
+    {% comment %}  {% endcomment %}
+    
     {%- for subPost in site.posts -%}
     {
     "title": "{{ subPost.title | xml_escape }}",

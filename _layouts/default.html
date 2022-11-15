@@ -19,10 +19,13 @@
             --bgDark: {{site.data.color.Dark_backgroundg}};
             --white: #ffffff;
         }
-    
+    .bob{color:red}
     
         h1,h2,h3 {
             color: var(--headings)
+        }
+        .min-height-100 {
+          min-height: 100vh;
         }
     </style>
     <header>
@@ -62,6 +65,54 @@
 </script>
 {% endunless %}
 
+{% unless page.layout == products %}
+<script type="text/javascript">
+    /*<![CDATA[*/
+    (function () {
+      var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+      if (window.ShopifyBuy) {
+        if (window.ShopifyBuy.UI) {
+          ShopifyBuyInit();
+        } else {
+          loadScript();
+        }
+      } else {
+        loadScript();
+      }
+      function loadScript() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = scriptURL;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+        script.onload = ShopifyBuyInit;
+      }
+      function ShopifyBuyInit() {
+        var client = ShopifyBuy.buildClient({
+          domain: 'retreateexample.myshopify.com',
+          storefrontAccessToken: 'e3c45df84d904d2f08d265d059d677d2',
+        });
+        ShopifyBuy.UI.onReady(client).then(function (ui) {
+          ui.createComponent('product', {
+            moneyFormat: '%24%7B%7Bamount%7D%7D',
+            options: {
+              "toggle": {}
+            },
+          });
+        });
+      }
+    })();
+/*]]>*/
+</script>
+
+<img src="{{thing.icon-image}}" alt="{{thing.icon-alt}}"
+  data-aos="fade-right"
+  data-aos-offset="{{thing.animation-delay}}"
+>
+<p>{{thing.text}}</p>
+
+
+{% endunless %}
+
     {{content}}
     <!-- <script>
     var MemberSpace = window.MemberSpace || { subdomain: "chilly-giraffe" };
@@ -72,6 +123,9 @@
         e.parentNode.insertBefore(s, e);
     }(document));
 </script> -->
+
+
+<div class="min-height-100"></div>
 </body>
 
 </html>

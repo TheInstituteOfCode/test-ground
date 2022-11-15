@@ -1,0 +1,40 @@
+---
+layout: default
+title: age checking
+---
+
+
+<div class="agePopup">
+  <input type="number" name="age" id="age">
+  <button id="ageButton">submit</button>
+  <span class="errorText"></span>
+</div>
+
+
+<script>
+  const body = document.querySelector('body');
+  const agePopup = document.querySelector('.agePopup');
+  const ageInput = agePopup.querySelector('#age');
+  const ageButton = agePopup.querySelector('#ageButton');
+  const errorText = agePopup.querySelector('.errorText')
+
+  if (document.cookie.includes('ageAppropriate=active')) {
+    agePopup.classList.add('hidden');
+  }
+
+
+
+  function checkAge() {
+    console.log(ageInput.value);
+    if(ageInput.value >= 18) {
+      document.cookie = 'ageAppropriate=active';
+      agePopup.classList.add('hidden');
+    } else {
+      errorText.textContent = `sorry you are ${18 - ageInput.value} years to young to smoke`
+    }
+  };
+
+  ageButton.addEventListener('click', checkAge);
+
+document.cookie = 'ageAppropriate=false'
+</script>

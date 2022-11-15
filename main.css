@@ -2,7 +2,16 @@
     margin: 0%;
     padding: 0%;
     box-sizing: border-box;
-    transition: 1s;
+    /* transition: 1s; */
+}
+
+a{
+  color: inherit;
+}
+
+body{
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 img{ max-width: 100%;}

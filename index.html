@@ -23,3 +23,9 @@ layout: default
     <a href="{{snippet.url}}">{{snippet.title}}</a>
 </div>
 {% endfor %}
+
+{% for item in site.products %}
+  <div>
+    <a href="{{item.url}}">{{item.title}}</a>
+  </div>
+{% endfor %}

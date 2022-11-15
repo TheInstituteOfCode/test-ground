@@ -3,6 +3,8 @@ collections:
     output: true
   css:
     output: true
+  products:
+    output: true
 
 
 categories:

@@ -6,7 +6,7 @@ target: home
 
 
 <!-- HTML elements for search -->
-<input type="text" id="search-input" placeholder="Search blog posts..">
+<input type="text" id="search-input" placeholder="Search blog or code snipets posts..">
 <div id="results-container" class="grid-4"></div>
 
 <style >
@@ -20,25 +20,32 @@ target: home
 
 <script defer>
 
-    const initial = location.search.replace("?", "");
+    const initial = location.search.replace("?", "" );
+    const searchInput = document.querySelector("#search-input");
+    
+    if (initial != ''){
+      searchInput.value = initial;
+    }
 
-    const searchInput = document.querySelector("#search-input")
 
-    searchInput.value = initial;
+    function log() {
+      console.log(searchInput.value)
+    }
+
+    searchInput.addEventListener('mouseenter', log)
 
     var sjs = SimpleJekyllSearch({
             searchInput: document.getElementById('search-input'),
             resultsContainer: document.getElementById('results-container'),
             json: '/search.json',
-            searchResultTemplate: '<div><img src="{imgPath}" alt=""><a href="{{ site.url }}{url}">{title}</a></div>'
+            searchResultTemplate: '<div><img src="{imgPath}" alt="{title}"><a href="{{ site.url }}{url}">{title}</a></div>'
         });
 
         function initialRun() {
             sjs.search( initial )
-
         }
 
-    const start = setTimeout(initialRun, 100);
+    const start = setTimeout(initialRun, 100 );
 
         
     </script>
