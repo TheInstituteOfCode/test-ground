@@ -7,14 +7,10 @@ teaching_notes: true
 
 <div class="gallery-target" style="background-image:url('https://picsum.photos/200/300')"></div>
 
-<div data-pic="https://picsum.photos/300/300" class="gallery-pic"
-    style="background-image:url('https://picsum.photos/300/300')"></div>
-<div data-pic="https://picsum.photos/400/300" class="gallery-pic"
-    style="background-image:url('https://picsum.photos/400/300')"></div>
-<div data-pic="https://picsum.photos/500/300" class="gallery-pic"
-    style="background-image:url('https://picsum.photos/500/300')"></div>
-<div data-pic="https://picsum.photos/600/300" class="gallery-pic"
-    style="background-image:url('https://picsum.photos/600/300')"></div>
+<div class="gallery-pic" style="background-image:url('https://picsum.photos/300/300')"></div>
+<div class="gallery-pic"style="background-image:url('https://picsum.photos/400/300')"></div>
+<div class="gallery-pic" style="background-image:url('https://picsum.photos/500/300')"></div>
+<div class="gallery-pic" style="background-image:url('https://picsum.photos/600/300')"></div>
 
 
 <style>
@@ -49,17 +45,9 @@ const galleryThumbnails = document.querySelectorAll(".gallery-pic")
 
     // our function to change our large image
 function changeTarget() {
-    // this is pulling the new image off of the div that we hovered on
-    let target = this.dataset.pic
-    // this is converting it in to a format that we can use in js
-    let urlValue = `url('${target}')`;
-
-    // this is just for testing 
-    console.log(target)
-    console.log(urlValue)
     
     // this is setting the background image = to what we hovered on
-    galleryTarget.style.backgroundImage = urlValue
+    galleryTarget.style.backgroundImage = this.style.backgroundImage
 
 }
 

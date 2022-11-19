@@ -12,11 +12,15 @@ title: age checking
 
 
 <script>
+  // 1) lets start buy define all our constants 
+  // all our const to make things easier in the rest of the code
   const body = document.querySelector('body');
   const agePopup = document.querySelector('.agePopup');
   const ageInput = agePopup.querySelector('#age');
   const ageButton = agePopup.querySelector('#ageButton');
   const errorText = agePopup.querySelector('.errorText')
+
+
 
   if (document.cookie.includes('ageAppropriate=active')) {
     agePopup.classList.add('hidden');

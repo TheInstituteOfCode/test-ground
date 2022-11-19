@@ -6,37 +6,33 @@ grid:
   - name: item 1
     Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum architecto autem, quia eaque velit, aliquid blanditiis ducimus ipsam cupiditate ipsum iure explicabo? Ratione excepturi recusandae minus quos dolores quibusdam nemo.
     hoverItems:
-      - img_path: https://picsum.photos/id/684/600
-        top: 5
-        left: 5
-        width: 10
-        height: 15
-      - img_path: https://picsum.photos/id/684/600
-        top: 15
-        left: 15
-        width: 10
-        height: 15
-      - img_path: https://picsum.photos/id/684/600
-        top: 10
-        left: 10
-        width: 10
-        height: 15
-  - name: item 1
+      - img_path: https://picsum.photos/100?random
+      - img_path: https://picsum.photos/200?random
+      - img_path: https://picsum.photos/300?random
+      - img_path: https://picsum.photos/400?random
+      - img_path: https://picsum.photos/500?random
+      - img_path: https://picsum.photos/600?random
+      - img_path: https://picsum.photos/700?random
+      - img_path: https://picsum.photos/800?random
+      - img_path: https://picsum.photos/900?random
+      - img_path: https://picsum.photos/1000?random
+      - img_path: https://picsum.photos/1100?random
+      - img_path: https://picsum.photos/1200?random
+      - img_path: https://picsum.photos/1300?random
+      - img_path: https://picsum.photos/1400?random
+      - img_path: https://picsum.photos/1500?random
+      - img_path: https://picsum.photos/1600?random
+  - name: item 2
     Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum architecto autem, quia eaque velit, aliquid blanditiis ducimus ipsam cupiditate ipsum iure explicabo? Ratione excepturi recusandae minus quos dolores quibusdam nemo.
     hoverItems:
       - img_path: https://picsum.photos/id/684/600
-        top: 5
-        left: 5
-        width: 10
-        height: 15
       - img_path: https://picsum.photos/id/684/600
-        top: 15
-        left: 15
-        width: 10
-        height: 15
 ---
 <style>
   /* div{border:2px solid} */
+  *{
+    transition: opacity 1s;
+  }
 
   .fancyHoverGrid > div{
     /* position: relative; */
@@ -52,6 +48,8 @@ grid:
     position: absolute;
     opacity: 0;
     display: none;
+    max-width: 90vw;
+    max-height: 90vh;
   }
 
   .hoveredChildInGrid > *{
@@ -60,9 +58,23 @@ grid:
   .hoveredChildInGrid .hoveredChild{
     opacity: 1;
   }
-  .hoveredChildInGrid .hoveredChild .hoverImg{
-    display: block;
+  .hoveredChild .eye-image {
+        opacity: .8;
   }
+  .hoveredChildInGrid .hoveredChild .hoverImg{
+    display: block; 
+
+  }
+  .screenSize {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -9;
+  }
+
 </style>
 
 
@@ -82,17 +94,24 @@ grid:
     </div>
   {% endfor %}
 </section>
-
+<div class="screenSize"></div>
 
 <script>
+  const screenSizer = document.querySelector('div.screenSize')
   const grid = document.querySelector(".fancyHoverGrid");
   const gridItems = grid.querySelectorAll(".grid-item");
   let currentImgNum = 1;
+  
+  console.log(screenSizer.clientWidth);
 
-  function nextImage(item) {
+  function nextImage(item,eye) {
+
       if (!item.classList.contains('hoveredChild') ) {
+        eye.addEventListener("mouseenter", debounce(e => hoverEffect(item, eye)));
+        console.log("eye should be hoverable");
         return
       }
+
 
       currentImgNum = (currentImgNum + 1);
 
@@ -104,39 +123,46 @@ grid:
 
       images.forEach(img => {
         let self = Math.floor(img.dataset.imgNum)
-        console.log(self)
+        // console.log(self)
         if (currentImgNum === self) {
+          img.style.top = `${Math.round(Math.random() * (screenSizer.clientHeight - img.height))}px`
+          img.style.left = `${Math.round(Math.random() * (screenSizer.clientWidth - img.width))}px`
+
           img.style.opacity = 1;
+
         } else {
           img.style.opacity = 0;
         }
       });
 
-      console.log(currentImgNum)
-    setTimeout(() => { nextImage(item) }, 1000);
+      // console.log(currentImgNum)
+    setTimeout(() => { nextImage(item,eye) }, 1000);
   }
 
   function unHovered(item) {
     grid.classList.remove('hoveredChildInGrid');
     item.classList.remove('hoveredChild');
     let images = item.querySelectorAll(".hoverImg");
-
     images.forEach(img => { img.style.opacity = 0 });
   }
 
-  function hoverEffect(item) {
+  function hoverEffect(item,eye) {
     grid.classList.add('hoveredChildInGrid');
     item.classList.add('hoveredChild');
-    setTimeout(() => { nextImage(item)}, 100 );
-    console.log(item);
+    eye.removeEventListener("mouseenter", e => hoverEffect(item, eye));
+    console.log('eye shouldnt be hoverable')
+    setTimeout(() => { nextImage(item,eye)}, 100 );
+    // console.log(item);
   }
   
   gridItems.forEach(item => {
     const eye = item.querySelector(".eye-image");
     eye.addEventListener('mouseleave', e =>  unHovered(item));
-    eye.addEventListener("mouseenter", e => hoverEffect(item));
+    eye.addEventListener("mouseenter", e => hoverEffect(item,eye));
     // console.log(item.dataset.hoverItems)
   });
+
+
 
 
 </script>

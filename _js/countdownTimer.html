@@ -39,7 +39,7 @@ teaching_notes: true
     let mins = Math.floor(timeLeft / ( 60 * 1000))
     timeLeft = timeLeft - (mins * 60 * 1000)
     let seconds = Math.floor(timeLeft / 1000)
-    // 11) and last but not least lets use all of those variables and change our span to some 
+    // 11) and last but not least lets use all of those variables and change our span to something that we can read  
     dateSpan.textContent = `${days} days ${hours} hours ${mins} minuets ${seconds} seconds`;
     // 12) ok and who thinks we are done... well it functions but what happenes if the end date is in the past? we are going to get some negative days. so we are going to need an if statement seeing if there are negative days.
     if (days < 0) {
@@ -51,7 +51,7 @@ teaching_notes: true
 
   }
 
-  // 4) then a special const that im going to place at the bottom of the script.its going down here because its going to call a function (the updateTime one that we are about to make). the other special thing about this one is it has a setInterval method. bonus point to who ever can tell me what 
+  // 4) then a special const that im going to place at the bottom of the script.its going down here because its going to call a function (the updateTime one that we are about to make). The other special thing about this one is it has a setInterval method.
 
   const timeUpdater = setInterval(updateTime, 500);
 
