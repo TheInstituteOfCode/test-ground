@@ -7,6 +7,10 @@ collections:
     output: true
 
 
+_inputs:
+  layout:
+    hidden: true
+
 categories:
   - prime
   - odd

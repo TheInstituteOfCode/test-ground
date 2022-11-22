@@ -3,3 +3,17 @@ layout: default
 ---
 
 {{content}}
+
+{% assign pageCategory = page.categories[0] %}
+<!-- just so that they can see what assign does -->
+{{pageCategory}}
+  {% assign relevant = site.categories[pageCategory] | where_exp:"post","post.url != page.url" %}
+  {% for post in relevant limit:3 %}
+  
+  <a href="{{post.url}}" class="col-4_xs-12 padded-2 centered">
+  <div class="bg-image padded" style="background-image:url({{post.image_path}})"> </div>
+  <span class="author">by {{post.author}}</span> //
+  <span class="author"> {{post.date | date: "%m.%d.%Y" }} </span>
+  <h3> {{post.title}} </h3>
+  </a>
+{% endfor %}

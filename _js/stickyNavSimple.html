@@ -32,6 +32,7 @@ img_Path: https://picsum.photos/id/1025/600/400
     position: sticky;
     z-index: 9;
     top:0;
+    transition: 1s;
   }
   .sticky{
     position: fixed;
@@ -42,6 +43,7 @@ img_Path: https://picsum.photos/id/1025/600/400
 </style>
 
 <script>
+  // 1) for const we are going to need 2 one for our header and one for our nav
   const header = document.querySelector(".stickyHeader");
   const stickyNav = document.querySelector('.stickyNav');
 
@@ -54,6 +56,6 @@ img_Path: https://picsum.photos/id/1025/600/400
       stickyNav.classList.remove('sticky')
     }
   }
-
-  window.onscroll = function() { updateNav() };
+  // 2) then we add an event listiner but becahe its on the window its slightly different
+  window.addEventListener("scroll", updateNav)
 </script>

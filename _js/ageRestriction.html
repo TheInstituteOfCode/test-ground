@@ -1,10 +1,11 @@
 ---
 layout: default
 title: age checking
+teaching_notes: true
 ---
 
 
-<div class="agePopup">
+<div class="agePopup hidden">
   <input type="number" name="age" id="age">
   <button id="ageButton">submit</button>
   <span class="errorText"></span>
@@ -21,16 +22,19 @@ title: age checking
   const errorText = agePopup.querySelector('.errorText')
 
 
-
   if (document.cookie.includes('ageAppropriate=active')) {
-    agePopup.classList.add('hidden');
+    agePopup.classList.remove('hidden');
   }
-
-
-
+  
+  
+  // 3) Then we add the function 
+  
   function checkAge() {
+    // 4) first up lets test that both the eventListiner and  that we can pull the value from our input
     console.log(ageInput.value);
+    // 5) next we need to check the age with an if statement.
     if(ageInput.value >= 18) {
+      // 6) if it was older 
       document.cookie = 'ageAppropriate=active';
       agePopup.classList.add('hidden');
     } else {
@@ -38,7 +42,10 @@ title: age checking
     }
   };
 
+
+  // 2) lets add an eventlistiner so that we can trigger the 
   ageButton.addEventListener('click', checkAge);
 
-document.cookie = 'ageAppropriate=false'
+  // this is just for troubleshooting the code
+  // document.cookie = 'ageAppropriate=false'
 </script>
