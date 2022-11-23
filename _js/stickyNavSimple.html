@@ -2,6 +2,7 @@
 layout: default
 title: sticky nav
 img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
 ---
 
 <header class="center stickyHeader">
@@ -46,16 +47,21 @@ img_Path: https://picsum.photos/id/1025/600/400
   // 1) for const we are going to need 2 one for our header and one for our nav
   const header = document.querySelector(".stickyHeader");
   const stickyNav = document.querySelector('.stickyNav');
-
+  // 3) next come our function
   function updateNav() {
+    // 4) we start by checking how far the top of the header is to the top of the page and set it as a let 
     let staticNavToTop = header.getBoundingClientRect().top;
+    // 5) next i tested it to see what numbers you get
     console.log(staticNavToTop)
+    // 6) if that number is less then the height of the nav then
     if (staticNavToTop < -10 ) {
+      // 7) then add the class of sticky
       stickyNav.classList.add('sticky')
     } else {
+      // otherwise remove it 
       stickyNav.classList.remove('sticky')
     }
   }
-  // 2) then we add an event listiner but becahe its on the window its slightly different
+  // 2) then we add an event listiner to the window (yep you cna do that :D )
   window.addEventListener("scroll", updateNav)
 </script>

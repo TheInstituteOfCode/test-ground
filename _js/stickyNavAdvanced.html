@@ -2,6 +2,7 @@
 layout: default
 title: sticky nav advanced
 img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
 ---
 
 
@@ -41,54 +42,63 @@ img_Path: https://picsum.photos/id/1025/600/400
 </style>
 
 <script>
+  // 1) first lest define all teh const we are going to need
   const header = document.querySelector(".stickyHeader");
   const stickyNav = document.querySelector('.stickyNav');
-  const staticNav = document.querySelector('.staticNav');
   let scrollHeight
 
+    // 3) function time
   function updateNav() {
+    // 4) just like before we are looking at our header position to see what we should do
     let staticNavToTop = header.getBoundingClientRect().top;
-
+    // 5) console for testing :D
     console.log(staticNavToTop)
+    // 6) if its less then 100px from then the top
     if (staticNavToTop < -100) {
       stickyNav.classList.add('fixed')
     } else {
       stickyNav.classList.remove('fixed')
     }
-    
+    // 8) next we want to test to see if we have scrolled up or down since the last time we ran the function
     if (window.scrollY < scrollHeight){
+      // 9)if we have scrolled up and if we are more then 30 px from the top we add hide 
       if (staticNavToTop < -30) {
         stickyNav.classList.add("hide");
+        // if we are less then 30px we show it
       } else {
         stickyNav.classList.remove("hide");
       }
+
+      // 10) and if we are scrolling up then we remove hide to show it :D
     } else {
       stickyNav.classList.remove("hide");
     }
-
+    // 7) here we record where the screen was at the end of the function each time
     scrollHeight = window.scrollY
 
-    console.log(window.scrollY)
+    // console.log(window.scrollY)
 
   }
 
 
-  function debounce(func, wait = 2, immediate = true) {
-      var timeout;
-      return function () {
-        var context = this, args = arguments;
-        var later = function () {
-          timeout = null;
-          if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-      };
-    };
+  // not sure if we should be teaching this
+
+  // function debounce(func, wait = 2, immediate = true) {
+  //     var timeout;
+  //     return function () {
+  //       var context = this, args = arguments;
+  //       var later = function () {
+  //         timeout = null;
+  //         if (!immediate) func.apply(context, args);
+  //       };
+  //       var callNow = immediate && !timeout;
+  //       clearTimeout(timeout);
+  //       timeout = setTimeout(later, wait);
+  //       if (callNow) func.apply(context, args);
+  //     };
+  //   };
 
 
-
-   window.addEventListener('scroll', debounce(updateNav));
+    // 2) we do our eventlistiner again
+   window.addEventListener('scroll', updateNav);
 </script>

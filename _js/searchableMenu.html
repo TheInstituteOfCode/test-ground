@@ -61,12 +61,12 @@ menu:
     <div class="grid-5 dish-div padded-2 border margin-b-2" data-search-terms="{{dish.name}} {{dish.description}} 
       {% for extra in dish.extras %}	{{extra.name}} {% endfor %}">
         <div class="col-w-4">
-            <h4>{{dish.name}}</h4>
-            <p>{{dish.description}}</p>
-            <!-- <div class="center"><img src="{{dish.img_path}}" alt="{{dish.name}}"></div> -->
-            {% if dish.extras %}
-            <p>Extras</p>
-            {% endif %}
+          <h4>{{dish.name}}</h4>
+          <p>{{dish.description}}</p>
+          <!-- <div class="center"><img src="{{dish.img_path}}" alt="{{dish.name}}"></div> -->
+          {% if dish.extras %}
+          <p>Extras</p>
+          {% endif %}
         </div>
         <div class="right">${{dish.price}}</div>
 				{% for extra in dish.extras %}

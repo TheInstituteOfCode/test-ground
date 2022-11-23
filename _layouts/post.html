@@ -3,6 +3,10 @@ layout: default
 ---
 
 {{content}}
+{% include related-post.html %}
+{% include related-post-with-mutual-exclusivity.html %}
+
+{% comment %}
 
 {% assign pageCategory = page.categories[0] %}
 <!-- just so that they can see what assign does -->
@@ -17,3 +21,5 @@ layout: default
   <h3> {{post.title}} </h3>
   </a>
 {% endfor %}
+
+{% endcomment %}

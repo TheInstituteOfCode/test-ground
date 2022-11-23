@@ -1,0 +1,20 @@
+
+related
+{% for loop in page.categories %}
+<div>
+  {% assign targetCat = page.categories[forloop.index0] %}
+  <!-- <h2>{{targetCat}}</h2> -->
+  {% for post in site.categories[targetCat] | where_exp: 'post', 'post.url' != 'page.url' limit:4 %}
+  
+          <a href="{{post.url}}">
+            {{post.title}}
+          </a>
+          {% assign seenPost = seenPost | append: post.url %}
+          {% assign count = count | plus:1 %}
+      
+  {% endfor %}
+  {{count}}
+  
+  
+</div>
+  {% endfor %}
