@@ -6,7 +6,7 @@ collections:
   products:
     output: true
 
-
+# 
 _inputs:
   layout:
     hidden: true

@@ -3,13 +3,17 @@
 {% for loop in page.categories %}
 <div>
 
+{% raw %}
+  {% include blog-section/blogloop-[forloop.index].html %}
+{% endraw %}
   {% assign targetCat = page.categories[forloop.index0] %}
   <h2>{{targetCat}}</h2>
   {% assign count = 0 %}
 
   {% for post in site.categories[targetCat] | where_exp: 'post', 'post.url' != 'page.url' %}
   {% if count < 4 %}
-  {% if seenPost contains post.url %}    
+  {% if seenPost contains post.url %}
+      <!-- skip it -->
     {% else %}
         <a href="{{post.url}}">
             {{post.title}}
@@ -20,7 +24,6 @@
   {% endif %}
     
   {% endfor %}
-  {{count}}
   
 </div>
   {% endfor %}
