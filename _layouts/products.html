@@ -9,6 +9,7 @@ layout: default
 {{content}}
 
 <div id='product-component-1668299545735'></div>
+<div id='product-component-1669539928349'></div>
 <script type="text/javascript">
   /*<![CDATA[*/
   (function () {
@@ -36,8 +37,8 @@ layout: default
       });
       ShopifyBuy.UI.onReady(client).then(function (ui) {
         ui.createComponent('product', {
-          id: '{{page.shopify-id-code}}',
-          node: document.getElementById('product-component-1668299545735'),
+          id: '{{page.shopify_id}}',
+          node: document.getElementById('product-component-1669539928349'),
           moneyFormat: '%24%7B%7Bamount%7D%7D',
           options: {
             "product": {
@@ -100,11 +101,6 @@ layout: default
                 "note": true
               }
             },
-            "lineItem": {
-              "template": {
-                "price": "<span> only {data.price}</span>"
-              }
-            }
             "toggle": {}
           },
         });

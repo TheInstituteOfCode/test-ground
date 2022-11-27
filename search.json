@@ -2,6 +2,16 @@
 ---
 
 [
+      {%- for subPost in site.css -%}
+    {
+        "title": "{{ subPost.title | xml_escape }}",
+        "description": "{{ subPost.description }}",
+        "imgPath": "{{ subPost.img_Path }}",
+        "url": "{{ subPost.url }}",
+        "date": "{{ subPost.last_modified_at | date_to_xmlschema }}",
+        "category": "{{ subPost.categories }}"
+      },
+      {%- endfor -%}
     {%- for subPost in site.js -%}
     {
         "title": "{{ subPost.title | xml_escape }}",

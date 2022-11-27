@@ -75,6 +75,7 @@
 </script>
 {% endunless %}
 
+{% comment %}
 {% unless page.layout == products %}
 <script type="text/javascript">
     /*<![CDATA[*/
@@ -114,6 +115,8 @@
 /*]]>*/
 </script>
 
+
+
 <img src="{{thing.icon-image}}" alt="{{thing.icon-alt}}"
   data-aos="fade-right"
   data-aos-offset="{{thing.animation-delay}}"
@@ -122,6 +125,10 @@
 
 
 {% endunless %}
+
+
+{% endcomment %}
+
 
     {{content}}
     <!-- <script>
