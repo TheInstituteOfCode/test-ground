@@ -113,6 +113,11 @@ layout: default
   function toggleBurger() {
     burgerButton.classList.toggle('active');
     burgerMenu.classList.toggle('active');
+
+    this.classList.add('active');
+
+    this.querySelector('.burger-menu').classList.add('active');
+    
   }
 
   burgerButton.addEventListener('click', toggleBurger)
