@@ -1,0 +1,63 @@
+---
+layout: default
+title: Orb menu
+---
+
+
+<style>
+*{
+  animation: spin 1000s linear infinite;
+}
+
+
+@keyframes spin {
+  from {transform: rotate(0deg);}
+  to   {transform: rotate(360deg);}
+}
+</style>
+
+<section class="orb-section grid-3">
+  <div class="orb" data-orb-pointer="0">1</div>
+  <div class="orb" data-orb-pointer="1">2</div>
+  <div class="orb" data-orb-pointer="2">3</div>
+</section>
+
+
+<section class="hidden-section collapsed">
+  <h2>first</h2>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus eligendi laboriosam placeat velit, eos maiores iusto sit necessitatibus veritatis, quas, corporis mollitia minima magnam! Fuga voluptates fugit enim quibusdam voluptas.</p>
+</section>
+<section class="hidden-section collapsed">
+  <h2>second</h2>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus eligendi laboriosam placeat velit, eos maiores
+    iusto sit necessitatibus veritatis, quas, corporis mollitia minima magnam! Fuga voluptates fugit enim quibusdam
+    voluptas.</p>
+</section>
+<section class="hidden-section collapsed">
+  <h2>third</h2>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus eligendi laboriosam placeat velit, eos maiores
+    iusto sit necessitatibus veritatis, quas, corporis mollitia minima magnam! Fuga voluptates fugit enim quibusdam
+    voluptas.</p>
+</section>
+
+<script>
+  const orbSec = document.querySelector('orb-section')
+  const orbs = document.querySelectorAll('.orb')
+  const hiddenSections = document.querySelectorAll('.hidden-section')
+  
+  function reveal() {
+    let target = this.dataset.orbPointer;
+    // hiddenSections.forEach(sec => {sec.classList.add('collapsed')})
+    hiddenSections[target].classList.remove('collapsed');
+    orbs.forEach(orb => {
+      orb.classList.add("extra-orb");
+    })
+    this.classList.add(main-orb)
+    console.log(target)
+  }
+
+  orbs.forEach(orb => {
+    orb.addEventListener('click', reveal)
+  })
+
+</script>
