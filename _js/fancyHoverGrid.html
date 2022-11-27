@@ -107,7 +107,6 @@ grid:
   function nextImage(item,eye) {
 
       if (!item.classList.contains('hoveredChild') ) {
-        eye.addEventListener("mouseenter", debounce(e => hoverEffect(item, eye)));
         console.log("eye should be hoverable");
         return
       }
@@ -146,19 +145,25 @@ grid:
     images.forEach(img => { img.style.opacity = 0 });
   }
 
-  function hoverEffect(item,eye) {
-    grid.classList.add('hoveredChildInGrid');
-    item.classList.add('hoveredChild');
-    eye.removeEventListener("mouseenter", e => hoverEffect(item, eye));
-    console.log('eye shouldnt be hoverable')
-    setTimeout(() => { nextImage(item,eye)}, 100 );
-    // console.log(item);
-  }
+  function clickEye(item,eye) {
+      if (item.classList.contains('hoveredChild')) {
+        grid.classList.remove('hoveredChildInGrid');
+        item.classList.remove('hoveredChild');
+        nextImage(item, eye)
+      } else {
+        grid.classList.add('hoveredChildInGrid');
+        item.classList.add('hoveredChild');
+        console.log('eye shouldnt be hoverable')
+        nextImage(item,eye)
+      };
+        // console.log(item);
+    }
+
   
   gridItems.forEach(item => {
     const eye = item.querySelector(".eye-image");
-    eye.addEventListener('mouseleave', e =>  unHovered(item));
-    eye.addEventListener("mouseenter", e => hoverEffect(item,eye));
+    item.addEventListener('mouseleave', e =>  unHovered(item));
+    eye.addEventListener("click", e => clickEye(item,eye));
     // console.log(item.dataset.hoverItems)
   });
 
