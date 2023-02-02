@@ -1,23 +1,5 @@
 {
-    "frontMatter.framework.id": "jekyll",
-    "frontMatter.content.publicFolder": "assets",
-    "frontMatter.content.pageFolders": [
-        {
-            "title": "posts",
-            "path": "[[workspace]]/_posts"
-        },
-        {
-            "title": "_posts",
-            "path": "[[workspace]]/_posts"
-        }
-    ],
-    "frontMatter.taxonomy.tags": [],
-    "frontMatter.taxonomy.categories": [
-        "even",
-        "odd",
-        "prime"
-    ],
-    "[markdown]": {
+  "[markdown]": {
       "editor.fontSize": 14,
       "editor.lineHeight": 26,
       "editor.wordWrap": "wordWrapColumn",
@@ -30,6 +12,5 @@
       },
       "editor.minimap.enabled": false
     },
-		"editor.tabSize": 2,
-		"frontMatter.content.fmHighlight": false
+    "editor.tabSize": 2
 }
