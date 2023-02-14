@@ -1,16 +1,22 @@
 ---
 layout: default
-title: ticker banner
-banner_messeges: 
-  - repeated text over and over again
-  - but then something else
+title: ticker banner with links
+banner_message: 
+  - text: home
+    url: /index
+  - text: blog
+    url: /blog
+  - text: one really long non link
+    url: /temp
+  - text: longest one yet Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis qui pariatur dicta eos exercitationem cupiditate eaque distinctio deleniti quaerat impedit, voluptatum eligendi explicabo temporibus enim magnam culpa ipsum, placeat inventore.
+  - url: bob
 banner_width: 20vw;
 ---
 
 
 <div class="tickerBanner">
-  {% for messege in page.banner_messeges %}
-    <div class="text-block">{{messege}}</div>
+  {% for message in page.banner_message %}
+    <a href="{{message.url}}" class="text-block">{{message.text}}</a>
     {% endfor %}
 </div>
 
@@ -30,7 +36,7 @@ text-align: center;
 }
 
 
-.tickerBanner div{
+.tickerBanner a{
   display: inline-block;
   padding: 1vw;
   flex-shrink: 0;
@@ -68,18 +74,19 @@ text-align: center;
 
   
   function extendBanner() {
-    if (bannerLength < (screen.width + bannerBlock) ) {
-      textBlock.forEach(block => {
-        console.log(block.innerHTML)
-        let newDiv = document.createElement('div')
-        // add the newly created element and its content into the DOM
-        banner.appendChild(newDiv);
-        newDiv.innerHTML = block.innerHTML
-      });
-      bannerLength += bannerBlock;
-      console.log(bannerLength)
-      extendBanner()
-    }
+  if (bannerLength < (screen.width + bannerBlock) ) {
+    textBlock.forEach(block => {
+      console.log(block.innerHTML)
+      // add the newly created element and its content into the DOM
+      banner.appendChild(block.cloneNode(true));
+      // banner.querySelector('a:last-child').innerHTML = block.innerHTML
+      // banner.querySelector('a:last-child').href = block.href
+      
+    });
+    bannerLength += bannerBlock;
+    console.log(bannerLength) 
+    extendBanner()
+  }
   }
 
 
