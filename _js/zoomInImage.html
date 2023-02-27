@@ -1,0 +1,59 @@
+---
+layout: default
+title: zoom in image
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+---
+
+
+<div class="grid-2">
+
+  <div class="image" style="background-image: url(https://picsum.photos/id/1025/600/600); height: 50vw;">
+  </div>
+
+  <div class="image" style="background-image: url(https://picsum.photos/id/1020/600/600); height: 50vw;">
+  </div>
+
+</div>
+
+<style>
+  div{
+    background-size: 100%;
+    transition: background-size 1s;
+  }
+</style>
+
+
+<script>
+  const imgs = document.querySelectorAll('.image');
+
+  function alignBg(e) {
+    e.currentTarget.style.backgroundPositionX = ` ${Math.floor(10000 * (e.offsetX / e.currentTarget.offsetWidth))/100}%`
+    e.currentTarget.style.backgroundPositionY = ` ${Math.floor(10000 * (e.offsetY / e.currentTarget.offsetHeight)) / 100}%`
+  }
+
+  function zoomIn() {
+    this.style.backgroundSize = '200%'
+    console.log('zoomed in')
+  }
+    function zoomOut() {
+      let img = this
+        this.style.backgroundSize = '100%';
+        console.log('zoomed out');
+        // setTimeout(function(img) {
+        //   this.style.backgroundPositionX = '50%';
+        //   this.style.backgroundPositionY = '50%';
+        // }, 500)
+
+      }
+
+
+  imgs.forEach(img => {
+    img.addEventListener('mouseenter', zoomIn);
+    img.addEventListener('mouseleave', zoomOut);
+    img.addEventListener('mousemove', alignBg)
+  })
+
+  console.log(imgs)
+
+</script>
