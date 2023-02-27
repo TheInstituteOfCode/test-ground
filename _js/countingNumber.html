@@ -1,15 +1,17 @@
 ---
 layout: default
-title: counting game
+title:  counting game
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
 ---
 
 
 <div>
     <p>bob</p>
-    <p class="counter" data-count="150" data-current="0">0</p>
+    <p class="counter" data-count="150">0</p>
 </div>
-<div class="counter" data-count="85"  data-current="0">0</div>
-<div class="counter" data-count="2200"  data-current="0">0</div>
+<div class="counter" data-count="85">0</div>
+<div class="counter" data-count="2200">0</div>
 
 
 <style>
@@ -40,31 +42,36 @@ div {
 
 <script>
 const counters = document.querySelectorAll('.counter');
+// 1) So our basic one is great if you happy with a nice consistent speed on all of them but what if you want both your counter thats going to 85 and the one going to 150 to get there at the same time. then we are going to need to add some more math to our script. Lets add a const for counting duration. This wont guarantee it will all end at the exact same time but will be close. 
+// this is a time (in milli second) we want the bumbers to count in (bigger number might take longer due to a rounding error). so 8000 is 8s
 const countingDuration = 8000
 
+// 4) now we have updated our initial time out we need to add the parameter to our function. once when we are declaring it
 function update(counter, time) {
-    //  var time = Math.floor(countingDuration / counter.dataset.count);
-    //  var currentCount = counter.dataset.current
-    // console.log(counter)
-    // console.log(counter.dataset.current)
-    // console.log(counter.dataset.count)
-    // console.log(Math.round(counter.dataset.current) < Math.round(counter.dataset.count))
-
     if (Math.round(counter.dataset.current) < Math.round(counter.dataset.count)) {
+
         counter.dataset.current = Math.round(counter.dataset.current) + 1 ;
-        counter.innerText = counter.dataset.current ;
+        counter.innerText = counter.dataset.current;
+        // 5) and once to update our setTimeout method  
         setTimeout(() => update(counter, time), time);
     } else {
-      // setTimeout(() => update(counter, time), time);
+        counter.innerText = counter.dataset.count;
     }
 }
 
 counters.forEach(counter => {
-  var time =  Math.floor(countingDuration / counter.dataset.count);
-  console.log(time);
-    // setTimeout(() => { checkMouse(deck, card) }, animationDuration);
-    setTimeout(() => update(counter, time), time);
+  
+  counter.dataset.current = 0;
+  let countBy = Math.floor(counter.dataset.countBy)
+  // 2) now its time for everyone's favorite MATHs
+  let time =  Math.floor(countingDuration / counter.dataset.count);
+
+  
+  // 3) next we need to use that time variable twice. Once for when to run and one to pass as a parameter (look we have two now :D )  
+  setTimeout(() => update(counter, time), time);
+
 })
 
 
 </script>
+

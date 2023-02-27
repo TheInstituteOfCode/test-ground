@@ -1,18 +1,16 @@
 ---
 layout: default
 title: hover Gallery
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
 ---
 
 <div class="gallery-target" style="background-image:url('https://picsum.photos/200/300')"></div>
 
-<div data-pic="https://picsum.photos/300/300" class="gallery-pic"
-    style="background-image:url('https://picsum.photos/300/300')"></div>
-<div data-pic="https://picsum.photos/400/300" class="gallery-pic"
-    style="background-image:url('https://picsum.photos/400/300')"></div>
-<div data-pic="https://picsum.photos/500/300" class="gallery-pic"
-    style="background-image:url('https://picsum.photos/500/300')"></div>
-<div data-pic="https://picsum.photos/600/300" class="gallery-pic"
-    style="background-image:url('https://picsum.photos/600/300')"></div>
+<div class="gallery-pic" style="background-image:url('https://picsum.photos/300/300')"></div>
+<div class="gallery-pic"style="background-image:url('https://picsum.photos/400/300')"></div>
+<div class="gallery-pic" style="background-image:url('https://picsum.photos/500/300')"></div>
+<div class="gallery-pic" style="background-image:url('https://picsum.photos/600/300')"></div>
 
 
 <style>
@@ -38,29 +36,26 @@ title: hover Gallery
 
 
 <script defer>
+  // 1) So doing js then lets make some const. One for the 
+    // const for targetting
+        // this is our large image at the top
 const galleryTarget = document.querySelector(".gallery-target")
+        // these are all of our smaller images for hovering on
 const galleryThumbnails = document.querySelectorAll(".gallery-pic")
 
+    // our function to change our large image
 function changeTarget() {
-    var target = this.dataset.pic
-
-    var urlValue = `url('${target}')`;
-    console.log(target)
-    
-    console.log(urlValue)
-    galleryTarget.style.backgroundImage = urlValue
-
+    // this is setting the background image = to what we hovered on
+    galleryTarget.style.backgroundImage = this.style.backgroundImage
 }
 
 
+// this is adding event lisiteners to all of our small images
 galleryThumbnails.forEach(thumbnail => {
+    // when 
     thumbnail.addEventListener('mouseenter', changeTarget)
-})
 
-            // $('.gallery-pic').mouseenter(function (e) {
-            //     var background = $(this).attr("data-pic");
-            //     $(".gallery-target").css("background-image", "url(" + background + ")");
-            // });
+})
 
     
 </script>

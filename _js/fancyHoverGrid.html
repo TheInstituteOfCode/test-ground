@@ -1,0 +1,175 @@
+---
+layout: default
+title: fancy hover grid
+img_Path: https://picsum.photos/id/1025/600/400
+grid:
+  - name: item 1
+    Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum architecto autem, quia eaque velit, aliquid blanditiis ducimus ipsam cupiditate ipsum iure explicabo? Ratione excepturi recusandae minus quos dolores quibusdam nemo.
+    hoverItems:
+      - img_path: https://picsum.photos/100?random
+      - img_path: https://picsum.photos/200?random
+      - img_path: https://picsum.photos/300?random
+      - img_path: https://picsum.photos/400?random
+      - img_path: https://picsum.photos/500?random
+      - img_path: https://picsum.photos/600?random
+      - img_path: https://picsum.photos/700?random
+      - img_path: https://picsum.photos/800?random
+      - img_path: https://picsum.photos/900?random
+      - img_path: https://picsum.photos/1000?random
+      - img_path: https://picsum.photos/1100?random
+      - img_path: https://picsum.photos/1200?random
+      - img_path: https://picsum.photos/1300?random
+      - img_path: https://picsum.photos/1400?random
+      - img_path: https://picsum.photos/1500?random
+      - img_path: https://picsum.photos/1600?random
+  - name: item 2
+    Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum architecto autem, quia eaque velit, aliquid blanditiis ducimus ipsam cupiditate ipsum iure explicabo? Ratione excepturi recusandae minus quos dolores quibusdam nemo.
+    hoverItems:
+      - img_path: https://picsum.photos/id/684/600
+      - img_path: https://picsum.photos/id/684/600
+---
+<style>
+  /* div{border:2px solid} */
+  *{
+    transition: opacity 1s;
+  }
+
+  .fancyHoverGrid > div{
+    /* position: relative; */
+  }
+  .fancyHoverGrid .eye-image{
+    /* position:absolute; */
+    top:5%;
+    right:5%;
+    width:50px;
+    z-index: 8;
+  }
+  .hoverImg {
+    position: absolute;
+    opacity: 0;
+    display: none;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+
+  .hoveredChildInGrid > *{
+    opacity: 0;
+  }
+  .hoveredChildInGrid .hoveredChild{
+    opacity: 1;
+  }
+  .hoveredChild .eye-image {
+        opacity: .8;
+  }
+  .hoveredChildInGrid .hoveredChild .hoverImg{
+    display: block; 
+
+  }
+  .screenSize {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -9;
+  }
+
+</style>
+
+
+<section class="grid-4 fancyHoverGrid">
+  {% for item in page.grid %}
+    <div class="grid-item grid-5" data-hover-items="{{item.hoverItems.size}}">
+      <div class="col-w-4">
+        <h3>{{item.name}}</h3>
+        <p>{{item.description}}</p>
+      </div>
+      <img class="eye-image" src="https://picsum.photos/id/1025/600/400" alt="eye">
+
+      {{identifier}}
+      {% for hoveritem in item.hoverItems %}
+      <img src="{{hoveritem.img_path}}" alt="" class="hoverImg" style="top:{{hoveritem.top}}%;left:{{hoveritem.left}}%;" data-img-num="{{forloop.index}}">
+      {% endfor %}
+    </div>
+  {% endfor %}
+</section>
+<div class="screenSize"></div>
+
+<script>
+  const screenSizer = document.querySelector('div.screenSize')
+  const grid = document.querySelector(".fancyHoverGrid");
+  const gridItems = grid.querySelectorAll(".grid-item");
+  let currentImgNum = 1;
+  
+  console.log(screenSizer.clientWidth);
+
+  function nextImage(item,eye) {
+
+      if (!item.classList.contains('hoveredChild') ) {
+        console.log("eye should be hoverable");
+        return
+      }
+
+
+      currentImgNum = (currentImgNum + 1);
+
+      if (currentImgNum > item.dataset.hoverItems) {
+        currentImgNum = 1
+      }
+
+      let images = item.querySelectorAll(".hoverImg")
+
+      images.forEach(img => {
+        let self = Math.floor(img.dataset.imgNum)
+        // console.log(self)
+        if (currentImgNum === self) {
+          img.style.top = `${Math.round(Math.random() * (screenSizer.clientHeight - img.height))}px`
+          img.style.left = `${Math.round(Math.random() * (screenSizer.clientWidth - img.width))}px`
+
+          img.style.opacity = 1;
+
+        } else {
+          img.style.opacity = 0;
+        }
+      });
+
+      // console.log(currentImgNum)
+    setTimeout(() => { nextImage(item,eye) }, 1000);
+  }
+
+  function unHovered(item) {
+    grid.classList.remove('hoveredChildInGrid');
+    item.classList.remove('hoveredChild');
+    let images = item.querySelectorAll(".hoverImg");
+    images.forEach(img => { img.style.opacity = 0 });
+  }
+
+  function clickEye(item,eye) {
+      if (item.classList.contains('hoveredChild')) {
+        grid.classList.remove('hoveredChildInGrid');
+        item.classList.remove('hoveredChild');
+        nextImage(item, eye)
+      } else {
+        grid.classList.add('hoveredChildInGrid');
+        item.classList.add('hoveredChild');
+        console.log('eye shouldnt be hoverable')
+        nextImage(item,eye)
+      };
+        // console.log(item);
+    }
+
+  
+  gridItems.forEach(item => {
+    const eye = item.querySelector(".eye-image");
+    item.addEventListener('mouseleave', e =>  unHovered(item));
+    eye.addEventListener("click", e => clickEye(item,eye));
+    // console.log(item.dataset.hoverItems)
+  });
+
+
+
+
+</script>
+
+

@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+
+
+<div class="my-slider">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div>6</div>
+  <div>7</div>
+  <div>8</div>
+  <div>9</div>
+  <div>10</div>
+  <div>11</div>
+  <div>12</div>
+  <div>13</div>
+
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+
+
+<script>
+    var slider = tns({
+        container: '.my-slider',
+        items: 1,
+        responsive: {
+          640: {
+            edgePadding: 20,
+            gutter: 20,
+            items: 2
+          },
+          700: {
+            gutter: 30
+          },
+          900: {
+            items: 3
+          }
+        }
+      });
+</script>

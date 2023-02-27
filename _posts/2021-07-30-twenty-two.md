@@ -1,6 +1,6 @@
 ---
 categories:
-  - even
   - prime
+  - even
 ---
 things about 22

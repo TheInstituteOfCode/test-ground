@@ -4,9 +4,9 @@
 }
 
 div{
-    border:1px solid black;
-    text-align: center;
-    gap:2px;
+    /* border:1px solid black; */
+    /* text-align: center;
+    gap:2px; */
 }
 
 .grid-2{grid-template-columns: repeat(2,    1fr);}

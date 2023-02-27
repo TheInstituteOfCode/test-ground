@@ -1,0 +1,52 @@
+---
+layout: default
+title: temp
+---
+<img src="https://picsum.photos/id/1020/600/400" alt="bear">
+<button class="expandButton" data-target-button="one"> click for more</button>
+<div class="expandable hidden" data-target-more="one">
+  more 1
+</div>
+<img src="https://picsum.photos/id/598/600/400" alt="boat">
+<button class="expandButton" data-target-button="2"> click for more</button>
+<div class="expandable hidden" data-target-more="2">
+  more 2
+</div>
+
+<script>
+
+const expandButtons = document.querySelectorAll(".expandButton");
+
+function expand() {
+  
+  console.log(this.previousElementSibling)
+  console.log(this.nextElementSibling)
+
+
+  this.nextElementSibling.classList.toggle("hidden")
+
+}
+
+expandButtons.forEach(button => {
+  button.addEventListener("click",expand);
+})
+
+</script>
+
+
+
+
+  <!-- function debounce(func, wait = 2, immediate = true) {
+  var timeout;
+  return function () {
+  var context = this, args = arguments;
+  var later = function () {
+  timeout = null;
+  if (!immediate) func.apply(context, args);
+  };
+  var callNow = immediate && !timeout;
+  clearTimeout(timeout);
+  timeout = setTimeout(later, wait);
+  if (callNow) func.apply(context, args);
+  };
+  }; -->

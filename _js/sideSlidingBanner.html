@@ -1,0 +1,107 @@
+---
+layout: default
+title: Side sliding 
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+---
+<section></section>
+<section class="sliderSection">
+    <div class="first sideSection">
+        centered text
+        <div class="second sideSection slide" data-order="1.3">
+            centered text
+        </div>
+        <div class="third sideSection slide" data-order="2.6">
+            centered text
+        </div>
+        <div class=" forth sideSection slide" data-order="3.9">
+            centered text
+        </div>
+        <div class=" fith sideSection slide" data-order="5.2">
+            centered text
+        </div>
+        <div class=" sixth sideSection slide" data-order="6.5">
+            centered text
+        </div>
+    </div>
+</section>
+<section></section>
+<style>
+    section{
+    height: 910vh;
+    }
+
+    .sideSection{
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+    }
+
+    .first{
+        position: sticky;
+    }
+    .first {color: black; background-color: azure;}
+    .second{ color: red; background-color: aqua;}
+    .third {color: green; background-color: royalblue}
+    .forth {color: blue; background-color: yellowgreen;}
+    .fith {color: green; background-color: rosybrown }
+    .sixth {color: blue; background-color: green;}
+    
+
+
+</style>
+
+<script>
+  // 1) js 101 looking for the section and all the slides
+    // this is our parent section 
+    const section = document.querySelector(".sliderSection");
+    // these are our slides in the section
+    const slides = document.querySelectorAll('.sideSection');
+
+    // 2) function time, lets call it update pannels
+    // this is our function
+    function updatePannels() {
+
+      //3) just like we when we start a script lets add some varables at the start of the function we want one for screen height and one for how far above the fold the parent section is
+        // this is finding the screen's height
+        let height = screen.height;
+        // this is finding out how far the top of the section is from the top of the screen (once you start going past the top of the section the number becomes negitive )
+        let distanceToTop = section.getBoundingClientRect().top;
+        
+        // this is for trouble shooting
+        console.log(distanceToTop);
+        // 4) now that we have them all defined lets loop over our slides
+        // this is a for each on the slides so we can do something slightly different to each of them
+        slides.forEach(slide => {
+                // 5) now because we want them to all come in at different times we are going to need to give them each there own offset
+                // this is finding the order of the slides and multiplying it by the screen height to find when it should be apearing  
+                let personaloffset = slide.dataset.order * height;
+                // this determins when it makes the switch
+                let percent = (personaloffset + distanceToTop) / 10 
+
+                // us this code if you want straight transitions
+                // slide.style.clipPath = `polygon( ${percent}% 0%,  100% 0%, 100% 100%,  ${percent}% 100%)`
+                // us this code if you want slanted ones
+                slide.style.clipPath = `polygon( ${percent + 30}% 0%,  100% 0%, 100% 100%,  ${percent - 30}% 100%)`
+
+        });
+
+    };
+
+
+    updatePannels()
+
+
+    // window.onscroll = function () { debounce(updatePannels()) };
+
+    // 3) and some eventlistiner so that we can test as we go :D 
+    window.onscroll = function () { updatePannels() };
+    window.onresize = function () { updatePannels() };
+
+</script>

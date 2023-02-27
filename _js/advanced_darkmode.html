@@ -1,6 +1,8 @@
 ---
 layout: default
 title: advanced dark mode with cookies
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
 ---
 
 
@@ -9,8 +11,12 @@ title: advanced dark mode with cookies
 
 
 <style>
-    
+  *{
+    transition: all 2s;
+  }
+
 .darkMode{
+  color: #fff;
   background:#000;
 }
 
@@ -21,8 +27,8 @@ title: advanced dark mode with cookies
   position:relative;
   border:1px solid black;
   border-radius:1rem;
-
 }
+
 #dark-btn span{
   position:absolute;
   background-color:#fff;
@@ -36,6 +42,7 @@ title: advanced dark mode with cookies
   bottom:1px;
   transition:1s;
 }
+
 .darkMode #dark-btn{
   background-color:#fff;
 }
@@ -45,30 +52,58 @@ left:calc(4rem - 2px);
   right:1px;
 }
 
+.darkMode h2 {
+}
+
 </style>
 
 
 <script>
-    
-
+    // 1) lets start by defining all the const we need. in this activity we need the body and our darkMode button 
+// constants for targeting later on 
         const body = document.querySelector('body');
-        const darkmodeButton = document.querySelector('#dark-btn');
+        const darkModeButton = document.querySelector('#dark-btn');
+
+        // 7) now because we are playing with cookies we want to run some code when the page loads to see if our dark mode cookie is active. to do this we use a classic if statement
+
+        // this is checking what state the cookie is in on page load 
         if (document.cookie.includes('dark-mode=active')) {
+          // 8) if was active then we want to add darkMode to the bodies class list and we are done :D
+          // if the cookie says darkMode active then add the class of darkMode to the body 
             body.classList.add('darkMode');
         }
+
+        // 2) just like our classic darkMode button lets start with the toggleDarkMode function
+
+        // new function for flipping between light and dark mode
         function toggleDarkMode() {
-            console.log('clickedon' + document.cookie)
+          
+            // this adds or removes darkMode from the bodies class list 
+            // 3) lets toggle the bodies darkMode class using   
             body.classList.toggle('darkMode');
+            // this is checking the classlist again
+
+            // 4) so that should all look similar to the button we did on the only course but now we get to the fun/scary part. first we are going to use a if statement to look at the bodies classlist for darkMode
             if (body.classList.contains('darkMode')) {
+              // 5) if the body contains darkMode then we want to make a cookie that says its active 
+              // if its set to darkMode then make a cookie saying its active
                 document.cookie = "dark-mode=active";
             }
+            // 6) other wise we want to make our cookie say that darkMode is deactivated
             else {
-                document.cookie = "dark-mode=deactive";
+              // if its not then it is setting it to de-active
+                document.cookie = "dark-mode=de-active";
             };
-
-            console.log('clickedon' + document.cookie)
+            // more trouble shooting code
+            console.log('clicked on ' + document.cookie)
         };
 
-        darkmodeButton.addEventListener('click', toggleDarkMode);
+
+
+        // this is tying the darkMode button to the toggleDarkMode function
+        darkModeButton.addEventListener('click', toggleDarkMode);
+
+
 
 </script>
+

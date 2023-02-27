@@ -1,0 +1,81 @@
+---
+layout: default
+title: multi dropdown sections
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+---
+
+<img src="https://picsum.photos/id/1020/600/400" alt="bear">
+<button class="expandButton" data-target-button="one"> click for more</button>
+<div class="expandable hidden" data-target-more="one">
+    more 1
+</div>
+<img src="https://picsum.photos/id/598/600/400" alt="boat">
+<button class="expandButton" data-target-button="2"> click for more</button>
+<div class="expandable hidden" data-target-more="2">
+    more 2
+</div>
+
+
+
+<script>
+    // 1) like all js lets start with our constants. As this is nice efficient code we we just have the one.  
+    // this is defining all our buttons
+    const buttons = document.querySelectorAll(".expandButton");
+
+    // This is a function that find the element that was clicked then finds the next child of its parent and removes the class of hidden
+      // 2) lets start our function that we want to use to show more
+    function showMore() {
+
+        //5) now we get to something new :D we are going to target an element based off of it's position relative to the triggering element. 
+        
+        console.log(this.previousElementSibling);
+        console.log(this.nextElementSibling);
+
+        // 6) using this we can target the section we want to appear and toggle the hidden class :D 
+        this.nextElementSibling.classList.toggle('hidden');
+    }
+
+      // 3) next we want to loop over all of our buttons using that classic forEach method
+    buttons.forEach(button =>
+        // 4) and add an event listener to each of them that triggers our function
+        button.addEventListener('click', showMore)
+    )
+
+ </script>
+
+
+<!-- non adjacent script -->
+
+<!-- this is a different version if you want a to open up an element that isn't adjacent  -->
+
+<!-- <script>
+  const buttons = document.querySelectorAll(".expandButton");
+  // 7) so that great if the elements are always one after each other but what if there is an arbitrary number of elements between the button and what we want to show. lets add a bit more code so it doesn't matter how far and how far apart the elements are. first up we need a new set of constant.
+    const moreThings = document.querySelectorAll(".expandable");
+
+    function showMore() {
+        //8) Now unlike before we need to pull some extra info from the buttons. To do that we are going to do a let variable targeting the links data-target-button 
+        let target = this.dataset.targetButton;
+        //9) lets throw out a console.log to make sure we are on the right track
+        console.log(target)
+
+
+        // 10) now that we have a target we want to check it against all of out moreThings
+        moreThings.forEach( moreThing => {
+                if (target == moreThing.dataset.targetMore) {
+                  // and lastly we re add in the classlist remove hidden but on the more thing now instead of the this.nextElementSibling
+                    moreThing.classList.remove('hidden')
+                };
+                
+            }
+        )
+    }
+
+    buttons.forEach(button =>
+        button.addEventListener('click', showMore)
+    )
+
+
+
+</script> -->

@@ -1,6 +1,7 @@
 ---
 categories:
-  - odd
   - prime
+  - odd
 ---
+
 twenty three

@@ -1,0 +1,109 @@
+---
+layout: default
+title: fancier form
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+---
+
+<style>
+    form div {
+        height: 100vh;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .page.active{
+        display: flex;
+    }
+</style>
+
+<section>
+
+
+<form action="">
+    <div class="page active" data-page="1">
+        <h2>Hi whats your name</h2>
+        <input type="text" id="name" class="infoPull" data-input="name">
+        <a href="#" class="pageTurner" data-pageTarget="2">next</a>
+    </div>
+    <div class="page" data-page="2">
+        <h2>Well now <span class="infoOutput" data-output="name">bob</span> let me know how i can help</h2>
+        <!-- <input  type="text" id="howICanHelp" data-input="howICanHelp"> -->
+        <select class="infoPull" name="howICanHelp" id="howICanHelp" data-input="howICanHelp">
+            <option value="simple site">I need a simple website</option>
+            <option value="fancy site">I need a fancy website</option>
+            <option value="Ecommerce site">I need a Ecommerce website</option>
+        </select>
+        </select>
+        <a href="#" class="pageTurner" data-pageTarget="1">last</a>
+        <a href="#" class="pageTurner" data-pageTarget="3">next</a>
+    </div>
+    <div class="page" data-page="3">
+        <h2>and whats you budget for this <span class="infoOutput" data-output="name">bob</span>?</h2>
+        <p>$<span class="infoOutput" data-output="budget"></span></p>
+        <input class="infoPull" type="range" min="500" max="5000" id="budget" data-input="budget">
+        <a href="#" class="pageTurner" data-pageTarget="2">last</a>
+        <a href="#" class="pageTurner" data-pageTarget="4">next</a>
+    </div>
+    <div class="page" data-page="4">
+        <h2>so just to confirm <span class="infoOutput" data-output="name">bob</span> your looking for <span class="infoOutput" data-output="howICanHelp">bob</span> and your budget is $<span class="infoOutput" data-output="budget">bob</span> </h2>
+        <a href="#" class="pageTurner" data-pageTarget="3">last</a>
+        <!-- <a href="#" data-pageTarget="3">next</a> -->
+    </div>
+</form>
+
+
+
+
+</section>
+
+<script>
+    
+    const inputs = document.querySelectorAll(".infoPull");
+    const outputs = document.querySelectorAll(".infoOutput");
+    const pages = document.querySelectorAll(".page");
+    const pageButtons = document.querySelectorAll(".pageTurner")
+
+    function goToPage() {
+        console.log(this.dataset)
+        let target = this.dataset.pagetarget;
+        console.log(target)
+        pages.forEach(page => {
+            if (target == page.dataset.page) {
+                page.classList.add('active');
+            } else {
+                page.classList.remove('active');
+            }
+        })
+    }
+
+    pageButtons.forEach(button => {
+        button.addEventListener("click",goToPage)
+    })
+
+    function updateData() {
+        let target = this.dataset.input;
+        let value = this.value;
+        console.log(target + " " +value )
+
+        outputs.forEach(output => {
+            if (target == output.dataset.output){
+                output.textContent = value;
+            }
+        })
+    }
+
+    inputs.forEach(input => {
+        input.addEventListener("change", updateData);
+        // 1) need to add an extra trigger for sliders to get the out put shown as you slide it
+        // only extra code from interactive form
+        input.addEventListener("mousemove", updateData);
+        
+    })
+
+
+
+</script>

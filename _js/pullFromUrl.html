@@ -1,7 +1,11 @@
 ---
 layout: default
 title: pull info from the url
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
 ---
+
+<!-- continues from filter gallery -->
 
 
 <!-- <section class="temp">
@@ -57,22 +61,26 @@ used to test scroll function
 }
 </style>
 
+
 <script>
     const gallery_buttons = document.querySelectorAll('#portfolio-filter a')
     const gallery_items = document.querySelectorAll('#portfolio-grid .gallery-item')
-    var initial = location.search.replace("?", "");
+    const gallery = document.querySelector("#portfolio-grid");
+
+    // 1) so the first step of pulling info from the url is to make a const that pulls it from the url :p location.search.replace is a fancy way of saying the text after the ? in a url. 
+    const initial = location.search.replace("?", "");
     
-            /* filtering */
+    // 2) so if there was nothing in the url then we want to tell it to skip url pulling code
+    // this first if is seeing if initial ISN'T blank remember ! before an = means not equal to or anything but
+    if (initial != "") {
+        // this line will scroll the gallery in to focus
+        // 5) now ocasionally we want to scroll down to the gallery if its pre filtered so lets add some code to do that here.
+        gallery.scrollIntoView();
+        //3)  and we can paste everything inside of our filterGallery function in to here. but we will be making a few replacements. first we want to replace filterVal with initial and we can delete the line that set that variable   
+        gallery_items.forEach(item => {
+                // this is running a filter on the grid based on what was in the url
 
-            alert(initial)
-
-            gallery_items.forEach(item => {
-                if (initial != "") {
-                    // element which needs to be scrolled to
-                    var element = document.querySelector("#portfolio-grid");
-                    // scroll to element
-                    element.scrollIntoView();
-
+                    // this is saying if our value is all we 
                     if (initial == 'all') {
                         item.classList.remove('hidden');
                     } else {
@@ -82,13 +90,11 @@ used to test scroll function
                             item.classList.add('hidden'); // hide those that don't have the filter
                         }
                     };
-                };
-            })
+                });
+            };
 
             
-            gallery_buttons.forEach(button => {
-                button.addEventListener('click', filterGallery)
-            })
+            
 
             function filterGallery(e) {
                 e.preventDefault();
@@ -100,7 +106,7 @@ used to test scroll function
                 this.classList.add('active');
 
                 /* get the name of the cateory from this link */
-                var filterVal = this.getAttribute('id');
+                let filterVal = this.getAttribute('id');
                  gallery_items.forEach(item => {
                     
 
@@ -116,6 +122,10 @@ used to test scroll function
                     
                 })
             }
+
+        gallery_buttons.forEach(button => {
+                button.addEventListener('click', filterGallery)
+        })
 
 
 </script>

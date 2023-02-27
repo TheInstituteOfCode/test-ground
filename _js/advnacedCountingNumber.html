@@ -1,0 +1,80 @@
+---
+layout: default
+title: advanced counting game
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+---
+
+<!-- 1) so we have them all finishing at the roughly the same time but what if we want them to count by different numbers. no matter how long we set the time numbers in the 1000s will take longer to count then those in the 10s to get around this -->
+<section class="grid-3 countingSec">
+  <div>
+      <p>bob</p>
+      <p class="counter" data-count="150" data-count-by="1">0</p>
+  </div>
+  <div class="counter" data-count="85"  data-count-by="1">0</div>
+  <div class="counter" data-count="2200"  data-count-by="23">0</div>
+
+</section>
+
+
+<style>
+    body {
+  /* background-color: #F46A6A;
+  color:#fff; */
+  max-width:800px;
+  margin: 100px auto 0;
+  text-align: center;
+  display: table;
+}
+
+.countingSec div {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin:1.5%;
+  font-size:50px;
+  background-color: #FF6F6F;
+  width:400px;
+  border-radius: 50%;
+  height:400px;
+  vertical-align: middle;
+}
+[class*="grid"] {
+ gap: 14px;
+}
+</style>
+
+
+<script>
+const counters = document.querySelectorAll('.counter');
+// 6) so assuming thats all working we might want to speed up the animation a little :D
+const countingDuration = 10000
+// 5) and we cant add it to the timeout without adding it in to the function 
+function update(counter, time, countBy) {
+
+    if (Math.round(counter.dataset.current) < Math.round(counter.dataset.count)) {
+
+        counter.dataset.current = Math.round(counter.dataset.current) + countBy;
+        counter.innerText = counter.dataset.current;
+        // 4) and here
+        setTimeout(() => update(counter, time, countBy), time);
+    } else {
+        counter.innerText = counter.dataset.count;
+    }
+}
+
+counters.forEach(counter => {
+  counter.dataset.current = 0;
+  let countBy = Math.floor(counter.dataset.countBy)
+  // 2) so if we are counting by a number bigger then 1 thats going to mess with our timming so lets updates our time var. great thing about updating it here is that it will update will go throught the rest of our function.
+  let time = Math.floor(countingDuration / counter.dataset.count * countBy);
+  
+  // 3) so then we come to a choice we can redefine countBy each time we run the function or we can pass it as another parameter both here   
+  setTimeout(() => update(counter, time, countBy), time);
+
+})
+
+
+</script>
+

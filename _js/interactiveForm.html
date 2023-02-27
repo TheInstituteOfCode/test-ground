@@ -1,6 +1,8 @@
 ---
 layout: default
 title: form
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
 ---
 
 <style>
@@ -21,12 +23,16 @@ title: form
 
 
 <form action="">
+    <!-- each of the divs get a data-page that we use for navigation between slides -->
     <div class="page active" data-page="1">
         <h2>Hi whats your name</h2>
+        <!-- each input has a data-input that will used to link to spans later -->
         <input type="text" id="name" class="infoPull" data-input="name">
+        <!-- this lets you go to the a different div based on the data-pageTarget -->
         <a href="#" class="pageTurner" data-pageTarget="2">next</a>
     </div>
     <div class="page" data-page="2">
+        <!-- the span is where the inputs are out put when changed -->
         <h2>Well now <span class="infoOutput" data-output="name">bob</span> let me know how i can help</h2>
         <input class="infoPull" type="text" id="howICanHelp" data-input="howICanHelp">
         <a href="#" class="pageTurner" data-pageTarget="1">last</a>
@@ -51,41 +57,94 @@ title: form
 </section>
 
 <script>
+  // 1) add all the constants inputs / spans and divs / spans
+    // selects all the inputs
     const inputs = document.querySelectorAll(".infoPull");
+    // selects all the spans
     const outputs = document.querySelectorAll(".infoOutput");
+    // selects all the divs
     const pages = document.querySelectorAll(".page");
+    // selects all the page buttons
     const pageButtons = document.querySelectorAll(".pageTurner")
 
+    // 2) start the function that we are going to use to go from page to page (between the )
+    // function for navagating the different div / pages
     function goToPage() {
-        console.log(this.dataset)
+        
+      // 5) lets add a console log to see what is triggering the function
+
+        // console.log(this)
+
+        // 6) now lets pull some info from this element. 
+
+        // this is defining which page we are trying to navigate to
         let target = this.dataset.pagetarget;
-        console.log(target)
+
+        // 7) and while we are getting started lets test the variable that we just made with another console.log()
+
+        // console.log(target)
+
+        // 8) Now we get to a slightly trickier bit we want to check each page and see if its data.page matches the target variable that we just made. lets do the same thing we did before but this time on the divs or pages.
+
+        // this loops through all the pages
         pages.forEach(page => {
+          
+          // 9) so we have gotten a for each but now we need to check and see if the link (or the very usefull target variable we made)
+          // this checks if the page matched the target
             if (target == page.dataset.page) {
+              // 10) Now if its matching we want that to add the class of active
+                // this makes the correct page show
                 page.classList.add('active');
-            } else {
+            } 
+            // 11) so that what we do if it matches what if it doesnt match? thats where we get to use an else conditional
+            else {
+              // 12) and we just need to remove the class if its got it.
+                // this hides the other pages
                 page.classList.remove('active');
             }
         })
     }
-
+    // 3) lets add an eventlistiner to all of our links. To do this we start with our pageButtons array and then we do the forEach method. next in our brackets we define what a single entity is (just like our for loop in jekyll).   
+    // this is adding all the event lisiteners to the page buttons 
     pageButtons.forEach(button => {
+      // 4) then we are adding an eventlistiner to trigger our function. in this case we are using click but there are tonnes of different options :D 
         button.addEventListener("click",goToPage)
     })
 
+    
+    // 13) Now that we can go between pages we want our form to update as we go. lets make a new function called updateData
+    // this function  that pulls from our inputs and pushes the info in to the spans
     function updateData() {
-        let target = this.dataset.input;
-        let value = this.value;
-        console.log(target + " " +value )
+        // 16) lets do a console.log(this) to make sure it worked
+        console.log(this);
+        // 17) now we need to  grab a couple of variables from our input. this.value would get us what was placed in the input and this.dataset.input is what 
+        // this is defining what was typed in to the input
 
+        let value = this.value;
+        // this is saying where we want the info to go
+        let target = this.dataset.input;
+        // this is just for testing 
+
+        // 18) while we are just getting started you can never have to many console.logs so lets ad one or two of them to out put our variables
+        console.log(target + " " + value )
+
+        // 19) now we have our to go through all our outputs / spans. time for another forEach :D
+        // this is running through all the different output text spans
         outputs.forEach(output => {
+
+          // 20) now just need do the same thing that we did before with an if statement seeing if our target matches the spans data-output
+            // this is making sure that it an appropriate span 
             if (target == output.dataset.output){
+                // 21) And finally we we want to change the text from its default to what was in the input  
+                // and this is updating the span with the new text
                 output.textContent = value;
             }
         })
     }
-
+    // 14) lets do another forEach on our inputs
+    // this runs our updateData function on input change
     inputs.forEach(input => {
+        // 15) lets add another addEventListener but this time we are using the new trigger of change  
         input.addEventListener("change", updateData)
     })
 
