@@ -1,0 +1,92 @@
+---
+layout: default
+title: lazy load
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+---
+
+
+<div class="padded lazy-div" style="background-image: url('https://picsum.photos/id/1025/200');" data-lazy="https://picsum.photos/2000">
+  <img src="https://picsum.photos/id/1025/100/100" alt="dog" data-lazy="https://picsum.photos/id/1025/900/900" class="lazy-img">
+
+</div>
+
+<div class="dumping-ground grid-15"></div>
+
+<div class="padded lazy-div" style="background-image: url('https://picsum.photos/id/1025/200');"
+  data-lazy="https://picsum.photos/2100">
+    <img src="https://picsum.photos/id/1025/100" alt="dog" data-lazy="https://picsum.photos/id/1021/1900" class="lazy-img">
+    <img src="https://picsum.photos/id/1025/100" alt="dog" data-lazy="https://picsum.photos/id/1022/1900" class="lazy-img">
+    <img src="https://picsum.photos/id/1025/100" alt="dog" data-lazy="https://picsum.photos/id/1023/1900" class="lazy-img">
+    <img src="https://picsum.photos/id/1025/100" alt="dog" data-lazy="https://picsum.photos/id/1024/1900" class="lazy-img">
+    <img src="https://picsum.photos/id/1025/100" alt="dog" data-lazy="https://picsum.photos/id/1025/1900" class="lazy-img">
+    <img src="https://picsum.photos/id/1025/100" alt="dog" data-lazy="https://picsum.photos/id/1026/1900" class="lazy-img">
+    <img src="https://picsum.photos/id/1025/100" alt="dog" data-lazy="https://picsum.photos/id/1027/1900" class="lazy-img">
+    <img src="https://picsum.photos/id/1025/100" alt="dog" data-lazy="https://picsum.photos/id/1028/1900" class="lazy-img">
+    <img src="https://picsum.photos/id/1025/100" alt="dog" data-lazy="https://picsum.photos/id/1029/1900" class="lazy-img">
+    <img src="https://picsum.photos/id/1025/100" alt="dog" data-lazy="https://picsum.photos/id/1030/1900" class="lazy-img">
+</div>
+
+<style>
+  *{
+    transition: all 2s;
+  }
+
+  .lazy-img{
+    width: 100%;
+  }
+
+.dumping-ground{
+position: absolute;
+left: -100vw;
+}
+.dumping-ground img{
+width: 0;
+}
+</style>
+
+
+<script>
+  const dumpingGround = document.querySelector('.dumping-ground')
+  const lazyDivs = document.querySelectorAll('.lazy-div')
+  const lazyImgs = document.querySelectorAll('.lazy-img')
+
+  console.log(dumpingGround)
+
+  function updateDiv(target,img) {
+    console.log("dump image loaded");
+    target.style.background = img
+  }
+  function updateImg(target, img) {
+      console.log("dump image loaded");
+      target.src = img
+    }
+
+window.addEventListener('load', () => {
+  lazyDivs.forEach(div => {
+    
+    let newImg = document.createElement('img');
+    // newImg.attributes.onload = updateDiv(div, `url(${div.dataset.lazy})`)
+    newImg.src = div.dataset.lazy;
+    dumpingGround.appendChild(newImg);
+    console.log(div.dataset.lazy);
+    newImg.addEventListener('load', () => {
+      updateDiv(div, `url(${div.dataset.lazy})`);
+    })
+  })
+  lazyImgs.forEach(img => {
+
+    let newImg = document.createElement('img');
+    // newImg.attributes.onload = updateDiv(div, `url(${div.dataset.lazy})`)
+    newImg.src = img.dataset.lazy;
+    dumpingGround.appendChild(newImg);
+    console.log(img.dataset.lazy);
+    newImg.addEventListener('load', () => {
+      updateImg(img, `${img.dataset.lazy}`);
+    })
+  })
+})
+  
+
+</script>
+
