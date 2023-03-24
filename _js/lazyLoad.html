@@ -37,8 +37,11 @@ teaching_notes: true
   }
 
 .dumping-ground{
-position: absolute;
-left: -100vw;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+/* position: absolute;
+left: -100vw; */
 }
 .dumping-ground img{
 width: 0;
@@ -55,7 +58,7 @@ width: 0;
 
   function updateDiv(target,img) {
     console.log("dump image loaded");
-    target.style.background = img
+    target.style.backgroundImage = img
   }
   function updateImg(target, img) {
       console.log("dump image loaded");
