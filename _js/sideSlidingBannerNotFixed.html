@@ -1,0 +1,133 @@
+---
+layout: default
+title: Side sliding alt
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+---
+<section></section>
+<section class="sliderSection">
+  <!-- <div class="spaceHolder"></div> -->
+    <!-- <div class="vertSlidingDiv"> -->
+      <div class="SlidingDiv">
+          <img src="https://picsum.photos/id/1025/900" alt="">
+          <img src="https://picsum.photos/id/1025/900" alt="">
+          <img src="https://picsum.photos/id/1025/900" alt="">
+          <img src="https://picsum.photos/id/1025/900" alt="">
+          <img src="https://picsum.photos/id/1025/900" alt="">
+          <img src="https://picsum.photos/id/1025/900" alt="">
+          <img src="https://picsum.photos/id/1025/900" alt="">
+          <img src="https://picsum.photos/id/1025/900" alt="">
+          <img src="https://picsum.photos/id/1025/900" alt="">
+          <img src="https://picsum.photos/id/1025/900" alt="">
+      <!-- </div> -->
+    </div>
+</section>
+<section></section>
+<style>
+
+  section{
+    height: 100vh;
+    border:1px solid green
+  }
+  
+  .sliderSection{
+    /* overflow-x: scroll; */
+    display: flex;
+        height: 1000vh;
+        position: relative;
+        align-items: flex-start;
+  }
+
+
+    .vertSlidingDiv{      
+      display: flex;
+      /* position: sticky; */
+      left: 0;
+      top:0;
+    }
+    .SlidingDiv{
+      position: absolute;
+      top: 0;
+      display: flex;
+    }
+    .SlidingDiv img{
+      max-width: min(100vw, 100vh);
+      flex-shrink: 0;
+      flex-grow: 1;      
+    }
+
+    
+
+
+</style>
+
+<script>
+  // 1) js 101 looking for the section and all the slides
+    // this is our parent section 
+    const slidingSection = document.querySelector(".sliderSection");
+    // these are our slides in the section
+    const SlidingDiv = document.querySelector('.SlidingDiv');
+    // const horzSlidingDiv = document.querySelector('.horzSlidingDiv');
+
+    // const screen = screen.height
+
+    
+    // 2) function time, lets call it update pannels
+    // this is our function
+    function updatePannels() {
+      slidingSection.style.height = `${SlidingDiv.offsetWidth}px`
+
+      //3) just like we when we start a script lets add some varables at the start of the function we want one for screen height and one for how far above the fold the parent section is
+        // this is finding the screen's height
+        let height = window.innerHeight;
+        let heightOffset = (height - SlidingDiv.offsetHeight) / 2
+        // this is finding out how far the top of the section is from the top of the screen (once you start going past the top of the section the number becomes negitive )
+        let distanceToTop = slidingSection.getBoundingClientRect().top;
+        
+        // this is for trouble shooting
+        // console.log(distanceToTop);
+        // 4) now that we have them all defined lets loop over our slides
+        // this is a for each on the slides so we can do something slightly different to each of them
+      console.log(heightOffset)
+      SlidingDiv.style.top = `${heightOffset}px`
+
+console.log(distanceToTop - heightOffset > 0)
+
+      if (distanceToTop  < 0) {
+      SlidingDiv.style.top = `${(distanceToTop - heightOffset) * -1}px`
+        // SlidingDiv.style.top = `${heightOffset}px`
+        SlidingDiv.style.left = `0px`
+      }
+
+        if (distanceToTop + heightOffset  < 0  ) {
+          
+          SlidingDiv.style.top = `${(distanceToTop - heightOffset) * -1}px`
+          SlidingDiv.style.left = `${distanceToTop - heightOffset}px`
+
+        }
+        // console.log(SlidingDiv.offsetWidth, SlidingDiv.offsetHeight)
+        
+      if ( SlidingDiv.offsetWidth - (distanceToTop + heightOffset)  < slidingSection.offsetWidth - heightOffset){
+        SlidingDiv.style.left = `-${SlidingDiv.offsetWidth - slidingSection.offsetWidth }px`
+        SlidingDiv.style.top = `${SlidingDiv.offsetWidth - slidingSection.offsetWidth + heightOffset}px`
+      }
+
+      console.table(SlidingDiv.offsetWidth - (distanceToTop + heightOffset) , slidingSection.offsetWidth - heightOffset)
+      // console.log((distanceToTop + slidingSection.offsetHeight) > SlidingDiv.offsetHeight)
+
+
+      
+      // console.log(height)
+    };
+
+
+    updatePannels()
+
+
+    // window.onscroll = function () { debounce(updatePannels()) };
+
+    // 3) and some eventlistiner so that we can test as we go :D 
+    window.onscroll = function () { updatePannels() };
+    window.onresize = function () { updatePannels() };
+
+</script>
