@@ -1,0 +1,120 @@
+---
+layout: default
+title: sideways accordion
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+info-cards:
+  - title: bob
+    p: >-
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio velit at non placeat! Illum omnis incidunt architecto ducimus laboriosam ipsum nesciunt repellat neque excepturi error officiis necessitatibus, nemo unde sunt.
+  - title: dave
+    p: >-
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio velit at non placeat! Illum omnis incidunt architecto ducimus laboriosam ipsum nesciunt repellat neque excepturi error officiis necessitatibus, nemo unde sunt.
+  - title: tim
+    p: >-
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio velit at non placeat! Illum omnis incidunt architecto ducimus laboriosam ipsum nesciunt repellat neque excepturi error officiis necessitatibus, nemo unde sunt.
+  - title: 4
+    p: >-
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio velit at non placeat! Illum omnis incidunt architecto ducimus laboriosam ipsum nesciunt repellat neque excepturi error officiis necessitatibus, nemo unde sunt.
+  - title: 5
+    p: >-
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio velit at non placeat! Illum omnis incidunt architecto ducimus laboriosam ipsum nesciunt repellat neque excepturi error officiis necessitatibus, nemo unde sunt.
+  - title: 6
+    p: >-
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio velit at non placeat! Illum omnis incidunt architecto ducimus laboriosam ipsum nesciunt repellat neque excepturi error officiis necessitatibus, nemo unde sunt.
+---
+
+
+<section>
+
+  <div class="grid-custom" style="grid-template-columns: 3rem calc(100% - 18rem) 3rem 0px 3rem 0px 3rem 0px 3rem 0px 3rem 0px">
+    {% for info in page.info-cards %}
+      <div class="infoCardHeading" data-count="{{forloop.index0}}"><h3>{{info.title}}</h3></div>
+      <div class="infoCardText {% if forloop.first %}active {% endif %}"><p>{{info.p}}</p></div>
+    {% endfor %}
+  </div>
+
+</section>
+
+<style>
+
+  .grid-custom{
+    grid-template-columns: 3rem calc(100% - 18rem) 3rem 0px 3rem 0px 3rem 0px 3rem 0px 3rem 0px;
+    transition: 2s;
+    width: 1000px;
+    margin: auto;
+  }
+  /* .grid-custom:hover{
+    grid-template-columns: 3rem 10px repeat(5, 3rem 10px) !important;
+
+  } */
+
+  .grid-custom > *{
+    border: 1px solid #333;
+    transition: padding 2s;
+  }
+
+  .infoCardText.active,
+  .infoCardHeading{
+    padding:1rem;
+  }
+
+  .infoCardHeading{
+    writing-mode: tb;
+    text-orientation: upright;
+  }
+
+  .infoCardText{
+    overflow: hidden;
+  }
+  .infoCardText p{
+    width:calc(1000px - 18rem - 2rem)
+  }
+
+</style>
+
+<script>
+  const grid = document.querySelector('.grid-custom');
+  const infoCardHeading = grid.querySelectorAll('.infoCardHeading');
+  const root = document.documentElement;
+
+  function slideGrid() {
+    // debugger
+    console.log(this.dataset.count);
+    
+    // new code
+    let newGrid = ''
+    let chosenCard = this;
+
+    infoCardHeading.forEach(card => {
+      if(chosenCard === card) {
+        card.nextElementSibling.classList.add('active');
+        newGrid = newGrid.concat(` 3rem calc(100% - ${ 3 * infoCardHeading.length }rem) `)
+      } else {
+        card.nextElementSibling.classList.remove('active');
+        newGrid = newGrid.concat(` 3rem 0 `)
+      }
+    })
+    
+    // Works but with no transition
+    
+    // infoCardHeading.forEach(card => {
+    //   card.nextElementSibling.classList.remove('active');
+    // })
+    // this.nextElementSibling.classList.add('active');
+
+    
+    // let earlierColumns = (this.dataset.count > 0) ?  `repeat(${this.dataset.count},3rem 0px)` : ''
+    // let laterColumns = (infoCardHeading.length - this.dataset.count - 1 > 0) ?  `repeat(${infoCardHeading.length - this.dataset.count - 1}, 3rem 0px)` : ''
+    // let newGrid =  `${earlierColumns} 3rem calc(1000px - ${3 * infoCardHeading.length}rem) ${laterColumns}`
+    // let newGrid =  `${earlierColumns} 3rem 100px ${laterColumns}`
+
+    console.log(newGrid);
+    grid.style.gridTemplateColumns = newGrid;
+  }
+
+  infoCardHeading.forEach(card => {
+    card.addEventListener('click', slideGrid)
+  })
+
+</script>
