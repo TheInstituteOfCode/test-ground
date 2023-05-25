@@ -4,14 +4,14 @@ title: ticker banner
 banner_messeges: 
   - repeated text over and over again
   - but then something else
-banner_width: 20vw;
 ---
 
-
-<div class="tickerBanner">
-  {% for messege in page.banner_messeges %}
+<div class="container">
+  <div class="tickerBanner">
+    {% for messege in page.banner_messeges %}
     <div class="text-block">{{messege}}</div>
     {% endfor %}
+  </div>
 </div>
 
 
@@ -22,11 +22,16 @@ banner_width: 20vw;
     --bannerBlockTime: 2s;
   }
 
+
+.container{
+  overflow-X: hidden;
+  display: flex;
+  flex-direction: row-reverse;
+}
 .tickerBanner{
-overflow-X: hidden;
-display: flex;
-flex-direction: row-reverse;
-text-align: center;
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: center;
 }
 
 
@@ -38,7 +43,6 @@ text-align: center;
   animation: ticker 2s infinite linear;
   animation-duration: var(--bannerBlockTime), 2s;
 }
-
 
 @keyframes ticker {
     from {left:0}
