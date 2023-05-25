@@ -22,12 +22,21 @@ info-cards:
   - title: 6
     p: >-
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio velit at non placeat! Illum omnis incidunt architecto ducimus laboriosam ipsum nesciunt repellat neque excepturi error officiis necessitatibus, nemo unde sunt.
+  - title: 4
+    p: >-
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio velit at non placeat! Illum omnis incidunt architecto ducimus laboriosam ipsum nesciunt repellat neque excepturi error officiis necessitatibus, nemo unde sunt.
+  - title: 5
+    p: >-
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio velit at non placeat! Illum omnis incidunt architecto ducimus laboriosam ipsum nesciunt repellat neque excepturi error officiis necessitatibus, nemo unde sunt.
+  - title: 6
+    p: >-
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio velit at non placeat! Illum omnis incidunt architecto ducimus laboriosam ipsum nesciunt repellat neque excepturi error officiis necessitatibus, nemo unde sunt.
 ---
 
 
 <section>
 
-  <div class="grid-custom" style="grid-template-columns: 3rem calc(100% - 18rem) 3rem 0px 3rem 0px 3rem 0px 3rem 0px 3rem 0px">
+  <div class="grid-custom">
     {% for info in page.info-cards %}
       <div class="infoCardHeading" data-count="{{forloop.index0}}"><h3>{{info.title}}</h3></div>
       <div class="infoCardText {% if forloop.first %}active {% endif %}"><p>{{info.p}}</p></div>
@@ -74,12 +83,13 @@ info-cards:
   const grid = document.querySelector('.grid-custom');
   const infoCardHeading = grid.querySelectorAll('.infoCardHeading');
   const root = document.documentElement;
+  let newGrid = '';
 
   function slideGrid() {
     // debugger
     console.log(this.dataset.count);
     
-    let newGrid = ''
+    newGrid = ''
     let chosenCard = this;
 
     infoCardHeading.forEach(card => {
@@ -100,4 +110,19 @@ info-cards:
     card.addEventListener('click', slideGrid)
   })
 
+
+  function initial(){
+    infoCardHeading.forEach(card => {
+      if (infoCardHeading[0] === card) {
+        card.nextElementSibling.classList.add('active');
+        newGrid = newGrid.concat(` 3rem calc(100% - ${3 * infoCardHeading.length}rem) `)
+      } else {
+        card.nextElementSibling.classList.remove('active');
+        newGrid = newGrid.concat(` 3rem 0 `)
+      }
+      grid.style.gridTemplateColumns = newGrid;
+    })
+  }
+
+  initial()
 </script>
