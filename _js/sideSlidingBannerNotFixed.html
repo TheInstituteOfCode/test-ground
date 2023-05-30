@@ -7,7 +7,7 @@ teaching_notes: true
 <section></section>
 <section class="sliderSection">
   <!-- <div class="spaceHolder"></div> -->
-    <!-- <div class="vertSlidingDiv"> -->
+    <div class="vertSlidingDiv">
       <div class="SlidingDiv">
           <img src="https://picsum.photos/id/1025/900" alt="">
           <img src="https://picsum.photos/id/1025/800" alt="">
@@ -19,10 +19,10 @@ teaching_notes: true
           <img src="https://picsum.photos/id/1025/900" alt="">
           <img src="https://picsum.photos/id/1025/900" alt="">
           <img src="https://picsum.photos/id/1025/900" alt="">
-      <!-- </div> -->
+      </div>
     </div>
 </section>
-<section></section>
+<section style="background-image: url(https://picsum.photos/id/1025/600/400); z-index: 1; position: relative;"></section>
 <style>
 
   section{
@@ -36,16 +36,16 @@ teaching_notes: true
         height: 1000vh;
         position: relative;
         align-items: flex-start;
-        justify-content: center;
+         justify-content: center;
+        /* position: relative; */
+  }
+  .vertSlidingDiv {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100vw;
   }
 
-
-    .vertSlidingDiv{      
-      display: flex;
-      /* position: sticky; */
-      left: 0;
-      top:0;
-    }
     .SlidingDiv{
       position: absolute;
       top: 0;
@@ -53,6 +53,7 @@ teaching_notes: true
       justify-content: center;
       align-items: center;
     }
+
     .SlidingDiv img{
       max-width: min(100vw, 100vh);
       flex-shrink: 0;
@@ -66,6 +67,7 @@ teaching_notes: true
 </style>
 
 <script>
+  // alert('bob was not here')
   // 1) js 101 looking for the section and all the slides
     // this is our parent section 
     const slidingSection = document.querySelector(".sliderSection");
@@ -79,6 +81,7 @@ teaching_notes: true
     // 2) function time, lets call it update pannels
     // this is our function
     function updatePannels() {
+      // debugger
       
       //3) just like we when we start a script lets add some varables at the start of the function we want one for screen height and one for how far above the fold the parent section is
       // this is finding the screen's height
@@ -92,31 +95,36 @@ teaching_notes: true
       // 4) now that we have them all defined lets loop over our slides
       // this is a for each on the slides so we can do something slightly different to each of them
       console.log(heightOffset)
-      SlidingDiv.style.top = `${heightOffset}px`
+      // SlidingDiv.style.top = `${heightOffset}px` - SlidingDiv.offsetHeight
       
-      slidingSection.style.height = `${SlidingDiv.offsetWidth - SlidingDiv.offsetHeight - heightOffset}px`
+      slidingSection.style.height = `${SlidingDiv.offsetWidth - (height / 2)}px`
 
       // console.log(distanceToTop - heightOffset > 0)
+      // SlidingDiv.style.left = `5px`
+      
+      SlidingDiv.style.left = `${distanceToTop - heightOffset}px`
+      console.log('maths =', distanceToTop - heightOffset)
 
-      if (distanceToTop  < 0) {
-      SlidingDiv.style.top = `${(distanceToTop - heightOffset) * -1}px`
-        // SlidingDiv.style.top = `${heightOffset}px`
-        SlidingDiv.style.left = `0px`
-      }
 
-        if (distanceToTop + heightOffset  < 0  ) {
+      // if (distanceToTop  < 0) {
+      // // SlidingDiv.style.top = `${(distanceToTop - heightOffset) * -1}px`
+      //   // SlidingDiv.style.top = `${heightOffset}px`
+      //   SlidingDiv.style.left = `0px`
+      // }
+
+      //   if (distanceToTop + heightOffset  < 0  ) {
           
-          SlidingDiv.style.top = `${(distanceToTop - heightOffset) * -1}px`
-          SlidingDiv.style.left = `${distanceToTop - heightOffset}px`
-        }
+      //     // SlidingDiv.style.top = `${(distanceToTop - heightOffset) * -1}px`
+      //     SlidingDiv.style.left = `${distanceToTop - heightOffset}px`
+      //   }
 
-        // console.log(SlidingDiv.offsetWidth, SlidingDiv.offsetHeight)
+      //   // console.log(SlidingDiv.offsetWidth, SlidingDiv.offsetHeight)
         
-      if ( -1 * (distanceToTop - heightOffset) > SlidingDiv.offsetWidth - window.innerWidth){
+      // if ( -1 * (distanceToTop - heightOffset) > SlidingDiv.offsetWidth - window.innerWidth){
 
-        SlidingDiv.style.left = `-${SlidingDiv.offsetWidth - slidingSection.offsetWidth }px`
-        SlidingDiv.style.top = `${SlidingDiv.offsetWidth - slidingSection.offsetWidth + heightOffset}px`
-      }
+      //   SlidingDiv.style.left = `-${SlidingDiv.offsetWidth - slidingSection.offsetWidth }px`
+      //   // SlidingDiv.style.top = `${SlidingDiv.offsetWidth - slidingSection.offsetWidth + heightOffset}px`
+      // }
 
       console.table(-1 * (distanceToTop - heightOffset), SlidingDiv.offsetWidth - window.innerWidth)
       console.log(SlidingDiv.offsetWidth - window.innerWidth)
