@@ -32,6 +32,9 @@ banner_messeges:
   display: flex;
   flex-direction: row-reverse;
   text-align: center;
+  position: relative;
+  animation: ticker 2s infinite linear;
+  animation-duration: var(--bannerBlockTime), 2s;
 }
 
 
@@ -39,9 +42,6 @@ banner_messeges:
   display: inline-block;
   padding: 1vw;
   flex-shrink: 0;
-  position: relative;
-  animation: ticker 2s infinite linear;
-  animation-duration: var(--bannerBlockTime), 2s;
 }
 
 @keyframes ticker {
@@ -50,7 +50,7 @@ banner_messeges:
 }
 </style>
 
-
+<img src="https://picsum.photos/id/1020/600/400" alt="">
 <script>
   // 1) Start by defining the elements that we want to target
   const banner = document.querySelector('.tickerBanner');
