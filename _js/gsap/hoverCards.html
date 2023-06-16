@@ -1,0 +1,77 @@
+---
+layout: default
+title: gsap hover cards
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+---
+
+
+
+
+<div class="grid-2">
+  <div></div>
+  <div class="cardHolder leftCard">
+    <div class="front ">
+      <p>front card</p>
+    </div>
+    <div class="back">
+      <p>back card</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+.cardHolder{
+  position: relative;
+}
+.cardHolder > div {
+  border: 5px;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid;
+  background-color: #fff;
+}
+.cardHolder .front{
+position: relative;
+z-index: 10;
+}
+.leftCard .back{
+position: absolute;
+z-index: 5;
+left:-1rem;
+width: 100%;
+top: 0;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+
+<script>
+const cardHolder = document.querySelectorAll('.cardHolder')
+
+
+
+
+cardHolder.forEach(card => {
+  let front = card.querySelector('.front')
+  let back = card.querySelector('.back')
+  let cardLeft = gsap.timeline();
+  cardLeft.to(back,{duration:.5,left:'-110%'})
+  cardLeft.to(back,{duration:.01,zIndex:20})
+  cardLeft.to(back,{duration:.5,left:'0%'})
+  cardLeft.reverse();
+  front.addEventListener("mouseenter", () => {
+    console.log('play Animation')
+    cardLeft.play()
+  })
+  card.addEventListener("mouseleave", () => {
+    console.log('play back Animation')
+    cardLeft.reverse()
+  })
+  console.log()
+})
+
+</script>

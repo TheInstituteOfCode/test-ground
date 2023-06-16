@@ -1,0 +1,134 @@
+---
+layout: default
+title: fancy Lightbox
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+boxes:
+  - 1: 1
+  - 2: 2
+  - 3: 3
+---
+
+<div class="flex">
+
+{% for box in page.boxes%}
+
+<div class="button lightInit" data-lightbox-trigger="light-{{forloop.index}}">
+  div
+  <img src="https://picsum.photos/id/102{{forloop.index0}}/200/200" alt="bear with me"> 
+   <img src="https://picsum.photos/id/102{{forloop.index0}}/200/200" alt="bear with me"> 
+    <img src="https://picsum.photos/id/102{{forloop.index0}}/200/200" alt="bear with me">
+    <p>button</p>
+</div>
+
+<div class="overlay lightbox" data-lightbox="light-{{forloop.index}}">
+  <div>
+    <img src="https://picsum.photos/id/102{{forloop.index0}}/800/800" alt="bear with me">
+    <h2 class="lightboxHeading">fancy text</h2>
+    <p></p>
+  </div>
+  
+  <div class="button deac" data-lightbox-trigger="light-{{forloop.index}}">
+    <p>X</p>
+  </div>
+</div>
+
+{% endfor %}
+
+<svg viewBox="0 0 100 7">
+  
+  <polygon points="0,0 100,0 50,5"/>
+  
+</svg>
+
+</div>
+
+<style>
+.button{
+  display: inline-flex;
+  border: 2px solid;
+}
+.overlay{
+  position: absolute;
+  clip-path: polygon(50vh 50vh, 50vw 50vh, 50vw 50vh, 50vh 50vh);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #272;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.button.deac{
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+
+<script>
+const lightButtonsInit = document.querySelectorAll('.button.lightInit')
+const lightboxes = document.querySelectorAll('.lightbox')
+const lightButtonsDeac = document.querySelectorAll('.button.deac')
+
+lightButtonsDeac
+console.log(lightboxes)
+
+
+lightButtonsInit.forEach(button => {
+  
+  button.addEventListener("click", () => {
+    console.log(button.dataset.lightboxTrigger)
+    lightboxes.forEach(box => {
+      console.log(box.dataset.lightbox, "bob")
+      if (box.dataset.lightbox == button.dataset.lightboxTrigger){
+        
+        let boxAnimation = gsap.timeline();
+
+        // diagonal swipe + all children swipe
+        boxAnimation.set(box,{ display: 'flex', clipPath: "polygon(0vw 0vh, 0vw 0vh, 0vw 0vh)"})
+        boxAnimation.set(box.querySelectorAll('*'),{ clipPath: "polygon(0% 0%, 0% 0%, 0% 0%)"})
+
+        // boxAnimation.to(box,{ duration:4, clipPath: "polygon(0vw 0vh, 200vw 0vh, 0vw 200vh)"})
+        // // boxAnimation.set(box,{ display: 'flex', clipPath: "polygon(0vw 0vh, 0vw 0vh, 0vw 0vh)"})
+        // boxAnimation.to(box.querySelectorAll('*'),{ duration:4, clipPath: "polygon(0% 0%, 200% 0%, 0% 200%)",stagger:.3})
+
+        // dimond animation
+        // boxAnimation.to(box,{duration:.1, display: 'flex', clipPath: "polygon(50vw 50vh, 50vw 50vh, 50vw 50vh, 50vw 50vh)"})
+        // boxAnimation.to(box,{duration:1.5, clipPath: "polygon(50vw 0vh, 100vw 50vh, 50vw 100vh, 0vw 50vh)"})
+        // boxAnimation.to(box,{duration:1, clipPath: "polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh)"})
+
+
+        // boxAnimation.to(box,{duration:2, clipPath: "polygon(0 0, 100vw 0, 100vw 100vh, 0 100vh)"})
+      }
+    });
+  })
+  
+})
+
+// lightButtonsDeac.forEach(button => {
+  
+//   button.addEventListener("click", () => {
+
+//     lightboxes.forEach(box => {
+//       console.log(box.dataset.lightbox, "bob")
+//       if (box.dataset.lightbox == button.dataset.lightboxTrigger){
+//         let boxAnimation = gsap.timeline();
+//         boxAnimation.to(box,{duration:2, clipPath: "polygon(0vw 50vh,50vw 0vh, 100vw 50vh, 50vw 100vh)"})
+//         boxAnimation.to(box,{duration:2, clipPath: "polygon(50vw 50vh, 50vw 50vh, 50vw 50vh, 50vw 50vh)"})
+
+//         boxAnimation.to(box,{duration:.1, display: 'none'})
+
+//         // boxAnimation.to(box,{duration:.5, clipPath: "polygon(0 0, 100% 0, 50% 50%, 0 100%)"})
+//       }
+//     });
+//   })
+  
+// })
+
+
+
+</script>

@@ -1,0 +1,17 @@
+run 
+```npm i gsap
+
+for snippets in vs code
+
+https://greensock.com/cheatsheet/
+
+units matter when transitioning between 2 things make sure its the same units
+
+
+to vs from
+gsap.[direction to or from]('target elements done with css selector',{
+  object with all gsap and css instructions,
+  end each command with a commer,
+})
+
+Timelines for layered effects
