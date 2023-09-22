@@ -1,0 +1,91 @@
+---
+layout: default
+title: scroll triggered popup
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+boxes:
+  - 1: 1
+  - 2: 2
+  - 3: 3
+---
+<section></section>
+<section>
+  <div class="triggered-popup"> 
+    <p>yo something is happening</p>
+    <span>X</span>
+  </div>
+</section>
+<section></section>
+<section>
+  <div class="triggered-popup"> 
+    <p>yo something is happening</p>
+    <span>X</span>
+  </div>
+</section>
+<section></section>
+<section>
+  <div class="triggered-popup"> 
+    <p>yo something is happening</p>
+    <span>X</span>
+  </div>
+</section>
+<section></section>
+<section>
+  <div class="triggered-popup"> 
+    <p>yo something is happening</p>
+    <span>X</span>
+  </div>
+</section>
+<style>
+  section{
+    min-height:150vh;
+    border:1px solid black;
+    position: relative;
+  }
+  
+  .triggered-popup{
+    position: absolute;
+    top:20vw;
+    left:-100vw;
+    border: 2px solid black;
+    padding: 5vw;
+  }
+
+  .triggered-popup span{ 
+    position: absolute;
+    top:2vw;
+    right: 2vw;
+  }
+.hidden{
+  display: none;
+}
+</style>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+  const popups = document.querySelectorAll('.triggered-popup')
+
+  popups.forEach(popup => {
+    // triggers scroll in
+    gsap.to(popup,
+      {
+        scrollTrigger: popup,
+        start: 'top top',
+        "left":"20vw",
+      }
+    )
+
+    let closePopUpButton = popup.querySelector('span')
+
+
+    closePopUpButton.addEventListener("click", (e) => {
+      e.target.parentNode.classList.add("hidden")
+      console.log(e.target.parentNode)
+    } )
+
+  })
+
+  
+
+  console.log('finish init')
+</script>
