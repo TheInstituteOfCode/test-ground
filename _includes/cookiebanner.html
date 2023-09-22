@@ -1,0 +1,87 @@
+<div id="cookie-notice">
+  <span>We would like to use third party cookies and scripts to improve the functionality of this website.</span>
+  
+  <a href="/privacy" class="button-subtle">More info</a>
+  <a id="cookie-notice-accept" class="button">Approve</a>
+  <!-- Optional close button that declines the cookies -->
+  <span id="close-cookie-banner"> X </span>
+</div>
+
+<style>#cookie-notice {
+  padding: 0.5rem 1rem;
+  display: none;
+  text-align: center;
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0;
+  width: calc(100% - 2rem);
+  background: #222;
+  color: rgba(255,255,255,0.8);
+}
+#cookie-notice a {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+#cookie-notice .button-subtle {
+opacity: 0.8;
+}
+#close-cookie-banner {
+padding: 1rem;
+cursor: pointer;
+font-size: 0.8rem;
+opacity: 0.5
+}</style>
+
+<script>
+  function createCookie(name,value,days) {
+      var expires = "";
+      if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days*24*60*60*1000));
+          expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+  }
+  function readCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+  }
+  function eraseCookie(name) {
+      createCookie(name,"",-1);
+  }
+
+  function runCookiedCodes() {
+            // Add tracking scripts here 
+            console.log("cookies ran")
+      // End tracking scripts 
+  }
+
+  if(readCookie('cookie-notice-accepted')=='true') {
+
+      runCookiedCodes()
+      //removes cookies while testing 
+      eraseCookie('cookie-notice-accepted')
+  } else {
+      document.getElementById('cookie-notice').style.display = 'block';
+  }
+  document.getElementById('cookie-notice-accept').addEventListener("click",function() {
+      createCookie('cookie-notice-accepted','true',31);
+      document.getElementById('cookie-notice').style.display = 'none';
+      runCookiedCodes()
+  });
+
+  document.querySelector("#close-cookie-banner").addEventListener("click", (e) => {
+      
+      document.querySelector("#cookie-notice").style.display = 'none';
+  });
+
+  console.log('all code init')
+</script>

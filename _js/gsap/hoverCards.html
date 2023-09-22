@@ -59,9 +59,9 @@ cardHolder.forEach(card => {
   let front = card.querySelector('.front')
   let back = card.querySelector('.back')
   let cardLeft = gsap.timeline();
-  cardLeft.to(back,{duration:.5,left:'-110%'})
-  cardLeft.to(back,{duration:.01,zIndex:20})
-  cardLeft.to(back,{duration:.5,left:'0%'})
+  cardLeft.to(back,{duration:.1,left:'-110%'})
+  cardLeft.to(back,{duration:.001,zIndex:20})
+  cardLeft.to(back,{duration:.1,left:'0%'})
   cardLeft.reverse();
   front.addEventListener("mouseenter", () => {
     console.log('play Animation')
