@@ -1,0 +1,123 @@
+---
+layout: default
+title: scroll triggered popup with cookie support
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+boxes:
+  - 1: 1
+  - 2: 2
+  - 3: 3
+---
+<section></section>
+<section>
+  <div class="triggered-popup" id="pop-up-1"> 
+    <p>yo something is happening</p>
+    <span>X</span>
+  </div>
+</section>
+<section></section>
+<section>
+  <div class="triggered-popup" id="pop-up-2"> 
+    <p>yo something is happening</p>
+    <span>X</span>
+  </div>
+</section>
+<section></section>
+<section>
+  <div class="triggered-popup" id="pop-up-3"> 
+    <p>yo something is happening</p>
+    <span>X</span>
+  </div>
+</section>
+<section></section>
+<section>
+  <div class="triggered-popup" id="pop-up-4"> 
+    <p>yo something is happening</p>
+    <span>X</span>
+  </div>
+</section>
+<style>
+  section{
+    min-height:150vh;
+    border:1px solid black;
+    position: relative;
+  }
+  
+  .triggered-popup{
+    position: absolute;
+    top:20vw;
+    left:-100vw;
+    border: 2px solid black;
+    padding: 5vw;
+  }
+
+  .triggered-popup span{ 
+    position: absolute;
+    top:2vw;
+    right: 2vw;
+  }
+.hidden{
+  display: none;
+}
+</style>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+  const popups = document.querySelectorAll('.triggered-popup')
+
+  // cookie set up (taken from the cookie banner)
+
+  function createCookie(name,value,days) {
+      var expires = "";
+      if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days*24*60*60*1000));
+          expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + value + expires + ";  SameSite=Strict";
+  }
+  function readCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+  }
+  popups.forEach(popup => {
+
+console.log(popup.id)
+
+
+    if (readCookie(popup.id) != 'closed') {
+
+
+    // triggers scroll in
+    gsap.to(popup,
+      {
+        scrollTrigger: popup,
+        "left":"20vw",
+      }
+    )
+
+  }
+
+    // triggers closing of the popup 
+    let closePopUpButton = popup.querySelector('span')
+
+
+    closePopUpButton.addEventListener("click", (e) => {
+      e.target.parentNode.classList.add("hidden")
+      console.log(e.target.parentNode)
+      createCookie(e.target.parentNode.id,'closed',5)
+    } )
+
+  })
+
+  
+
+  console.log('finish init')
+
+</script>
