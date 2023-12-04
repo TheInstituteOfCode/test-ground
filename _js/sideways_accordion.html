@@ -49,9 +49,9 @@ info-cards:
 
   .grid-custom{
     display: grid;
-    grid-template-columns: 3rem calc(100% - 18rem) 3rem 0px 3rem 0px 3rem 0px 3rem 0px 3rem 0px;
+    /* grid-template-columns: 3rem calc(100% - 18rem) 3rem 0px 3rem 0px 3rem 0px 3rem 0px 3rem 0px; */
     transition: 2s;
-    width: 1000px;
+    /* width: 1000px; */
     margin: auto;
   }
 
@@ -74,7 +74,9 @@ info-cards:
     overflow: hidden;
   }
   .infoCardText p{
-    /* width:calc(1000px - 18rem - 2rem) */
+    writing-mode: vertical-lr;
+text-orientation: upright;
+max-height: 50vh;
   }
 
 </style>

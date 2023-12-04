@@ -92,9 +92,9 @@ lightButtonsInit.forEach(button => {
         boxAnimation.set(box,{ display: 'flex', clipPath: "polygon(0vw 0vh, 0vw 0vh, 0vw 0vh)"})
         boxAnimation.set(box.querySelectorAll('*'),{ clipPath: "polygon(0% 0%, 0% 0%, 0% 0%)"})
 
-        // boxAnimation.to(box,{ duration:4, clipPath: "polygon(0vw 0vh, 200vw 0vh, 0vw 200vh)"})
-        // // boxAnimation.set(box,{ display: 'flex', clipPath: "polygon(0vw 0vh, 0vw 0vh, 0vw 0vh)"})
-        // boxAnimation.to(box.querySelectorAll('*'),{ duration:4, clipPath: "polygon(0% 0%, 200% 0%, 0% 200%)",stagger:.3})
+        boxAnimation.to(box,{ duration:4, clipPath: "polygon(0vw 0vh, 200vw 0vh, 0vw 200vh)"})
+        boxAnimation.set(box,{ display: 'flex', clipPath: "polygon(0vw 0vh, 0vw 0vh, 0vw 0vh)"})
+        boxAnimation.to(box.querySelectorAll('*'),{ duration:4, clipPath: "polygon(0% 0%, 200% 0%, 0% 200%)",stagger:.3})
 
         // dimond animation
         // boxAnimation.to(box,{duration:.1, display: 'flex', clipPath: "polygon(50vw 50vh, 50vw 50vh, 50vw 50vh, 50vw 50vh)"})

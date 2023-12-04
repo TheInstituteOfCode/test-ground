@@ -4,13 +4,20 @@ title: ticker banner
 banner_messeges: 
   - repeated text over and over again
   - but then something else
+  - but then something else
 ---
 
 <div class="container">
   <div class="tickerBanner">
-    {% for messege in page.banner_messeges %}
-    <div class="text-block">{{messege}}</div>
-    {% endfor %}
+    <div class="text-block">
+      {% for messege in page.banner_messeges %}
+      <span>
+        {{messege}}
+      </span>
+
+      {% endfor %}
+
+    </div>
   </div>
 </div>
 
