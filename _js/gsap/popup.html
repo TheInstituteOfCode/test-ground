@@ -78,6 +78,7 @@ boxes:
     let closePopUpButton = popup.querySelector('span')
 
 
+
     closePopUpButton.addEventListener("click", (e) => {
       e.target.parentNode.classList.add("hidden")
       console.log(e.target.parentNode)
@@ -88,4 +89,11 @@ boxes:
   
 
   console.log('finish init')
+
+
+  setTimeout(function(){ showMailchimpPopup(); }, delay);
+
+  function showMailchimpPopup(){
+    $('.mailchimp-overlay').show();
+  }
 </script>
