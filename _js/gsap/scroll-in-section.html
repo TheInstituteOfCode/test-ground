@@ -1,0 +1,100 @@
+---
+layout: default
+title: horizontal scroll section
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+boxes:
+  - title: 1
+    top-sticky: 1rem
+    img_path: https://picsum.photos/id/1025/600/400
+  - title: 2
+    top-sticky: 2rem
+    img_path: https://picsum.photos/id/1025/600/400
+  - title: 3
+    top-sticky: 3rem
+    img_path: https://picsum.photos/id/1025/600/400
+---
+
+<section class="spacer"></section>
+
+<section class="cards">
+  {% for card in page.boxes %}
+  <div class=" card card-num-{{forloop.index}}">
+    <div>
+      <h1>{{card.title}}</h1>
+      <img src="{{card.img_path}}" alt="">
+
+    </div>
+    </div>
+  {% endfor %}
+</section>
+
+
+<section class="spacer"></section>
+
+
+
+<style>
+
+  .spacer{
+    min-height: 100vh;
+    background: #000;
+  }
+
+.card{
+  border: 5px solid #000;
+  background: #272;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+}
+
+.card:not( .card-num-1){
+position: absolute;
+top: 0;
+left: 100vw;
+}
+
+.card img{
+  width: 50vw
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/ScrollTrigger.min.js"></script>
+<script>
+
+const deck = document.querySelectorAll(".cards")
+const cards = document.querySelectorAll(".cards .card")
+const neededScreenHeight = window.innerHeight * {{page.boxes.size}}
+console.log(neededScreenHeight)
+
+  let tl = gsap.timeline({
+    // yes, we can add it to an entire timeline!
+    scrollTrigger: {
+      trigger: deck,
+      start: "top top", // when the top of the trigger hits the top of the viewport
+      end: neededScreenHeight, // end after scrolling 50vh beyond the start
+      scrub: .01, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
+      pin: true
+    },
+  });
+  
+  {% for card in page.boxes %}
+  {% if forloop.index != 1 %}
+  tl.to('.card-num-{{forloop.index }}',{
+    left: 0,
+    ease: "none"
+  })
+  {% endif %}
+{% endfor %}
+
+console.log(
+  "no errors"
+)
+
+</script>
