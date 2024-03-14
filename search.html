@@ -24,15 +24,11 @@ target: home
     const searchInput = document.querySelector("#search-input");
     
     if (initial != ''){
-      searchInput.value = initial;
+      searchInput.value = initial.replaceAll('%20', ' ');
+      // initial = initial.replaceAll('%20', ' ')
     }
 
 
-    function log() {
-      console.log(searchInput.value)
-    }
-
-    searchInput.addEventListener('mouseenter', log)
 
     var sjs = SimpleJekyllSearch({
             searchInput: document.getElementById('search-input'),
@@ -42,7 +38,7 @@ target: home
         });
 
         function initialRun() {
-            sjs.search( initial )
+            sjs.search( initial.replaceAll('%20', ' ') )
         }
 
     const start = setTimeout(initialRun, 100 );

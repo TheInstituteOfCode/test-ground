@@ -1,0 +1,624 @@
+---
+layout: default
+---
+    
+    <form id="calculatorForm">
+
+      <fieldset>
+        <p>Let's start with the basics, choose the type of shoot you want to plan. </p>
+        <div class="flex gap-4 mt-4 centered">
+        <div class="w-1/3">
+          <label for="headless" class="bg-v-light mb-2 radio-select p-0">
+            <span class="block p-4 pb-0"> Headless Catalog </span>
+            <span class="subtitle block p-2">A fast, affordable option</span>
+            <input type="radio" id="headless" name="shootType" value="headless" checked>
+          </label>
+        </div>
+        
+        <div class="w-1/3">
+        
+        <label for="simple" class="bg-v-light p-0 mb-2 radio-select">
+          <span class="block p-4 pb-0">Simple Catalog</span>
+          <span class="subtitle block p-2">The classic front + back + side </span>
+          <input type="radio" id="simple" name="shootType" value="simple">
+        </label>
+        </div>
+        
+      <div class="w-1/3">
+        <label for="lookbook" class="bg-v-light p-0 mb-2 radio-select">
+          <span class="block p-4 pb-0">Lookbook</span>
+          <span class="subtitle block p-2">Includes more creative angles and poses as well</span>
+          <input type="radio" id="lookbook" name="shootType" value="lookbook">
+        </label>
+      </div>
+      </fieldset>
+      
+      <label class="mt-12"for="numLooks">How many looks do you have to shoot? </label>
+      <p>Count any outfit that will be shot together as one, so bikini top + bottom counts as one look.</p>
+
+      <!-- note for tina added scroll margin so that when wrong number alert pops up and it scrolls in to view it will be in the center of the screen. can also add a focus border if you want but havent yet -->
+      <input type="number" id="numLooks" value="10" min="1" step="1" required style="width: 30%; scroll-margin: 40vh;">
+
+      <label class="mt-12">How many models would you like? </label>
+      <p>Having 2+ models means that while one is changing the other can be in front of the camera (so the shoot moves faster).</p>
+      <div class="mt-4">
+        <label class="inline p-8 mb-2 radio-select" for="numModels1">
+        <input type="radio" id="numModels1" name="numModels" value="1" checked>
+          1
+        </label>
+
+        <label class="inline p-8 mb-2 radio-select" for="numModels2">
+          <input type="radio" id="numModels2" name="numModels" value="2+">
+            2+
+        </label>
+      </div>
+
+      <!-- - - - - - - - - - - OUTFIT COMPLEXITY  - - - - - - - - - - -  -->
+      <fieldset>
+
+        <label class="mt-12">How complex is each look to put on? </label>
+        <p>Some outfits you can just pull on quickly while others have intricate ties or lots of small buttons & layers.</p>
+        <div class="flex gap-4 mt-4 centered">
+        <div class="w-1/3">
+          <label for="simple-outfits" class="bg-v-light mb-2 radio-select p-0">
+            <span class="block p-4 pb-0"> Simple Outfits </span>
+            <span class="subtitle block p-2">Quick and easy for the models to change from one outfit to another</span>
+            <input type="radio" id="simple-outfits" name="outfit-complexity" value="simple" checked>
+          </label>
+        </div>
+        
+        <div class="w-1/3">
+        
+        <label for="complex-outfits" class="bg-v-light p-0 mb-2 radio-select">
+          <span class="block p-4 pb-0">Complex Outfits</span>
+          <span class="subtitle block p-2">Plan for a little extra time to change between looks</span>
+          <input type="radio" id="complex-outfits" name="outfit-complexity" value="complex">
+        </label>
+        </div>
+
+      </div>
+      </fieldset>
+
+
+      <!-- - - - - - - - - - - STYLING COMPLEXITY  - - - - - - - - - - -  -->
+      <fieldset>
+
+        <label class="mt-12">What kind of styling would you like? </label>
+        <p>How much would you like the model's hair, accessories & shoes to change between looks? </p>
+        <div class="flex gap-4 mt-4 centered">
+        <div class="w-1/3">
+          <label for="styling-0" class="bg-v-light mb-2 radio-select p-0">
+            <span class="block p-4 pb-0"> No Styling </span>
+            <span class="subtitle block p-2">Model doesn't need to change styling between looks</span>
+            <input type="radio" id="styling-0" name="styling-complexity" value="styling-0" checked>
+          </label>
+        </div>
+        
+        <div class="w-1/3">
+        
+        <label for="styling-1" class="bg-v-light p-0 mb-2 radio-select">
+          <span class="block p-4 pb-0">Minimal Styling</span>
+          <span class="subtitle block p-2">Model only changes styling a few times in the shoot </span>
+          <input type="radio" id="styling-1" name="styling-complexity" value="styling-1">
+        </label>
+        </div>
+
+        <div class="w-1/3">
+        
+          <label for="styling-2" class="bg-v-light p-0 mb-2 radio-select">
+            <span class="block p-4 pb-0">Dynamic Styling</span>
+            <span class="subtitle block p-2">Unique styling, shoes or accessories for every look </span>
+            <input type="radio" id="styling-2" name="styling-complexity" value="styling-2">
+          </label>
+          </div>
+
+      </div>
+      </fieldset>
+      
+            <!-- - - - - - - - - - - ADD Video  - - - - - - - - - - -  -->
+            <fieldset>
+
+              <label class="mt-12">Want to add a video of each look? </label>
+              <p> Video boosts the conversation rate on websites, drives sales and helps your customers see all the little details. </p>
+              <div class="flex gap-4 mt-4 centered">
+              <div class="w-1/3">
+                <label for="video-0" class="bg-v-light mb-2 radio-select p-0">
+                  <span class="block p-4 pb-0"> No Video </span>
+                  <span class="subtitle block p-2">Stick to photography only</span>
+                  <input type="radio" id="video-0" name="video" value="video-0" checked>
+                </label>
+              </div>
+              
+              <div class="w-1/3">
+              
+              <label for="video-1" class="bg-v-light p-0 mb-2 radio-select">
+                <span class="block p-4 pb-0">Basic Video</span>
+                <span class="subtitle block p-2">Classic walk or turn from a single angle. </span>
+                <input type="radio" id="video-1" name="video" value="video-1">
+              </label>
+
+              </div>
+      
+              <div class="w-1/3">
+              
+                <label for="video-2" class="bg-v-light p-0 mb-2 radio-select">
+                  <span class="block p-4 pb-0">Dynamic Video</span>
+                  <span class="subtitle block p-2">Multiple camera angles or poses for each look. </span>
+                  <input type="radio" id="video-2" name="video" value="video-2">
+                </label>
+                </div>
+      
+            </div>
+            </fieldset>
+    
+
+
+    <button class="button-solid" type="button" onclick="calculateTime()">Calculate</button>
+    
+
+    
+    <div class="px-8 mt-12 v-light-bg" id="results-container">
+      <p class="subtle-heading"> ESTIMATED SHOOT TIME... </p>
+      <p id="result" class="emphasis"></p>
+      <p class="emphasis">Note that this is the minimum shoot time, and if you want your photography team to have more time to capture your brand in the best light, to add more time if your budget allows it. In addition to the shoot time, when you're planning model selection you'll also need to add 1+ hour for hair and makeup.</p>
+      <p class="emphasis"> Want a more personalised estimate & detailed quotation? Send us a message and let's chat.  </p>
+    </div>
+  </form>
+
+  </div>
+
+</section>
+<section class="padded v-light-bg grid">
+
+  <div class="col-4_sm-12 bg-image mob-tall-50" style="background-image:url('/images/forsoul-2020/eon-forsoul2020-33.jpg')"></div>
+  </div>
+  
+  <div class="col-8_sm-12 p-8 mt-12 ">
+    
+      <h2> Photograph your brand in Bali </h2>
+      <p> Bali isn't just a dream holiday destination, it's a hub for creative talent. You can access world-class photographers, models, stylists and hmua artists, often at a fraction of the cost of shooting back home. </p>
+      <p> Let us take the headache out of your content creation, our full-service agency can handle everything from finding the right talent (with valid working permits of course), scouting the perfect location (from high-end studios to stunning luxury photoshoot villas as well as destination campaigns across Indonesia's diverse scenery from white sand beaches and limestone cliffs, to lush waterfalls & jungles, and dramatic mountains). You simply send your products to us, and we handle everything right now to color-matching your products and re-touching the final images. </p>
+      
+      <button id="quote-button" class="button-solid mb-4" value="Quote this project"> Quote this project </button>
+      <form class="minimalist-form" id="shoot-quote" style="display:none"> 
+      <ul class="simple-ul"> A summary of your shoot:
+          <li><span id="details-looks"> 12 </span> Looks </li>
+          <li><span id="details-type"> Headless </span> Style Shoot </li>
+          <li><span id="details-models"> 2+ </span> Models </li>
+          <li><span id="details-complex-outfits">Simple Outfits </span>  </li>
+          <li><span id="details-extra-styling"> Minimalist Styling</span>  </li>
+          <li><span id="details-video"> No Video</span>  </li>
+      </ul>
+
+      <textarea class="mb-2" name="about-brand" placeholder="Tell us a little bit about your brand"></textarea>
+      <textarea class="mb-2" name="extra-shoot-details" placeholder="Any other details about the shoot that might be helpful for us to know?"></textarea>
+      <input class="mb-2" type="text" placeholder="Your Name" name="name">
+      <input class="mb-2" type="email" placeholder="Your Email" name="email">
+      <input type="_submit" class="button-solid w-auto" value="QUOTE THIS PROJECT"> 
+      <!-- Need to collect all the fields above, possible with Alpine? -->
+    </form>
+  </div>
+
+  </div>
+</section>
+
+
+      <!-- Checkbox template -->
+      <!-- <div class="checkbox-wrapper-13 mb-2">
+        <input type="checkbox" id="complexOutfits"> 
+        <label for="complexOutfits"> Do you have more complex outfits? <span class="subtitle"> (requires longer to get changed) </span> </label>
+      </div> -->
+
+<style> 
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  font-size: 2rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.w-1\/3 {
+  flex-basis: 33%;
+}
+
+.w-2\/3 {
+  flex-basis: 66%;
+}
+
+section form .w-auto {
+  width: auto;
+}
+
+.sm-bold {
+font-size: 2vw;
+}
+
+.simple-ul {
+  list-style: circle inside;
+}
+
+.simple-ul li {
+  padding-left: 0;
+  margin-bottom:0; 
+  font-size: 1rem;
+}
+
+.shoot-summary {
+  font-size: 1.2rem;
+}
+
+.shoot-summary span {
+  font-weight: 500;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.vertical-video {
+  padding-bottom: 150%;
+}
+
+.relative {
+  overflow: hidden;
+  position: relative;
+}
+
+.inset-0 {
+  left:-2px;
+  right:-2px;
+  bottom:-2px;
+  width: 102%;
+}
+
+
+/* input[type="checkbox"] {
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  border: 2px solid #f9f0e7;
+  appearance: auto;
+  -webkit-appearance: auto;
+} */
+
+.radio-select {
+  background-color: #fff;
+  margin: 0;
+  padding: 1rem;
+  font: inherit;
+  color: inherit;
+  border: 2px solid #f9f0e7;
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 86px;
+  min-height: 86px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.radio-select:has(> input:checked) {
+  border: 2px solid rgb(60, 60, 60);
+}
+
+
+input[type="select"] {
+  border: 2px solid #f9f0e7;
+  padding: .8em;
+  background-color: white;
+  -webkit-appearance: auto;
+  appearance: auto;
+}
+
+
+.inline {
+  display: inline-block;
+}
+.block {
+  display: block;
+}
+
+.subtitle {
+  opacity: 0.7;
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.big-text {
+  font-size: 4rem;
+  display: block;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.px-8 {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.pb-0 {
+  padding-bottom: 0;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.mt-12 {
+  margin-top: 4rem;
+}
+
+fieldset {
+  border: none;
+  outline: none;
+}
+
+.hidden {
+  display: none; 
+}
+
+#results-container {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: max-height 1.5s padding-top 1.5s padding-bottom 1.5s;
+  overflow: hidden;
+}
+
+#results-container.show {
+  max-height: min-content;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+}
+
+
+
+@media(max-width:900px) {
+  .sm-bold {
+    font-size: 1.5rem;
+    font-family: "ivyora-display", serif;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+  label {
+    font-size: 1.5rem;
+  }
+
+  .mt-12 {
+      margin-top: 3rem;
+  }
+}
+
+
+</style>
+
+<script>
+
+  // 1) lets start out our caculator liek we strat all our js scripts by defining our constants that arnt going to change (in this case its just our main form, toggle button and our hidden section,). Anything that going to change we are going to define in the function
+
+  
+  const toggleButton = document.querySelector("#quote-button");
+  const hiddenSection = document.querySelector("#shoot-quote");
+  const calculatorForm = document.querySelector('#calculatorForm') 
+  
+  // 2) next we are going start with naming our function. for this time i went with calculateTime (in camle case for ease of reading)
+
+  function calculateTime() {
+
+    // 3) now we are going to pull some infor from our secret form, the number of modles number of looks and what kind of shoot we are doing. for most of these first values we are just looking in our form (the calculatorForm we defined at the start) for an input with both certian name attribute and a checked attribute 
+    let numModels = calculatorForm.querySelector('input[name="numModels"]:checked').value;
+    let numLooks = parseInt(calculatorForm.querySelector('#numLooks').value, 10);
+    let shootType = calculatorForm.querySelector('input[name="shootType"]:checked').value;
+    // note for tina moved minTimePerLook so that they are more centurlised
+    // 8) lets add in a new variable that we are going to use
+    let minTimePerLook;
+    
+
+
+
+    // 4) that should be great if we could trust every one that came to our site but lets add a little check to see if they deleted our number in the number of looks input or done an negitive (people are strange)
+
+    // note for tina added check to see if negitive number
+    if (isNaN(numLooks) || numLooks < 1) {
+    // note for tina added js to scroll the input in to the screen (false means it not going to the top of the screen instead will try to go to the bottom of the screen with and scroll margins placed on the elemenent )
+
+    // 5) if they have done either of those 2 things then we want to scroll back up to it
+      calculatorForm.querySelector('#numLooks').scrollIntoView(false);
+      // 6) and alert them that was a bad number
+      alert('Please enter a valid number of looks.');
+      // note to tina return isnt needed. once it gets to the end of the if statment it would naturally jump out
+      return;
+    }
+
+    // 7) ok lets check how we are going with some console logs. This will show us if all of our ariables are there and working as expected 
+    console.log("Number of models selected: " + numModels);
+    console.log("Number of looks to shoot: " + numLooks);
+    console.log("Type of photoshoot selected: " + shootType);
+
+
+// 9) for how long each shoot is going to depend on what kind of shoot it is. so we are going to use switch function. (just think of it as a bunch of if else staments). the shootType variabe is what we a checking against
+    switch(shootType) {
+      // 10) and the case is what we are looking for
+      case 'headless':
+        minTimePerLook = 12;
+        break;
+      case 'simple':
+        minTimePerLook = 15;
+        break;
+      case 'lookbook':
+        minTimePerLook = 20;
+        break;
+        // 11) now on the off case we have been slightly hacked or we have made a mistake we have added in a fall back just incase. 
+      default:
+        minTimePerLook = 15; // Default to simple catalog if type is not recognized
+    }
+
+    // 12) and we did something finiky so lets add another console.log() to see if its working 
+    console.log("Minimum time per look for this type of shoot: " + minTimePerLook + " minutes with one model, 5 minutes less for each with two or more models");
+
+    // 13) and again lets add our new variables (this time additiaonal time for vids and such) to our list of vairables 
+    let additionalTime = 0;
+    let videoTime = 0;
+    var addVideo = document.querySelector('input[name="video"]:checked').value;
+    
+    // 14) lets do the same thing we did with the shoot type for the video
+    switch(addVideo) {
+      case 'video-0':
+      videoTime += 0;
+        break;
+      case 'video-1':
+      videoTime += 5;
+        break;
+      case 'video-2':
+      videoTime += 10;
+        break;
+      default:
+      videoTime += 0 ; // Default to simple catalog if type is not recognized
+    }
+
+    additionalTime =+ videoTime
+
+    // and lets log it to make sure
+    console.log('adding video got us to ' + videoTime + 'min per shot')
+
+    // replaced with switch
+    // Additional time for video 
+    // var videoAdditionalTime = (addVideo === 'video-1') ? 5 : ((addVideo === 'video-2') ? 10 : 0);
+    // console.log("Additional time for video: " + videoAdditionalTime + " minutes");
+    // additionalTime += videoAdditionalTime;
+
+    // 15) and cant forget styling. add our new variables (this time additiaonal time for vids and such) to our list of vairables 
+
+
+    let stylingComplexity = document.querySelector('input[name="video"]:checked').value;
+    let styleTime = 0;
+    
+    switch(stylingComplexity) {
+      case 'styling-0':
+      
+      break;
+      
+      case 'styling-1':
+        // 16) here we can see some fun new js. this is the conditional (ternary) operator or in more causal company an if statment short hand in our breakets we have a statment followed by a ? next we have two bits of code. if the statment is true it will di the first if the second is true then it will do the second. we had to do this because one mode will take more time to get changed while 2 or more models can get changed while the other models are getting shot
+        (numModels === '1') ? styleTime += 3 : styleTime += 1 ;
+      break;
+      
+      case 'styling-2':
+      (numModels === '1') ? styleTime += 5 : styleTime += 3 ;
+      break;
+
+      default:
+      styleTime += 0 ; // Default to simple catalog if type is not recognized
+    }
+
+    additionalTime += styleTime
+
+    // and lets log it to make sure
+    console.log('adding shot complexity got us to an extra ' + styleTime + 'min per shot')
+
+
+
+
+    // Additional time for outfit complexity
+    let complexOutfits = document.querySelector('#complex-outfits').checked;
+    let complexityTime = 0
+
+    console.log('were the outfits complex' + complexOutfits)
+    if(complexOutfits){
+      switch(numModels) {
+        case '1':
+           complexityTime = 3
+        break
+        case '2+':
+           complexityTime = 1
+        break
+      }
+    }
+
+    console.log("Additional time for outfit complexity: " + complexityTime + " minutes");
+    additionalTime += complexityTime;
+
+    var totalMinutes;
+
+    if (numModels === '1') {
+      totalMinutes = numLooks * (minTimePerLook + additionalTime);
+    } else if (numModels === '2+') {
+      totalMinutes = numLooks * (minTimePerLook + additionalTime - 5); // Assuming an average reduction of 5 minutes per look for two or more models
+    }
+
+    console.log("Total minutes calculated for the shoot: " + totalMinutes + " minutes - " );
+
+    var recommendedShootTime = Math.ceil(totalMinutes / 60); // Round up to the nearest hour
+    console.log("Recommended shoot time (rounded up to nearest hour): " + recommendedShootTime + " hours");
+
+    document.querySelector('#result').innerHTML =
+      '<span class="hidden">Minimum shoot time: ' + totalMinutes.toFixed(2) + ' minutes<br></span>' +
+      '<span class="big-text">' + recommendedShootTime + '+ hours </span>' +
+      'Based on what you\'ve shared, we recommend you plan for at least ' + recommendedShootTime + ' hours for this shoot.';
+    
+    var resultsContainer = document.querySelector('#results-container');
+    // Add the "active" class to the results container
+    resultsContainer.classList.add('show');
+
+    // Update the form fields with the calculated values
+    document.querySelector('#details-looks').textContent = numLooks;
+    document.querySelector('#details-type').textContent = shootType;
+    document.querySelector('#details-models').textContent = numModels;
+    document.querySelector('#details-complex-outfits').textContent = (complexOutfits) ? 'Complex Outfits' : 'Simple Outfits';
+    document.querySelector('#details-extra-styling').textContent = (stylingComplexity === 'styling-0') ? 'No Styling' : (stylingComplexity === 'styling-1') ? 'Minimalist Styling' : 'Dynamic Styling';
+    document.querySelector('#details-video').textContent = (addVideo === 'video-0') ? 'No Video' : (addVideo === 'video-1') ? 'Basic Video' : 'Dynamic Video';
+
+
+
+    // Get references to the button and the hidden section
+    
+    // Add an event listener to the button
+    
+  }
+  toggleButton.addEventListener("click", function() {
+    calculateTime()
+    // Hide the button
+      toggleButton.style.display = "none";
+      // Show the hidden section
+      hiddenSection.style.display = "block";
+
+  });
+</script>
