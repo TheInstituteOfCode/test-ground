@@ -1,0 +1,99 @@
+---
+layout: default
+title: lock and scroll ticketbanner section
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+logos:
+  - img_path: https://picsum.photos/id/1025/600/400
+  - img_path: https://picsum.photos/id/1024/600/400
+  - img_path: https://picsum.photos/id/1023/600/400
+  - img_path: https://picsum.photos/id/1022/600/400
+  - img_path: https://picsum.photos/id/1021/600/400
+  - img_path: https://picsum.photos/id/1020/600/400
+  - img_path: https://picsum.photos/id/1026/600/400
+
+---
+
+<section class="spacer"></section>
+
+<section class="logos lockSection">
+  <div>
+    filler text for the page
+  </div>
+  <div class="logos-banner">
+    {% for logo in page.logos %}
+    <div class="logo">
+      <img src="{{logo.img_path}}" alt="">
+    </div>
+    {% endfor %}
+  </div>
+  
+</section>
+
+<section class="spacer"></section>
+
+
+
+<style>
+
+  .logos{min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logos-banner{
+    position: absolute;
+    display: flex;
+    /* make sure this right is equal to the .logo width */
+    right:-{{page.logos.size | times: 32}}rem;
+  }
+
+  .logo{
+    width:32rem;
+    padding:1rem
+  }
+
+  .spacer{
+    min-height: 100vh;
+    background: #000;
+  }
+
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/ScrollTrigger.min.js"></script>
+<script>
+
+const lockSection = document.querySelector(".lockSection")
+const ticketBanner = document.querySelector(".logos-banner")
+// this screen height is for the speed of the animation. to speed it up increase the number doing the dividing on the end to slow it down decrease it :D 
+const neededScreenHeight = window.innerHeight * {{page.logos.size}} / 2
+console.log(neededScreenHeight,lockSection,ticketBanner)
+// debugger
+
+
+  let tl = gsap.timeline({
+    // yes, we can add it to an entire timeline!
+    scrollTrigger: {
+      trigger: lockSection,
+      start: "top top", // when the top of the trigger hits the top of the viewport
+      end: neededScreenHeight, // end after scrolling 50vh beyond the start
+      scrub: .01, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
+      pin: true
+    },
+  });
+
+  tl.to(ticketBanner,{
+    right: '100vw',
+    // right: '{{page.logos.size | times: 30}}rem',
+    ease: "none"
+  })
+
+console.log(
+  "no errors"
+)
+
+</script>
