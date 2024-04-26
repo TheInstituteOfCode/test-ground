@@ -132,6 +132,7 @@ teaching_notes: true
 </script>
 
 
+{% endcomment %}
 
 <!-- third layer complexity -->
 
@@ -140,12 +141,12 @@ teaching_notes: true
   <input type="number" min='1' value="5" name="pageCount" id="pageCount">
   <label for="sectionCount">number of sections per page</label>
   <input type="number" min='1' value="5" name="sectionCount" id="sectionCount">
-  <!-- 1) up untill now we just assumed that the building of the blocks and the putting them togeather was all part of the same thing but lets be honest, putting the sections in to place takes way less time and effort then building out the unique section so lets break that up in to building the sections and putting them in to there places. to do this lets make a new input and label for unique secions -->
+  <!-- 1) up until now we just assumed that the building of the blocks and the putting them togeather was all part of the same thing but lets be honest, putting the sections in to place takes way less time and effort then building out the unique section so lets break that up in to building the sections and putting them in to there places. to do this lets make a new input and label for unique secions -->
   <label for="uniqueSecCount">number of unique section</label>
   <input type="number" min='1' value="5" name="uniqueSecCount" id="uniqueSecCount">
 
   <span class="updatePrice button"> price check</span>
-  <p class="">thats going to cost $<span class="priceSpan">100</span>+</p>
+  <p class="">thats going to cost $<span class="priceSpan">1000</span>+</p>
 </form>
 
 <style>
@@ -166,56 +167,55 @@ teaching_notes: true
 
 <script>
 
-  // const siteCaulator = document.querySelector('#siteCaulator')
-  // const pageCountInput = siteCaulator.querySelector('#pageCount')
-  // const sectionCountInput = siteCaulator.querySelector('#sectionCount')
-  // // 2) new input means new js variable
-  // const uniqueSecInput = siteCaulator.querySelector('#uniqueSecCount')
-  // const priceButtonUpdater = siteCaulator.querySelector('.updatePrice')
-  // const priceSpan = siteCaulator.querySelector('.priceSpan')
+  const siteCaulator = document.querySelector('#siteCaulator')
+  const pageCountInput = siteCaulator.querySelector('#pageCount')
+  const sectionCountInput = siteCaulator.querySelector('#sectionCount')
+  // 2) new input means new js variable
+  const uniqueSecInput = siteCaulator.querySelector('#uniqueSecCount')
+  const priceButtonUpdater = siteCaulator.querySelector('.updatePrice')
+  const priceSpan = siteCaulator.querySelector('.priceSpan')
 
-  // function updatePrice(){
+  function updatePrice(){
 
-  //   // 3) now lets build the logic. for each of our unique sections lets say it cost 50 and lets add that to a new variable 
+    // 3) now lets build the logic. for each of our unique sections lets say it cost 50 and lets add that to a new variable 
 
-  //   // build cost of sections
-  //   let uniqueSecs = uniqueSecInput.value
-  //   let buildPrice = uniqueSecs * 50
-  //   // 4) loged of course 
-  //   console.log('building the blocks will cost ' + buildPrice )
+    // build cost of sections
+    let uniqueSecs = uniqueSecInput.value
+    let buildPrice = uniqueSecs * 50
+    // 4) loged of course 
+    console.log('building the blocks will cost ' + buildPrice )
     
 
-  //   // assembling block cost
-  //   let pages = pageCountInput.value
-  //   console.log("they want " + pages + ' pages in the site')
-  //   let secPerPage = sectionCountInput.value
-  //   console.log("they want " + secPerPage + ' sections per page')
+    // assembling block cost
+    let pages = pageCountInput.value
+    console.log("they want " + pages + ' pages in the site')
+    let secPerPage = sectionCountInput.value
+    console.log("they want " + secPerPage + ' sections per page')
 
-  //   // 5) just like the build price lets pull the assembly price out and log it.
-  //   let assemblyPrice = pages * secPerPage * 30
-  //   console.log('assembling the blocks will cost' + assemblyPrice )
+    // 5) just like the build price lets pull the assembly price out and log it.
+    let assemblyPrice = pages * secPerPage * 30
+    console.log('assembling the blocks will cost' + assemblyPrice )
     
 
-  //   // 6) and finally we are going to update our price output to be a combo of build and assembly prices
-  //   console.log(`total cost is ${assemblyPrice + buildPrice}`)
-  //   // price output 
-  //   if (assemblyPrice + buildPrice > 1000 ){
-  //     priceSpan.innerHTML = assemblyPrice + buildPrice
-  //   } else {
-  //     priceSpan.innerHTML = 1000
-  //   }
+    // 6) and finally we are going to update our price output to be a combo of build and assembly prices
+    console.log(`total cost is ${assemblyPrice + buildPrice}`)
+    // price output 
+    if (assemblyPrice + buildPrice > 1000 ){
+      priceSpan.innerHTML = assemblyPrice + buildPrice
+    } else {
+      priceSpan.innerHTML = 1000
+    }
 
-  // }
+  }
 
-  // priceButtonUpdater.addEventListener('click', updatePrice)
+  priceButtonUpdater.addEventListener('click', updatePrice)
 
 </script>
 
-{% endcomment %}
 
 <!-- forth layer complexity -->
 
-<form action="" id="siteCaulator" class="padded">
+<!-- <form action="" id="siteCaulator" class="padded">
   <label for="pageCount">number of pages</label>
   <input type="number" min='1' value="5" name="pageCount" id="pageCount">
   <label for="sectionCount">number of sections per page</label>
@@ -297,4 +297,4 @@ teaching_notes: true
 
   priceButtonUpdater.addEventListener('click', updatePrice)
 
-</script>
+</script> -->
