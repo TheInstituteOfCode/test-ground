@@ -1,6 +1,6 @@
 ---
 layout: default
-title: ticker banner with links
+title: ticker banner with variable speed
 banner_message: 
   - text: home
     url: /index
@@ -9,24 +9,36 @@ banner_message:
   - text: one really long non link
     url: /temp
   - url: bob
+banner_message_2: 
+  - text: home
+    url: /index
+  - text: blog
+    url: /blog
+  - text: one really
+    url: /temp
+  - url: bob
+    text: dan was here
 ---
 
 
-<div class="tickerBanner">
+<div class="tickerBanner" data-banner-speed="50">
   {% for message in page.banner_message %}
+    <a href="{{message.url}}" class="text-block">{{message.text}}</a>
+    {% endfor %}
+</div>
+<div class="tickerBanner" data-banner-speed="100">
+  {% for message in page.banner_message_2 %}
     <a href="{{message.url}}" class="text-block">{{message.text}}</a>
     {% endfor %}
 </div>
 
 
-
 <style>
-:root {
-    --bannerBlockLength: 280px;
-    --bannerBlockTime: 2s;
-  }
+
 
 .tickerBanner{
+  --bannerBlockLength: 280px;
+  --bannerBlockTime: 2s;
 overflow-X: hidden;
 display: flex;
 flex-direction: row-reverse;
@@ -56,8 +68,13 @@ text-align: center;
 
 
 <script>
-  const banner = document.querySelector('.tickerBanner');
-  const textBlock = banner.querySelectorAll('.text-block');
+  const tickerBanners = document.querySelectorAll('.tickerBanner');
+
+tickerBanners.forEach(banner => {
+
+
+
+  let textBlock = banner.querySelectorAll('.text-block');
 
   console.log(textBlock[1].offsetWidth)
 
@@ -68,11 +85,11 @@ text-align: center;
 
   let bannerLength = bannerBlock
   console.log(bannerBlock)
-  console.log(bannerLength)
+  console.log(banner.dataset.bannerSpeed)
   
   
-  document.documentElement.style.setProperty('--bannerBlockLength', `${bannerBlock}px`);
-  document.documentElement.style.setProperty('--bannerBlockTime', `${(bannerBlock / 50)}s`);
+  banner.style.setProperty('--bannerBlockLength', `${bannerBlock}px`);
+  banner.style.setProperty('--bannerBlockTime', `${(bannerBlock / banner.dataset.bannerSpeed )}s`);
 
   
   function extendBanner() {
@@ -96,5 +113,7 @@ text-align: center;
   extendBanner()
 
   console.log(bannerLength)
+
+})
 
 </script>
