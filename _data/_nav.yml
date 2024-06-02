@@ -1,3 +1,4 @@
+def_title: default title
 links:
   - url: /page-1.html
     text: page 1
