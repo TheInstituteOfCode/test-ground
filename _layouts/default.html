@@ -9,7 +9,13 @@
     <link rel="stylesheet" href="/main.css">
     <link rel="stylesheet" href="" type="css">
     <!-- <link rel="stylesheet" href="prism.css"> -->
-    <title>Document</title>
+    <title>
+    {% if page.title %}
+      {{page.title}}
+    {% else %}
+      default page title
+    {% endif %}
+    </title>
 </head>
 
 
