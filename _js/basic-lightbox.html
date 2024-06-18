@@ -1,0 +1,80 @@
+---
+layout: default
+title: basic Lightbox
+img_Path: https://picsum.photos/id/1020/600/400
+teaching_notes: false
+light_boxes:
+  - button_text: bob
+    heading: bob the builder
+    para: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate quaerat sint nihil perferendis quisquam doloremque officiis consequuntur, non debitis fuga commodi, ratione a ut quam. Aperiam enim id reprehenderit vero.
+---
+
+
+<style>
+body{
+  min-height: 100vh;
+}
+
+dialog{
+  margin: auto;
+}
+
+  dialog::backdrop{
+    background-color: #2727;
+  }
+  .m-5{
+    margin:5%;
+  }
+  .p-5{
+    padding: 5%;
+  }
+
+  .closingX {
+    position: absolute;
+    top: 2.5%;
+    right: 2.5%;
+  }
+
+</style>
+
+<section>
+
+  {% for pop in page.light_boxes  %}
+    <span onclick="this.nextElementSibling.showModal()">
+      {{pop.button_text}}
+    </span>
+    <dialog>
+      <div class="p-5 m-5">
+        <h1>
+          {{pop.heading}}
+        </h1>
+        <p>
+          {{pop.para}}
+        </p>
+        <span class="closingX" onclick="this.parentElement.parentElement.close()">X</span>
+      </div>
+    </dialog>
+  {% endfor %}
+</section>
+
+<script>
+const dialogs = document.querySelectorAll("dialog")
+
+function closeDialogs(event) {
+  dialogs.forEach(dia => {
+    console.log(event.target)
+    if (event.target === dia) {
+      dia.close();
+    }
+  })
+}
+
+
+console.log(dialogs)
+
+dialogs.forEach(dia => {
+  dia.addEventListener("click", closeDialogs);
+})
+
+
+</script>
