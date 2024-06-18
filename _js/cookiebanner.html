@@ -1,0 +1,159 @@
+---
+layout: default
+title: Cookie banner
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+---
+
+<style>
+
+  body.darkmode{
+    background-color: #272;
+    color:antiquewhite;
+  }
+
+  #cookie-notice {
+    padding: 0.5rem 1rem;
+    /* display: none; */
+    text-align: center;
+    position: fixed;
+    left: calc(-100% + 2rem);
+    right: calc(100% - 2rem);
+    bottom: 0;
+    background: #222;
+    color: rgba(255,255,255,0.8);
+    transition: all 2s;
+  }
+  #cookie-notice.active {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    width: calc(100% - 2rem);
+  }
+  #cookie-notice a {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 0.5rem;
+  }
+  #cookie-notice .button-subtle {
+  opacity: 0.8;
+  }
+
+  #close-cookie-banner {
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  opacity: 0.5
+  }
+
+  button.unaccepted::before{
+    content: 'accept ';
+  }
+  button.accepted::before{
+    content: 'revoke ';
+  }
+  body button.hide-button::before {
+    content: ''
+  }
+  body button.hide-button{
+    position: absolute;
+    right: 1rem;
+  }
+</style>
+
+<div id="cookie-notice">
+  <button class="unaccepted cookieButton" data-cookie-type="anacliticCookies">anaclitic cookies</button>
+  <button class="unaccepted cookieButton" data-cookie-type="darkmode">darkmode cookies</button>
+  <button class="hide-button cookieButton" data-cookie-type="hideBanner">X</button>
+</div>
+
+
+<script>
+  function createCookie(name,value,days) {
+      var expires = "";
+      if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days*24*60*60*1000));
+          expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+  }
+  function readCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+  }
+  function eraseCookie(name) {
+      createCookie(name,"",-1);
+  }
+
+
+
+
+  const cookieBanner = document.querySelector('#cookie-notice')
+  const cookieButtons = cookieBanner.querySelectorAll('.cookieButton')
+
+
+  function runCookies() {
+      if (readCookie('anacliticCookies')=='accepted') {
+        // analitic cookie codes
+      } 
+      if (readCookie('darkmode')=='accepted') {
+        // darkmode cookie codes
+        document.querySelector('body').classList.add('darkmode')
+      } else {
+        document.querySelector('body').classList.remove('darkmode')
+      }
+  }
+
+  runCookies()
+
+  cookieButtons.forEach(button => {
+    let buttonCookie = button.dataset.cookieType
+
+    if ( readCookie(buttonCookie) == 'accepted' ){
+      button.classList.remove('unaccepted')
+      button.classList.add('accepted')
+    }
+
+    button.addEventListener('click', () => {
+      
+      if (button.classList.contains('unaccepted')){
+        button.classList.remove('unaccepted')
+        button.classList.add('accepted')
+        createCookie(buttonCookie,'accepted',31)
+      } else {
+        button.classList.add('unaccepted')
+        button.classList.remove('accepted')
+        createCookie(buttonCookie,'unaccepted',31) 
+      }
+      runCookies()
+      console.log(buttonCookie, readCookie(buttonCookie))
+    })
+
+  })
+
+  console.log("cookies",document.cookie)
+
+
+  
+  // HideBanner
+
+
+
+  if (readCookie('hideBanner') != 'accepted') {
+    cookieBanner.classList.add('active')
+  }
+
+  const hideButton = cookieBanner.querySelector('.hide-button')
+
+  hideButton.addEventListener('click', () => {
+    cookieBanner.classList.toggle('active')
+  })
+
+</script>
