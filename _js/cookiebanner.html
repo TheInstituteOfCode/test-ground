@@ -14,7 +14,6 @@ teaching_notes: false
 
   #cookie-notice {
     padding: 0.5rem 1rem;
-    /* display: none; */
     text-align: center;
     position: fixed;
     left: calc(-100% + 2rem);
@@ -62,9 +61,10 @@ teaching_notes: false
 </style>
 
 <div id="cookie-notice">
+  <button class="unaccepted accept-all">all cookies</button>
   <button class="unaccepted cookieButton" data-cookie-type="anacliticCookies">anaclitic cookies</button>
   <button class="unaccepted cookieButton" data-cookie-type="darkmode">darkmode cookies</button>
-  <button class="hide-button cookieButton" data-cookie-type="hideBanner">X</button>
+  <button class="hide-button" data-cookie-type="hideBanner">X</button>
 </div>
 
 
@@ -97,22 +97,12 @@ teaching_notes: false
 
   const cookieBanner = document.querySelector('#cookie-notice')
   const cookieButtons = cookieBanner.querySelectorAll('.cookieButton')
+  const acceptAllButton = cookieBanner.querySelector('.accept-all')
+  let allCookiesAccepted = true
+  let unaccepted = false 
 
 
-  function runCookies() {
-      if (readCookie('anacliticCookies')=='accepted') {
-        // analitic cookie codes
-      } 
-      if (readCookie('darkmode')=='accepted') {
-        // darkmode cookie codes
-        document.querySelector('body').classList.add('darkmode')
-      } else {
-        document.querySelector('body').classList.remove('darkmode')
-      }
-  }
-
-  runCookies()
-
+  // button initilisaztion
   cookieButtons.forEach(button => {
     let buttonCookie = button.dataset.cookieType
 
@@ -138,22 +128,74 @@ teaching_notes: false
 
   })
 
-  console.log("cookies",document.cookie)
+  // checks for unaccepted cookie buttons 
+function checkForUnacceptedCookies() {
+  console.log('cookie checker')
 
-
+  if (Array.from(cookieButtons).some((node) => node.classList.contains('unaccepted'))) {
+    return true
+  }
+  return false
+}
   
-  // HideBanner
 
+  // runs the codes based on different button
+  function runCookies() {
+      allCookiesAccepted = true
+      if (readCookie('anacliticCookies')=='accepted') {
+        // analitic cookie codes
+      } 
+      if (readCookie('darkmode')=='accepted') {
+        // darkmode cookie codes
+        document.querySelector('body').classList.add('darkmode')
+      } else {
+        document.querySelector('body').classList.remove('darkmode')
+      }
+      if (readCookie('hideBanner') != 'accepted') {
+        cookieBanner.classList.add('active')
+      } else {
+        cookieBanner.classList.remove('active')
+      }
 
+      console.log(checkForUnacceptedCookies(),'output')
 
-  if (readCookie('hideBanner') != 'accepted') {
-    cookieBanner.classList.add('active')
+      if (checkForUnacceptedCookies() === true) {
+        acceptAllButton.classList.remove('accepted')
+        acceptAllButton.classList.add('unaccepted')
+      } else {
+        acceptAllButton.classList.remove('unaccepted')
+        acceptAllButton.classList.add('accepted')
+      }
   }
 
-  const hideButton = cookieBanner.querySelector('.hide-button')
 
-  hideButton.addEventListener('click', () => {
-    cookieBanner.classList.toggle('active')
-  })
+  // runs the cookies 
+  runCookies()
+
+
+
+// just a checker for dev
+  console.log("cookies", document.cookie, allCookiesAccepted)
+
+const allCookieButton = cookieBanner.querySelector('.accept-all')
+
+allCookieButton.addEventListener('click', () => {
+    if (allCookieButton.classList.contains('unaccepted')) {
+        cookieButtons.forEach(button => {
+
+            if (button.classList.contains('unaccepted')) {
+                button.click()
+            }
+
+        })
+    } else {
+        cookieButtons.forEach(button => {
+
+            button.click()
+
+        })
+    }
+})
+  
 
 </script>
