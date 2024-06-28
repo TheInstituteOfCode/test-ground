@@ -24,11 +24,15 @@ teaching_notes: false
     transition: all 2s;
   }
   #cookie-notice.active {
-    position: fixed;
     left: 1rem;
     right: 1rem;
     width: calc(100% - 2rem);
   }
+
+  #cookie-notice.init{
+    right:100vw;
+    left: -100vw;
+  } 
   #cookie-notice a {
     display: inline-block;
     cursor: pointer;
@@ -60,7 +64,7 @@ teaching_notes: false
   }
 </style>
 
-<div id="cookie-notice">
+<div id="cookie-notice" class="init">
   <button class="unaccepted accept-all">all cookies</button>
   <button class="unaccepted cookieButton" data-cookie-type="anacliticCookies">anaclitic cookies</button>
   <button class="unaccepted cookieButton" data-cookie-type="darkmode">darkmode cookies</button>
@@ -98,6 +102,7 @@ teaching_notes: false
   const cookieBanner = document.querySelector('#cookie-notice')
   const cookieButtons = cookieBanner.querySelectorAll('.cookieButton')
   const acceptAllButton = cookieBanner.querySelector('.accept-all')
+  const hideButton = cookieBanner.querySelector('.hide-button')
   let allCookiesAccepted = true
   let unaccepted = false 
 
@@ -196,6 +201,36 @@ allCookieButton.addEventListener('click', () => {
         })
     }
 })
-  
+
+
+  // hide popup logic
+
+  if (readCookie('hideBanner') == "unaccepted") {
+    hideButton.classList.add('unaccepted')
+  } else {
+    hideButton.classList.add('accepted')
+  }
+
+hideButton.addEventListener('click', () => {
+      
+    let buttonCookie = hideButton.dataset.cookieType
+      if (hideButton.classList.contains('unaccepted')){
+        hideButton.classList.remove('unaccepted')
+        hideButton.classList.add('accepted')
+        createCookie(buttonCookie,'accepted',31)
+      } else {
+        hideButton.classList.add('unaccepted')
+        hideButton.classList.remove('accepted')
+        createCookie(buttonCookie,'unaccepted',31) 
+      }
+      runCookies()
+    })
+
+
+    // popup delay
+
+    setTimeout(() => {
+  cookieBanner.classList.remove('init')
+}, "1000")
 
 </script>
