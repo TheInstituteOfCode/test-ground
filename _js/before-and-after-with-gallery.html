@@ -1,30 +1,35 @@
 ---
 layout: default
-title: before and after code now with inputs
+title: before and after code with gallery
 img_Path: https://picsum.photos/id/1025/600/400
 teaching_notes: false
-boxes:
-  - 1: 1
-  - 2: 2
-  - 3: 3
+slider-images:
+  - before_image: https://picsum.photos/id/1003/600/400
+    after_image: https://picsum.photos/id/1003/600/400
+  - before_image: https://picsum.photos/id/1004/600/400
+    after_image: https://picsum.photos/id/1004/600/400
+  - before_image: https://picsum.photos/id/1012/600/400
+    after_image: https://picsum.photos/id/1012/600/400
+  - before_image: https://picsum.photos/id/1008/600/400
+    after_image: https://picsum.photos/id/1008/600/400
+  - before_image: https://picsum.photos/id/1011/600/400
+    after_image: https://picsum.photos/id/1011/600/400
 ---
 
 
 <div class='sliderContainer relative'>
-  <div class='ba-img ba-background-img'></div>
-  <div class='ba-img ba-foreground-img'></div>
+  <div class='ba-img ba-before-img' style="background-image: url({{page.slider-images[0].before_image}})"></div>
+  <div class='ba-img ba-after-img' style="background-image: url({{page.slider-images[0].after_image}})"></div>
   <div class="ba-slider-line">
     <div class='ba-slider-button'> < > </div>
   </div>
-  <input type="range" min="0" max="10000" value="5000" class="ba-slider absolute" name='ba-slider'>
+  <input type="range" min="0" max="100" value="50" class="ba-slider absolute" name='ba-slider'>
 </div>
 <div class="grid grid-cols-3 alt-photo-grid">
-  <img src="https://picsum.photos/id/1003/600/400" alt="" data-pre-image="https://picsum.photos/id/1003/600/400">
-  <img src="https://picsum.photos/id/1002/600/400" alt="" data-pre-image="https://picsum.photos/id/1004/600/400">
-  <img src="https://picsum.photos/id/1011/600/400" alt="" data-pre-image="https://picsum.photos/id/1012/600/400">
-  <img src="https://picsum.photos/id/1013/600/400" alt="" data-pre-image="https://picsum.photos/id/1014/600/400">
-  <img src="https://picsum.photos/id/1015/600/400" alt="" data-pre-image="https://picsum.photos/id/1016/600/400">
-  <img src="https://picsum.photos/id/1017/600/400" alt="" data-pre-image="https://picsum.photos/id/1018/600/400">
+  {% for img in page.slider-images %}
+  <img src="{{img.after_image}}" alt="" data-before-image="{{img.before_image}}">
+  {% endfor %}
+
 </div>
 
 <style>
@@ -36,7 +41,7 @@ boxes:
   border: 2px solid white;
   margin:auto;
   position: relative;
-
+  --position: 50%;
 }
 .ba-img {
   position: absolute;
@@ -48,12 +53,12 @@ boxes:
   background-position: left;
   pointer-events: none;
 }
-.ba-background-img {
+.ba-before-img {
   background-image: url('https://picsum.photos/id/1003/600/400');
 }
-.ba-foreground-img {
+.ba-after-img {
   background-image: url('https://picsum.photos/id/1003/600/400');
-  width: 50%;
+  width: var(--position);
   /* just for testing if you use the same image */
   filter: invert(1);
 }
@@ -71,7 +76,7 @@ boxes:
   position:absolute;
   height:100%;
   border:1px solid black;
-  left:calc(50% - 1px);
+  left:var(--position);
 }
 .ba-slider-button {
   position:absolute;
@@ -86,6 +91,11 @@ boxes:
   align-items: center;
   border-radius:100%;
 }
+
+.grid-cols-3{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 </style> 
 
 
@@ -96,24 +106,17 @@ boxes:
    
   const sliderContainer = document.querySelector('.sliderContainer')
   const sliderInput = document.querySelector('.ba-slider')
+  const beforeImage = document.querySelector('.ba-before-img')
+  const afterImage = document.querySelector('.ba-after-img')
 
-  function updateImageSlide(){
-    console.log(sliderInput.value)
-    let width = (sliderInput.value * sliderContainer.offsetWidth / 10000)
-    console.log(sliderContainer.offsetWidth)
-    gsap.set(".ba-foreground-img", {
-      width: `${width}px`
-    });
-     gsap.set(".ba-slider-line", {
-      left: `${width}px`
-    });
+  
+  
+  sliderInput.addEventListener('input', (e) => {
+  // Update the CSS variable '--position' with the slider value
+  sliderContainer.style.setProperty('--position', `${e.target.value}%`);
+})
 
-  }
-
-
-
-  sliderInput.addEventListener('input', updateImageSlide)
-
+  
 
 
   // change image functionality
@@ -123,12 +126,8 @@ boxes:
   altImages.forEach(img => {
     img.addEventListener('click', () => {
       console.log(`url(${img.src})`)
-      gsap.set('.ba-background-img',{
-        backgroundImage: `url('${img.src}')`
-      })
-      gsap.set('.ba-foreground-img',{
-        backgroundImage: `url('${img.dataset.preImage}')`
-      })
+      beforeImage.style.backgroundImage = `url(${img.dataset.beforeImage})`
+      afterImage.style.backgroundImage = `url(${img.src})`
     })
   });
 </script>

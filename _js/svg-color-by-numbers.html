@@ -1,0 +1,101 @@
+---
+layout: default
+title: svg color by numbers
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+---
+ <label for="outsidecolor">outside color
+    <select class="colorInput" name="outsidecolor" id="outsidecolor">
+        <option value="stroke-outsidePoly-#000">black</option>
+        <option value="stroke-outsidePoly-#722">red</option>
+        <option value="stroke-outsidePoly-#272">green</option>
+        <option value="stroke-outsidePoly-#227">blue</option>
+    </select>
+</label>
+<label for="fill">
+    fill color
+    <select class="colorInput" name="fill" id="fill">
+        <option value="fill-outsidePoly-rgba(0,0,0,0)">transparent</option>
+        <option value="fill-outsidePoly-#000">black</option>
+        <option value="fill-outsidePoly-#722">red</option>
+        <option value="fill-outsidePoly-#272">green</option>
+        <option value="fill-outsidePoly-#227">blue</option>
+    </select>
+</label>
+<label for="outsidecolor">line_1
+    <select class="colorInput" name="outsidecolor" id="outsidecolor">
+        <option value="stroke-line_1-#000">black</option>
+        <option value="stroke-line_1-#722">red</option>
+        <option value="stroke-line_1-#272">green</option>
+        <option value="stroke-line_1-#227">blue</option>
+    </select>
+</label>
+<label for="outsidecolor">line_2
+    <select class="colorInput" name="outsidecolor" id="outsidecolor">
+        <option value="stroke-line_2-#000">black</option>
+        <option value="stroke-line_2-#722">red</option>
+        <option value="stroke-line_2-#272">green</option>
+        <option value="stroke-line_2-#227">blue</option>
+    </select>
+</label>
+<label for="outsidecolor">line_3
+    <select class="colorInput" name="outsidecolor" id="outsidecolor">
+        <option value="stroke-line_3-#000">black</option>
+        <option value="stroke-line_3-#722">red</option>
+        <option value="stroke-line_3-#272">green</option>
+        <option value="stroke-line_3-#227">blue</option>
+    </select>
+</label>
+
+<svg class="target-svg" viewBox="0 0 100 100">
+<polygon
+class="outsidePoly colorAble"
+points="15,0 0,30 15,60 45,60 60,30 45,0 "/>
+<path class="colorAble line_1" d="M 0,30 L45,60"/>
+<path class="colorAble line_2" d="M 15,60 L45,0"/>
+<path class="colorAble line_3" d="M 15,60 L60,30"/>
+<polygon
+class="outsidePoly colorAble transparent-fill"
+points="15,0 0,30 15,60 45,60 60,30 45,0 "/>
+
+</svg>
+
+<style>polygon,
+path {
+    fill: transparent;
+    stroke: #000;
+}
+.transparent-fill {
+    fill: transparent !important;
+}
+</style>
+
+<script>
+const colorInputs = document.querySelectorAll('.colorInput')
+const polygons = document.querySelectorAll('.colorAble')
+
+function changeColor() {
+    console.log('start', this, this.value)
+    let colorPlan = this
+        .value
+        .split("-");
+    console.log(colorPlan)
+    polygons.forEach(polygon => {
+        if (polygon.classList.contains(colorPlan[1])) {
+            if (colorPlan[0] == 'stroke') {
+                polygon.style.stroke = colorPlan[2];
+            }
+            if (colorPlan[0] == 'fill') {
+                polygon.style.fill = colorPlan[2];
+
+            }
+            console.log('traget polygon')
+        }
+    })
+}
+
+colorInputs.forEach(input => {
+    input.addEventListener('change', changeColor)
+}) 
+
+</script>
