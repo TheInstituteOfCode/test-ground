@@ -1,6 +1,6 @@
 ---
 layout: default
-title: ticker banner
+title: ticker banner js
 banner_message: 
   - text: home
     url: /index
@@ -27,6 +27,25 @@ banner_message_2:
     {% endfor %}
 </div>
 <div class="tickerBanner">
+  <div class="img text-block">
+    <img src="https://picsum.photos/id/1081/600/400" alt="">
+  </div>
+  <div class="img text-block">
+    <img src="https://picsum.photos/id/1081/600/400" alt="">
+  </div>
+  <div class="img text-block">
+    <img src="https://picsum.photos/id/1081/600/400" alt="">
+  </div>
+  <div class="img text-block">
+    <img src="https://picsum.photos/id/1081/600/400" alt="">
+  </div>
+  <div class="img text-block">
+    <img src="https://picsum.photos/id/1081/600/400" alt="">
+  </div>
+
+
+</div>
+<div class="tickerBanner">
   {% for message in page.banner_message_2 %}
     <a href="{{message.url}}" class="text-block">{{message.text}}</a>
     {% endfor %}
@@ -46,16 +65,25 @@ text-align: center;
 }
 
 
-.tickerBanner a{
+.tickerBanner .img {
+  width: 600px;
+  height: 400px;
+  flex-shrink: 0;
+}
+
+.tickerBanner > * {
   display: inline-block;
   padding: 1vw;
   flex-shrink: 0;
   position: relative;
-  animation: ticker 2s infinite linear;
-  animation-duration: var(--bannerBlockTime), 2s;
 }
 
-.tickerBanner:hover a{
+.tickerBanner.active > * {
+  animation: ticker 2s infinite linear;
+  animation-duration: var(--bannerBlockTime), 2s;
+} 
+
+.tickerBanner:hover > *{
   animation-play-state: paused;
 }
 
@@ -70,13 +98,15 @@ text-align: center;
 <script>
   const tickerBanners = document.querySelectorAll('.tickerBanner');
 
+console.log(tickerBanners)
+
 tickerBanners.forEach(banner => {
 
 
 
   let textBlock = banner.querySelectorAll('.text-block');
 
-  console.log(textBlock[1].offsetWidth)
+
 
   let bannerBlock = 0;
   textBlock.forEach( block => {
@@ -93,6 +123,7 @@ tickerBanners.forEach(banner => {
 
   
   function extendBanner() {
+    // debugger
   if (bannerLength < (screen.width + bannerBlock) ) {
     textBlock.forEach(block => {
       console.log(block.innerHTML)
@@ -105,7 +136,10 @@ tickerBanners.forEach(banner => {
     bannerLength += bannerBlock;
     console.log(bannerLength) 
     extendBanner()
+  } else {
+    banner.classList.add('active')
   }
+
   }
 
 
