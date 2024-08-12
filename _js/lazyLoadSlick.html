@@ -1,0 +1,95 @@
+---
+layout: default
+title: lazy loading slick slider 
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+slider-images:
+  - image: https://picsum.photos/id/1003/600/400
+    alt: pic 1
+  - image: https://picsum.photos/id/1004/600/400
+    alt: pic 2
+  - image: https://picsum.photos/id/1005/600/400
+    alt: pic 3
+  - image: https://picsum.photos/id/1006/2000/3000
+    alt: pic 4
+  - image: https://picsum.photos/id/1007/2000/3000
+    alt: pic 5
+  - image: https://picsum.photos/id/1008/2000/3000
+    alt: pic 6
+  - image: https://picsum.photos/id/1009/2000/3000
+    alt: pic 7
+---
+
+
+<style>
+
+  .slider {
+    display: grid;
+    /* repeat should match the slides to show on page load */
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .slider > img:nth-child(n + 4){
+    display: none;
+  }
+
+</style>
+
+<!-- offset and limit should match the slider width on the biggest screen size -->
+<div class="slider" data-extra-images="{% for image in page.slider-images offset:3 %}{{image.image}}:::{{image.alt}}{% unless forloop.last %};;;{% endunless %}{% endfor %}">
+  {% for image in page.slider-images limit:3 %}
+  <img src="{{image.image}}" alt="{{image.alt}}">
+  {% endfor %}
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script>
+
+
+addEventListener("load", (event) => {
+  const sliders = document.querySelectorAll('.slider')
+  
+  sliders.forEach(slider => {
+    // debugger
+    let imageArray = slider.dataset.extraImages.split(';;;')
+    imageArray.forEach(img => {
+      let newImage = document.createElement('img')
+      console.log(imageArray)
+      
+      let imgComponent = img.split(":::")
+      newImage.src = imgComponent[0]
+      newImage.alt = imgComponent[1]
+      console.log(newImage)
+      slider.appendChild(newImage)
+      console.log(imgComponent)
+
+      if (img = imageArray[imageArray.length - 1]) {
+        newImage.addEventListener("load", () => {
+          $(slider).slick({
+            // slick code goes here
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+          });
+          console.log('running slick')
+        })
+      } 
+    })
+
+    addEventListener("load", (event) => {
+    });
+        
+
+  });
+
+});
+  
+
+
+</script>
