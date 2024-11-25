@@ -1,0 +1,133 @@
+---
+layout: default
+title: filter gallery with nth-child function
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+---
+
+
+<!-- <section class="temp">
+used to test scroll function
+</section> -->
+<section class="center padded">
+    <nav class="port-nav" id="portfolio-filter">
+        <a href="#" data-filter="all">ALL</a> /
+        <a href="#" data-filter="type-1">type-1</a> /
+        <a href="#" data-filter="type-2">type-2</a> /
+        <a href="#" data-filter="type-3">type-3</a>
+    </nav>
+</section>
+
+<!-- Second SECTION - - - - - - - - - - - - - - -->
+
+<section class="no-margin-top padded">
+    <div class="grid-3 center" id="portfolio-grid">
+        <div class="type-1 gallery-item"></div>
+        <div class="type-2 gallery-item"></div>
+        <div class="type-3 gallery-item"></div>
+        <div class="type-1 gallery-item"></div>
+        <div class="type-2 gallery-item"></div>
+        <div class="type-3 gallery-item"></div>
+        <div class="type-1 gallery-item"></div>
+        <div class="type-2 gallery-item"></div>
+        <div class="type-3 gallery-item"></div>
+    </div>
+</section>
+
+
+<style>
+    
+.type-1{
+  background-image: url("https://picsum.photos/200/300/?random")
+}
+
+.type-2{
+  background-image: url("https://picsum.photos/300/300/?random")
+}
+.type-3{
+  background-image: url("https://picsum.photos/400/300/?random")
+}
+
+.gallery-item {
+    padding-bottom: 50%;
+    background-size: cover;
+    background-position: center;
+}
+
+[class*=grid] {
+    gap: 5vw;
+}
+
+.odd{ border: 11px solid red}
+.even{ border: 11px solid #272}
+</style>
+
+<script>
+
+    const gallery_buttons = document.querySelectorAll('#portfolio-filter a')
+    const gallery_items = document.querySelectorAll('#portfolio-grid .gallery-item')
+    let filterShownCount = 0
+
+    function filterGallery(e) {
+        e.preventDefault();
+
+        console.log('click')
+        console.log(1%2 , 2%2 , 5%2)
+
+
+        gallery_buttons.forEach(button => {
+            button.classList.remove('active')
+          });
+          this.classList.add('active');
+                    
+        let filterVal = this.dataset.filter;
+        filterShownCount = 0
+        
+        gallery_items.forEach(item => {
+            item.classList.remove('odd')
+            item.classList.remove('even')
+                
+              if (filterVal == 'all') {
+                    item.classList.remove('hidden');
+                } else {
+                  if (item.classList.contains(filterVal)) {
+                      item.classList.remove('hidden');
+                  } else {
+                      item.classList.add('hidden');
+                  }
+              };
+
+              
+              if (!item.classList.contains('hidden') ) {
+                
+                filterShownCount++
+
+                if ( filterShownCount %= 2 ) {
+                  item.classList.add('odd')
+                } else {
+                  item.classList.add('even')
+                }
+
+
+
+              if ( filterCheck %= 3 === 0 ) {
+                  item.classList.add('first')
+                } else if ( filterCheck %= 3 === 1 ) {
+                  item.classList.add('second')
+                } else if ( filterCheck %= 3 === 2 ){
+                  item.classList.add('third')
+                }
+
+                // console.log(!item.classList.contains('hidden'), item, filterCheck % 2 )
+              }
+              
+        })
+    }
+
+    // 4) lets add an eventListiner for each of our buttons 
+    gallery_buttons.forEach(button => {
+            button.addEventListener('click', filterGallery)
+    })
+
+
+</script>

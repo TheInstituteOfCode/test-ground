@@ -1,0 +1,46 @@
+---
+layout: default
+title: svg spinning border
+---
+
+
+<svg viewBox="-5 -5 110 110">
+    <path d="M 50,0
+    L 90, 0
+    Q 100,0 100,10
+    L 100,90
+    Q 100,100 90,100
+    L 10,100
+    Q 0,100 0,90
+    L 0,10
+    Q 0,0 10,0
+    Z" />
+</svg>
+
+
+
+<style>
+    svg{
+        width: 100vh;
+    }
+svg path{
+    fill: transparent;
+    stroke: #070;
+    stroke-width: .5;
+    stroke-dasharray: 8;
+    stroke-dashoffset: 0;
+    animation: runningDashs 2s infinite linear;
+}
+
+@keyframes runningDashs {
+    from {
+        stroke-dashoffset: 0%;
+    }
+    to{
+    stroke-dashoffset: 100%;
+
+    }
+}
+
+
+</style>
