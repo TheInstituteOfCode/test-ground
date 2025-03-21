@@ -2,7 +2,7 @@
 layout: default
 title: basic Lightbox
 img_Path: https://picsum.photos/id/1020/600/400
-teaching_notes: false
+teaching_notes: true
 light_boxes:
   - button_text: bob
     heading: bob the builder
@@ -22,56 +22,75 @@ dialog{
   dialog::backdrop{
     background-color: #2727;
   }
-  .m-5{
-    margin:5%;
-  }
-  .p-5{
-    padding: 5%;
+
+.button {
+  border: 1px solid black;
+  padding: 1rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+  .p-10{
+    padding: 10%;
   }
 
   .closingX {
     position: absolute;
-    top: 2.5%;
-    right: 2.5%;
+    top: 5vw;
+    right: 5vw;
   }
 
 </style>
 
 <section>
-
+<!-- first we loop so that we can have multiple pop-ups -->
   {% for pop in page.light_boxes  %}
-    <span onclick="this.nextElementSibling.showModal()">
+  <!-- 1) first we make a something to click on. This can be a simple button or a coloumn or any other element you can think of.
+   2)  on this element we are going to add the attribute of onclick. This is to js what style is to css just a mini script right in our html. and we want to give it the value of this.nextElementSibling.showModal() or in less JS technical terms find the next element and open it up  -->
+    <span class="button" onclick="this.nextElementSibling.showModal()">
       {{pop.button_text}}
     </span>
+    <!-- 
+  3) Next we make the dialog element. This is the element that will pop up making both the js and html much easier then the old div method. just like our button we can place what ever we want in here. 
+     -->
     <dialog>
-      <div class="p-5 m-5">
+      <div class="p-10">
         <h1>
           {{pop.heading}}
         </h1>
         <p>
           {{pop.para}}
         </p>
+        <!-- 
+        4) Finally we add a closing button. This is just a span with an onclick event that will close the dialog.  
+        -->
         <span class="closingX" onclick="this.parentElement.parentElement.close()">X</span>
       </div>
     </dialog>
   {% endfor %}
 </section>
 
+
+<!-- 5) Now a lot of the time if you have a light box you are going to want to be able to click the overlay to close the dialog. to do this we are going to need just a little bit extra js  -->
+
 <script>
+  
+// 6) first we need to select all the dialogs. This is so that we can add an event trigger to each of them on a page.
 const dialogs = document.querySelectorAll("dialog")
 
+// 9) Now we are going to make a function that will close the dialog if we click on the overlay.
 function closeDialogs(event) {
-  dialogs.forEach(dia => {
-    console.log(event.target)
-    if (event.target === dia) {
-      dia.close();
+// 10) first we are going to check if the dialog is open. we do this to make sure its the dialog box that was clicked and not if it was something inside of the lightbox.
+    if (event.target.open) {
+      event.target.close();
     }
-  })
-}
 
+  }
 
+// 7) Lets do a console log to see if we are getting the right elements
 console.log(dialogs)
 
+// 8) Now we are going to add an event listener to each of the dialogs. This is going to trigger the closeDialogs function that we are about to make.
 dialogs.forEach(dia => {
   dia.addEventListener("click", closeDialogs);
 })

@@ -2,7 +2,7 @@
 layout: default
 title: before and after code with gallery
 img_Path: https://picsum.photos/id/1025/600/400
-teaching_notes: false
+teaching_notes: true
 slider-images:
   - before_image: https://picsum.photos/id/1003/600/400
     after_image: https://picsum.photos/id/1003/600/400
@@ -16,23 +16,32 @@ slider-images:
     after_image: https://picsum.photos/id/1011/600/400
 ---
 
-
+<!-- 1) lets start with our html. We are going to need 4 elements. a container thats going to be responsible for sizing the other 3 elements and keeping them together. -->
 <div class='sliderContainer relative'>
+  <!-- 2) a div for the before image. -->
   <div class='ba-img ba-before-img' style="background-image: url({{page.slider-images[0].before_image}})"></div>
+  <!-- 3) a div for the after image. -->
   <div class='ba-img ba-after-img' style="background-image: url({{page.slider-images[0].after_image}})"></div>
+  <!-- 8) So at this stage we have a functional before and after slider but lets add a bar to prompt people to try the slider -->
   <div class="ba-slider-line">
     <div class='ba-slider-button'> < > </div>
   </div>
-  <input type="range" min="0" max="100" value="50" class="ba-slider absolute" name='ba-slider'>
+  <!-- 4) and a input for controling it -->
+  <input type="range" min="0" max="1000" value="500" class="ba-slider absolute" name='ba-slider'>
 </div>
+
+<!-- 10) So whats better then on image to demo a before and after filter. How about a gallery? first normal grid -->
+
 <div class="grid grid-cols-3 alt-photo-grid">
   {% for img in page.slider-images %}
+  <!-- 11) and imgs in the grid. Make sure you are also giving them the data-before-image so we can grab that info in the js -->
   <img src="{{img.after_image}}" alt="" data-before-image="{{img.before_image}}">
   {% endfor %}
 
 </div>
 
 <style>
+  /* 5) some basic styles to make every thins overlap */
 
 .sliderContainer {
   position: relative;
@@ -50,14 +59,11 @@ slider-images:
   width: 100%;
   height: 100%;
   background-size: 90vw; /* change this to suit your design */
-  background-position: left;
+  background-position: top left; /* with the way we are messing with the width its important to either go top left or bottom left so that the 2 image line up. */
   pointer-events: none;
 }
-.ba-before-img {
-  background-image: url('https://picsum.photos/id/1003/600/400');
-}
+
 .ba-after-img {
-  background-image: url('https://picsum.photos/id/1003/600/400');
   width: var(--position);
   /* just for testing if you use the same image */
   filter: invert(1);
@@ -72,12 +78,15 @@ slider-images:
   height:100%;
 }
 
+/* 9) and the matching css. */
+
 .ba-slider-line{
   position:absolute;
   height:100%;
   border:1px solid black;
   left:var(--position);
 }
+
 .ba-slider-button {
   position:absolute;
   width: 3rem;
@@ -99,30 +108,29 @@ slider-images:
 </style> 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
 
 
 <script>
    
+// 6) lets add some javascript to make the slider work. first lets define the elements we are going to use.
   const sliderContainer = document.querySelector('.sliderContainer')
   const sliderInput = document.querySelector('.ba-slider')
-  const beforeImage = document.querySelector('.ba-before-img')
-  const afterImage = document.querySelector('.ba-after-img')
 
-  
-  
+  // 7) lets add a event listener to the slider input so that we can update the css variable when the slider is moved. we use a variable so we can then use in multiple places in the css.
   sliderInput.addEventListener('input', (e) => {
-  // Update the CSS variable '--position' with the slider value
-  sliderContainer.style.setProperty('--position', `${e.target.value}%`);
+  sliderContainer.style.setProperty('--position', `${e.target.value / 10}%`);
 })
 
   
 
-
+  // 12) lets define all the things we need to change the image
   // change image functionality
+  const beforeImage = document.querySelector('.ba-before-img')
+  const afterImage = document.querySelector('.ba-after-img')
   const altPhotoGrid = document.querySelector('.alt-photo-grid')
   const altImages = altPhotoGrid.querySelectorAll('img')
 
+  // 13) lets add a event listener to all the images so that when they are clicked they change the before and after images
   altImages.forEach(img => {
     img.addEventListener('click', () => {
       console.log(`url(${img.src})`)
