@@ -1,0 +1,64 @@
+---
+layout: default
+title: keyframe banner
+---
+
+
+<div class="banner">
+    <div class="banner-slice-1">
+
+    </div>
+    
+    <div class="banner-slice-2">
+
+    </div>
+
+</div>
+
+
+
+<style>
+.banner {
+    overflow: hidden;
+    display: flex;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url(https://picsum.photos/id/1025/600/400);
+}
+
+[class*=banner-slice] {
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+    background-image: url(https://picsum.photos/id/1026/600/400);
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
+
+.banner-slice-1  {
+    clip-path: polygon(0 0, 50% 100%, 100% 0, 100% 100%, 0 100%);
+    animation: slideUp 2s infinite linear alternate;
+    top: 100%;
+}
+.banner-slice-2  {
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    animation: slideDown 2s infinite linear alternate;
+    bottom: 100%
+}
+
+@keyframes slideUp {
+    0%  {top:100%}
+    33% {top:100%}
+    66% {top:0}
+    100%{top:0}
+}
+@keyframes slideDown {
+    0%     {bottom:100%}
+    33%{bottom:100%}
+    66%     {bottom:0}
+    100%    {bottom:0}
+}
+</style>

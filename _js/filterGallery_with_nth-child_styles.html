@@ -72,8 +72,6 @@ used to test scroll function
         e.preventDefault();
 
         console.log('click')
-        console.log(1%2 , 2%2 , 5%2)
-
 
         gallery_buttons.forEach(button => {
             button.classList.remove('active')
@@ -102,7 +100,16 @@ used to test scroll function
                 
                 filterShownCount++
 
-                if ( filterShownCount %= 2 ) {
+                console.log(filterShownCount)
+
+                // class reset
+                item.classList.remove('odd')
+                item.classList.remove('even')
+                item.classList.remove('first')
+                item.classList.remove('second')
+                item.classList.remove('third')
+
+                if ( filterShownCount % 2 === 0 ) {
                   item.classList.add('odd')
                 } else {
                   item.classList.add('even')
@@ -110,15 +117,14 @@ used to test scroll function
 
 
 
-              if ( filterCheck %= 3 === 0 ) {
+              if ( filterShownCount % 3 === 1 ) {
                   item.classList.add('first')
-                } else if ( filterCheck %= 3 === 1 ) {
+                } else if ( filterShownCount % 3 === 2 ) {
                   item.classList.add('second')
-                } else if ( filterCheck %= 3 === 2 ){
+                } else if ( filterShownCount % 3 === 0 ){
                   item.classList.add('third')
                 }
 
-                // console.log(!item.classList.contains('hidden'), item, filterCheck % 2 )
               }
               
         })
