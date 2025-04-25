@@ -1,0 +1,80 @@
+---
+layout: default
+title: section bg transition on scroll
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: true
+---
+
+<header class="center main-section" data-bg-color="#fff" data-text-color="#000">
+  <nav class="stickyNav">links</nav>
+</header>
+<section class="main-section" data-bg-color="#227" data-text-color="#772">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+</section>
+<section class="main-section" data-bg-color="#272" data-text-color="#727">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+</section>
+<section class="main-section" data-bg-color="#722" data-text-color="#277">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo dolores doloremque in. Blanditiis saepe quod sed
+  iste architecto? Eum ullam mollitia animi! Consectetur ipsum provident ipsa porro natus soluta.
+</section>
+
+
+
+<style>
+body {
+  transition: all 2s;
+}
+
+  section, header{min-height: 100vh; border: 1px solid;}
+
+
+
+</style>
+
+<script>
+  const body = document.querySelector('body')
+  const mainSections = document.querySelectorAll('.main-section') ;
+
+
+  function updateBody() {
+    
+    mainSections.forEach(sec => {
+let notFound = false
+      if (sec.getBoundingClientRect().top < Math.floor(window.innerHeight / 3) ) {
+        body.style.backgroundColor = `${sec.dataset.bgColor}`
+        body.style.color = `${sec.dataset.textColor}`
+        found = true
+        console.log(sec.dataset.bgColor)
+      } else {
+        return
+      }
+  })}
+  // 2) then we add an event listiner to the window (yep you cna do that :D )
+  window.addEventListener("scroll", updateBody)
+</script>

@@ -1,0 +1,232 @@
+---
+layout: default
+title: product carosel tina
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+boxes:
+  - title: 1
+    description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.
+    price: $100 
+    img_path: https://picsum.photos/id/1025/600/400
+    bg-color: '#272'
+  - title: 2
+    description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus. Filler text added here to extend the description for testing purposes. This is additional filler text to ensure the content is longer and more descriptive.
+    price: $200 
+    img_path: https://picsum.photos/id/1026/600/400
+    bg-color: '#447'
+
+  - title: 3
+    description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus. And more filler text added here to extend the description for testing purposes. This is additional filler text to ensure the content is longer and more descriptive.
+    price: $300 
+    img_path: https://picsum.photos/id/1027/600/400
+    bg-color: '#744'
+
+
+---
+
+<section class="cards grid product-gallery" data-slide-position="0" style="background-color: #272;">
+  <div class="image_gallery" >
+
+    {% for card in page.boxes %}
+    <div class="card product-num-{{forloop.index}} {% if forloop.first %} active {% elsif forloop.index == 2 %} off-right {% else%} far-right {% endif %}" data-description="{{card.description}}" data-heading="{{card.title}}" data-price="{{card.price}}" data-bg-color="{{card.bg-color}}">
+      <img class="" src="{{card.img_path}}" alt="{{card.title}}">
+    </div>
+    {% endfor %}
+    
+  </div>
+  <div class="info padding">
+    <div>
+      <h2 class="title">{{page.boxes[0].title}}</h2>
+      <p class="description">{{page.boxes[0].description}}</p>
+      <h3 class="price">{{page.boxes[0].price}}</h3>
+    </div>
+  </div>
+  <div class="padding">
+    <span class="btn prev" onclick="prevProduct()">prev</button>
+  </div>
+  
+  <div class="text-right padding">
+    <span class="btn next" onclick="nextProduct()">next</button>
+  </div>
+
+</section>
+
+
+
+<style>
+  /* *{
+    border: 1px solid #000;
+  } */
+
+  .text-right{
+    text-align: right;
+  }
+  .text-center{
+    text-align: center;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5vw;
+  }
+
+  .padding {
+    padding: 5%;
+  }
+
+  .info {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+  }
+
+  .product-gallery{
+    transition: all .5s ;
+  }
+
+  .image_gallery {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    aspect-ratio: 4/3;
+  }
+  .image_gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .image_gallery .card {
+    position: absolute;
+    aspect-ratio: 4/3;
+    z-index: 1;
+    width: 80%;
+    left: 10%;
+    right: 10%;
+    top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s all ease-in-out;
+  }
+
+  .image_gallery .off-right {
+    left: 95%;
+    width: 40%;
+    top: 27% ;
+  }
+  .image_gallery .far-right{
+    left: 150%;
+    width: 40%;
+    top: 27% ;
+  }
+  .image_gallery .off-left {
+    right: 85%;
+    left: -35%;
+    width: 40%;
+    top: 27% ;
+  }
+  .image_gallery .far-left{
+    right: 150%;
+    left: -130%;
+    width: 40%;
+    top: 27% ;
+  }
+
+  /* buttons */
+
+  .btn {
+    display: inline-block;
+    background: #272;
+    color: #fff;
+    padding: .5rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  [data-slide-position='1'] .prev.btn {
+    opacity: .5;
+  }
+  [data-slide-position='{{page.boxes.size}}'] .next.btn {
+    opacity: .5;
+  }
+
+
+</style>
+
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+  <!-- Setup and start animation! -->
+  <script>
+    const productGallery = document.querySelector('.product-gallery')
+    const productCards = productGallery.querySelectorAll('.product-gallery > div > .card')
+    const nextButton = productGallery.querySelector('.btn.next')
+    const prevButton = productGallery.querySelector('.btn.prev')
+    const infoBox = productGallery.querySelector('.info')
+    console.log(productCards)
+
+    function selectProduct(target) {
+      productCards.forEach((card, i) => {
+        card.classList.remove('active', 'off-right', 'far-right', 'off-left', 'far-left')
+        if (i == target) {
+          card.classList.add('active')
+          updateInfo(target)
+        } else if (i == target + 1) {
+          card.classList.add('off-right')
+        } else if (i >= target + 2) {
+          card.classList.add('far-right')
+        } else if (i == target - 1) {
+          card.classList.add('off-left')
+        } else if (i <= target - 2) {
+          card.classList.add('far-left')
+        }
+        // console.log(card, i, target)
+      })
+    }
+
+    function updateInfo(target) {
+      const currentCard = productCards[target]
+      const title = currentCard.dataset.heading
+      const description = currentCard.dataset.description
+      const price = currentCard.dataset.price
+
+      productGallery.style.backgroundColor = currentCard.dataset.bgColor
+
+      infoBox.querySelector('.title').innerText = title
+      infoBox.querySelector('.description').innerText = description
+      infoBox.querySelector('.price').innerText = price
+
+    }
+
+
+
+    function nextProduct() {
+      let currentslide = parseInt(productGallery.dataset.slidePosition)
+      console.log('start',currentslide,productCards.length - 1)
+      if (currentslide < productCards.length - 1) {
+        console.log('current', currentslide,productCards.length - 1)
+        currentslide++
+        console.log('next', currentslide)
+        productGallery.dataset.slidePosition = currentslide
+        selectProduct(currentslide)
+      } else {
+        productGallery.dataset.slidePosition = 0
+        selectProduct(productGallery.dataset.slidePosition)
+      }
+
+    }
+
+    function prevProduct() {
+      let currentslide = parseInt(productGallery.dataset.slidePosition)
+      if (currentslide >= 1) {
+        console.log('current', currentslide)
+        currentslide--
+        console.log('next', currentslide)
+        productGallery.dataset.slidePosition = currentslide
+        selectProduct(currentslide)
+      } else {
+        productGallery.dataset.slidePosition = productCards.length - 1
+        selectProduct(productCards.length - 1)
+      }
+    }
+
+
+  </script>

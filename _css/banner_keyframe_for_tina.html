@@ -12,6 +12,18 @@ title: keyframe banner
     <div class="banner-slice-2">
 
     </div>
+    <div class="banner-slice-3">
+
+    </div>
+    
+    <div class="banner-slice-4">
+
+    </div>  
+    <div class="banner-slice-5">
+
+    </div>
+
+    
 
 </div>
 
@@ -24,7 +36,8 @@ title: keyframe banner
     text-align: center;
     position: relative;
     width: 100%;
-    height: 100vh;
+    /* important to maintain aspect ratio of the slices */
+    aspect-ratio: 4/3;
     background-image: url(https://picsum.photos/id/1025/600/400);
 }
 
@@ -39,15 +52,33 @@ title: keyframe banner
 }
 
 .banner-slice-1  {
-    clip-path: polygon(0 0, 50% 100%, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 20% 0%, 20% 100%, 0% 100%);
     animation: slideUp 2s infinite linear alternate;
     top: 100%;
 }
 .banner-slice-2  {
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    clip-path: polygon(20% 0, 40% 0%,  40% 100%, 20% 100%);
     animation: slideDown 2s infinite linear alternate;
     bottom: 100%
 }
+
+.banner-slice-3  {
+    clip-path: polygon(40% 0, 60% 0%, 60% 100%, 40% 100%);
+    animation: slideUp 2s infinite linear alternate;
+    top: 100%;
+}
+.banner-slice-4  {
+    clip-path: polygon(60% 0, 80% 0%,  80% 100%, 60% 100%);
+    animation: slideDown 2s infinite linear alternate;
+    bottom: 100%
+}
+
+.banner-slice-5  {
+    clip-path: polygon(80% 0, 100% 0%, 100% 100%, 80% 100%);
+    animation: slideUp 2s infinite linear alternate;
+    top: 100%;
+}
+
 
 @keyframes slideUp {
     0%  {top:100%}
