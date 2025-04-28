@@ -1,0 +1,223 @@
+---
+layout: default
+title: product carosel horizontal scroll version with multiple slides
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+boxes:
+  - title: 1
+    description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.
+    price: $100 
+    img_path: https://picsum.photos/id/1025/900/900
+    bg-color: '#272'
+  - title: 2
+    description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus. Filler text added here to extend the description for testing purposes. This is additional filler text to ensure the content is longer and more descriptive.
+    price: $200 
+    img_path: https://picsum.photos/id/1026/900/900
+    bg-color: '#447'
+
+  - title: 3
+    description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus. And more filler text added here to extend the description for testing purposes. This is additional filler text to ensure the content is longer and more descriptive.
+    price: $300 
+    img_path: https://picsum.photos/id/1027/900/900
+    bg-color: '#744'
+---
+
+<section class="cards grid product-gallery" data-slide-position="0" style="background-color: #272;">
+  <div class="image_gallery" >
+
+    {% for card in page.boxes %}
+    <div class="card product-num-{{forloop.index}} {% if forloop.first %} active {% endif %}" data-description="{{card.description}}" data-heading="{{card.title}}" data-price="{{card.price}}" data-bg-color="{{card.bg-color}}">
+      <img class="" src="{{card.img_path}}" alt="{{card.title}}">
+    </div>
+    {% endfor %}
+    {% for card in page.boxes %}
+    <div class="card product-num-{{forloop.index}} {% if forloop.first %} active {% endif %}" data-description="{{card.description}}" data-heading="{{card.title}}" data-price="{{card.price}}" data-bg-color="{{card.bg-color}}">
+      <img class="" src="{{card.img_path}}" alt="{{card.title}}">
+    </div>
+    {% endfor %}
+    
+  </div>
+
+  <div class="padding">
+    <span class="btn prev">prev</button>
+  </div>
+  
+  <div class="text-right padding">
+    <span class="btn next">next</button>
+  </div>
+
+</section>
+
+
+
+<style>
+  /* *{
+    border: 1px solid #000;
+  } */
+
+  .text-right{
+    text-align: right;
+  }
+  .text-center{
+    text-align: center;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5vw;
+  }
+
+  .padding {
+    padding: 5%;
+  }
+
+  .info {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+  }
+
+  .product-gallery{
+    transition: all .5s ;
+  }
+
+  .image_gallery {
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    position: relative;
+    display: flex;
+    flex-direction: row nowrap;
+    height: 100%;
+    aspect-ratio: 4/3;
+    grid-column: span 2;
+    gap: 1rem;
+  }
+  .image_gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .image_gallery .card {
+    flex: 0 0 40vw;
+    aspect-ratio: 4/3;
+    z-index: 1;
+    width: 40vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s all ease-in-out;
+    scroll-snap-align: center;
+  }
+
+  .image_gallery .card img {
+    object-fit: cover;
+  }
+  /* .image_gallery .card.off-right img {
+    left:-19%;
+  }
+  .image_gallery .card.off-left img {
+    left:19%;
+  } */
+  .image_gallery .card img {
+    width: 40%;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: width 0.5s, left .5s, right .5s;
+    position: relative;
+
+  }
+
+  .image_gallery .card.active img {
+    width: 90%;
+    object-fit: cover;
+    border-radius: 5px;
+    left: 0;
+  }
+   
+
+  .image_gallery .card:first-child {
+    margin-left: 50vw;
+  }
+  .image_gallery .card:last-child {
+    margin-right: 50vw;
+  }
+
+
+  /* buttons */
+
+  .btn {
+    display: inline-block;
+    background: #272;
+    color: #fff;
+    padding: .5rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  [data-slide-position='1'] .prev.btn {
+    opacity: .5;
+  }
+  [data-slide-position='{{page.boxes.size}}'] .next.btn {
+    opacity: .5;
+  }
+
+
+</style>
+
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+  <!-- Setup and start animation! -->
+  <script>
+    const gallery = document.querySelector('.image_gallery');
+    const cards = gallery.querySelectorAll('.card');
+    let currentIndex = 0;
+    const totalCards = cards.length;
+
+
+
+    
+    
+    function updateCardPositions() {
+      console.log(gallery, gallery.scrollLeft);
+      let cardWidth = cards[1].offsetWidth;
+      cards.forEach((card, i) => {
+        const offsetScroll = gallery.scrollLeft - (cardWidth / 8);
+        console.log(card.offsetLeft, offsetScroll, i);
+        if (card.offsetLeft < offsetScroll) {
+          card.classList.add('off-left');
+          card.classList.remove('active');
+        } else if (card.offsetLeft > offsetScroll + cardWidth) {
+          card.classList.add('off-right');
+          card.classList.remove('active');
+        } else if (card.offsetLeft > offsetScroll - cardWidth && card.offsetLeft < offsetScroll + cardWidth) {
+         card.classList.add('active');
+          card.classList.remove('off-left', 'off-right', 'far-left', 'far-right');
+        }
+      });
+    }
+
+    gallery.addEventListener('scroll', () => {
+        updateCardPositions()
+    });
+
+    updateCardPositions()
+
+    const nextButton = document.querySelector('.btn.next');
+    const prevButton = document.querySelector('.btn.prev'); 
+
+    function slideTo(offset){
+      let cardWidth = cards[1].offsetWidth;
+      gallery.scrollTo({
+        left: gallery.scrollLeft + offset,
+        behavior: 'smooth'
+      });
+    }
+
+    nextButton.addEventListener('click', () => {
+      slideTo(cardWidth);
+    });
+    prevButton.addEventListener('click', () => {
+      slideTo(cardWidth * -1 );
+    });
+
+
+  </script>
