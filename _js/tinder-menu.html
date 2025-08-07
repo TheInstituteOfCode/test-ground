@@ -1,0 +1,163 @@
+---
+layout: default
+title: tinder menu
+img_Path: https://picsum.photos/id/1025/600/400
+menu-items:
+  - img_path: https://picsum.photos/id/1060/600/400
+    name: cake
+    description: fun fluffy cakes
+    allergies:
+      - gluten
+      - dairy
+  - img_path: https://picsum.photos/id/1060/600/400
+    name: pie
+    description: fun decadent pies
+    allergies:
+      - gluten
+      - meat
+---
+
+<section class="center">
+  <h2>Menu fun search</h2>
+  
+  <form action="" class="allergy-form">
+  <h3>First up any allergies</h3>
+  <div class="allergies">
+    <label>
+      <input type="checkbox" name="allergies" value="gluten"> Gluten
+    </label>
+    <label>
+      <input type="checkbox" name="allergies" value="dairy"> Dairy
+    </label>
+    <label>
+      <input type="checkbox" name="allergies" value="nuts"> Nuts
+    </label>
+    <label>
+      <input type="checkbox" name="allergies" value="meat"> Meat
+    </label>
+    <div>
+      <span class="btn" onclick="runTinder()"> lets go </span>
+    </div>
+  </form>
+  <div class="swipe-div">
+
+  </div>
+  <div class="outputDiv"></div>
+
+<div class="data-div">
+  {% for item in page.menu-items %}
+  <div class="dish-div" data-img="{{item.img_path}}" data-name="{{item.name}}" data-allergies="allergies-{{item.allergies | join: ' allergies-'}}">
+
+  </div>
+{% endfor %}
+</div>
+
+
+<style>
+  .btn{
+    border:1px solid
+  }
+
+  .flex-grid {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .allergy{
+    background-color: red;
+  }
+</style>
+
+<script>
+
+  const allergies = document.querySelectorAll('.allergies input')
+  const menuItems = document.querySelectorAll('.dish-div')
+  const swipeDiv = document.querySelector('.swipe-div')
+  const outputDiv = document.querySelector('.outputDiv')
+  
+  
+  function runTinder() {
+  // Get all the checkboxes
+  menuItems.forEach(menuItem => {
+    menuItem.classList.add('allergy-clear')
+    menuItem.classList.add('need-asking')
+  })
+
+allergies.forEach(allergy => {
+  console.log(allergy.value, allergy.checked)
+  if (allergy.checked) {
+
+    menuItems.forEach(menuItem => {
+      
+      if (menuItem.dataset.allergies.includes(allergy.value)){
+        menuItem.classList.remove('allergy-clear')
+      }
+    })
+
+  }
+
+
+})
+addToSwiper()
+}
+
+function addToSwiper() {
+  possibleMatches = document.querySelectorAll('.dish-div.allergy-clear.need-asking')
+  console.log(possibleMatches, "loop start")
+   if (possibleMatches.length >= 1){
+    let randomNumber = Math.floor(Math.random()*possibleMatches.length)
+     let option = possibleMatches[randomNumber]
+     swipeDiv.innerHTML = `  
+       <div class="center">
+        <h2>${option.dataset.name}</h2>
+        <img src="${option.dataset.img}" alt="${option.dataset.name}">
+        <div class="flex-grid">
+          <span onclick="addToMenu('${randomNumber}')">
+            interested
+          </span>
+          <span onclick="didntLike('${randomNumber}')">
+            not interested
+          </span>
+        </div>
+      </div>`
+   } else if (outputDiv.innerHTML = '' ) {
+     swipeDiv.innerHTML = ` <h2> sorry seems like we cant find any matches </h2>`
+    } else {
+    swipeDiv.innerHTML = ``
+   }
+}
+
+function didntLike(e) {
+  console.log(e)
+  let newDiv = document.createElement('div')
+  let possibleMatches = document.querySelectorAll('.dish-div.allergy-clear.need-asking')
+  let match = possibleMatches[e]
+  match.classList.remove('need-asking')
+  if (possibleMatches.length > 1){
+      addToSwiper()
+    } else {
+    swipeDiv.innerHTML = ``
+  }
+}
+
+function addToMenu(e) {
+  console.log(e)
+  let newDiv = document.createElement('div')
+  let possibleMatches = document.querySelectorAll('.dish-div.allergy-clear.need-asking')
+  let match = possibleMatches[e]
+  console.log(e, possibleMatches, match)
+  newDiv.innerHTML = `
+      <div class="center">
+        <h2>${match.dataset.name}</h2>
+        <img src="${match.dataset.img}" alt="${match.dataset.name}">
+      </div>`
+  outputDiv.append(newDiv)
+  match.classList.remove('need-asking')
+  console.log(possibleMatches)
+  addToSwiper()
+
+}
+
+
+
+</script>
