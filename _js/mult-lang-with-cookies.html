@@ -1,0 +1,91 @@
+---
+layout: default
+title: multi language with cookies
+img_Path: https://picsum.photos/id/1025/600/400
+teaching_notes: false
+
+english:
+    heading: english heading
+    paragraph: this is an english paragraph
+danish:
+    heading: dansk overskrift 
+    paragraph: dette er et dansk afsnit
+---
+
+
+<section>
+  <h1 class="translatable" data-english="{{page.english.heading}}" data-danish="{{page.danish.heading}}">{{page.english.heading}}</h1>
+  <p class="translatable" data-english="{{page.danish.paragraph}}" data-danish="{{page.danish.paragraph}}">{{page.english.paragraph}}</p>
+  <form action="">
+
+    <select name="language" id="lang">
+      <option value="english">english</option>
+      <option value="danish">dansk</option>
+    </select>
+  </form>
+</section>
+
+
+
+
+<script>
+  function createCookie(name,value,days) {
+      var expires = "";
+      if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days*24*60*60*1000));
+          expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+  }
+
+
+  function readCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+  }
+
+
+  function eraseCookie(name) {
+      createCookie(name,"",-1);
+  }
+
+
+const langSelect = document.querySelector('#lang')
+const translatableElements = document.querySelectorAll('.translatable')
+const cookieLang = readCookie('preferredLanguage')
+
+
+
+
+updateLanguage = (lang) => {
+  
+  translatableElements.forEach(el => {
+    const text = el.getAttribute(`data-${lang}`)
+    if(text){
+      el.textContent = text
+    }
+  })
+  console.log(document.cookie)
+}
+
+langSelect.addEventListener('change', (e) => {
+  const selectedLang = e.target.value
+  createCookie('preferredLanguage', selectedLang, 30)
+  updateLanguage(selectedLang)
+  console.log(document.cookie)
+})
+
+if(cookieLang){
+  langSelect.value = cookieLang
+  updateLanguage(cookieLang)
+}
+console.log(document.cookie)
+
+</script>
